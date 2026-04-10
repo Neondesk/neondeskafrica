@@ -1,629 +1,806 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Neondesk Africa — Grow. Scale. Lead.</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,300&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Neondesk Africa — We Build What Africa Needs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Epilogue:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <style>
-    /* ── BRAND COLOURS (from original site) ─────────────────────────
-       Navy dark bg   : #001233
-       Blue accent    : #1D6BE6   (buttons, highlights, links)
-       Blue mid       : #2B7FFF
-       Light blue bg  : #EBF3FF
-       White          : #FFFFFF
-       Off-white text : #F4F7FF
-       Body text      : #2C2C3A
-       Muted text     : #6B7280
-    ────────────────────────────────────────────────────────────────── */
+    /* ─── TOKENS ─────────────────────────────────────── */
     :root {
-      --navy:        #001233;
-      --navy-mid:    #001a4d;
-      --navy-light:  #002166;
-      --blue:        #1D6BE6;
-      --blue-bright: #2B7FFF;
-      --blue-light:  #EBF3FF;
-      --blue-pale:   #dbeafe;
-      --white:       #FFFFFF;
-      --off-white:   #F4F7FF;
-      --body:        #2C2C3A;
-      --muted:       #6B7280;
-      --border:      rgba(29,107,230,0.15);
+      --bg:       #0c0c0b;
+      --bg2:      #111110;
+      --bg3:      #181816;
+      --white:    #f0ede6;
+      --muted:    rgba(240,237,230,0.45);
+      --dim:      rgba(240,237,230,0.22);
+      --accent:   #1D6BE6;   /* Lustre-style neon lime */
+      --accent2:  #ff5c35;   /* warm orange pop */
+      --border:   rgba(240,237,230,0.09);
     }
 
+    /* ─── RESET ──────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body { background: var(--white); color: var(--body); font-family: 'DM Sans', sans-serif; font-weight: 300; overflow-x: hidden; }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Epilogue', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      cursor: none;
+    }
 
-    /* ── NAV ─────────────────────────────────────────── */
+    /* ─── CUSTOM CURSOR ──────────────────────────────── */
+    .cursor-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent);
+      position: fixed; top: 0; left: 0; z-index: 10000;
+      pointer-events: none; transform: translate(-50%, -50%);
+      transition: transform 0.1s;
+    }
+    .cursor-ring {
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1px solid rgba(212,242,68,0.4);
+      position: fixed; top: 0; left: 0; z-index: 9999;
+      pointer-events: none; transform: translate(-50%, -50%);
+      transition: all 0.18s ease;
+    }
+
+    /* ─── GRAIN OVERLAY ──────────────────────────────── */
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 9998; opacity: 0.4; mix-blend-mode: overlay;
+    }
+
+    /* ─── NAV ────────────────────────────────────────── */
     nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 1.2rem 4rem;
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(29,107,230,0.1);
-      transition: box-shadow 0.3s;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.6rem 3rem;
+      transition: background 0.4s, backdrop-filter 0.4s;
     }
-    nav.scrolled { box-shadow: 0 4px 24px rgba(0,18,51,0.08); }
-
-    .logo {
-      display: flex; align-items: center; gap: 0.6rem;
-      text-decoration: none;
-    }
-    .logo-mark {
-      width: 36px; height: 36px; border-radius: 8px;
-      background: linear-gradient(135deg, var(--blue) 0%, var(--navy) 100%);
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Fraunces', serif; font-weight: 900; font-size: 1rem; color: white;
-    }
-    .logo-text {
-      display: flex; flex-direction: column; line-height: 1;
-    }
-    .logo-text span:first-child {
-      font-family: 'Fraunces', serif; font-weight: 900; font-size: 1.1rem;
-      letter-spacing: -0.02em; color: var(--navy);
-    }
-    .logo-text span:last-child {
-      font-size: 0.55rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--blue); font-weight: 500; margin-top: 1px;
+    nav.scrolled {
+      background: rgba(12,12,11,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
     }
 
-    .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900; font-size: 1.25rem;
+      color: var(--white); text-decoration: none;
+      letter-spacing: -0.02em;
+      display: flex; flex-direction: column; line-height: 1.1;
+    }
+    .nav-logo em {
+      font-style: normal; color: var(--accent);
+      font-size: 0.52rem; letter-spacing: 0.22em;
+      text-transform: uppercase; font-family: 'Epilogue', sans-serif;
+      font-weight: 500; margin-top: 2px;
+    }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 2.5rem; list-style: none;
+    }
     .nav-links a {
-      text-decoration: none; color: var(--body); font-size: 0.88rem;
-      font-weight: 400; transition: color 0.2s;
+      font-size: 0.82rem; letter-spacing: 0.05em;
+      color: var(--muted); text-decoration: none;
+      transition: color 0.2s;
     }
-    .nav-links a:hover { color: var(--blue); }
+    .nav-links a:hover { color: var(--white); }
+
     .nav-cta {
-      background: var(--blue) !important; color: white !important;
-      padding: 0.6rem 1.4rem; border-radius: 6px; font-weight: 500 !important;
-      transition: background 0.2s, transform 0.2s !important;
-      border: 1.5px solid var(--blue) !important;
+      font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--bg) !important; background: var(--accent);
+      padding: 0.6rem 1.4rem; border-radius: 2px; font-weight: 600 !important;
+      transition: background 0.2s !important;
     }
-    .nav-cta:hover { background: var(--navy) !important; transform: translateY(-1px); }
+    .nav-cta:hover { background: #1D6BE6 !important; }
 
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
-    .hamburger span { display: block; width: 24px; height: 2px; background: var(--navy); transition: all 0.3s; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: none; background: none; border: none; }
+    .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--white); }
 
+    /* MOBILE MENU */
     .mobile-menu {
-      display: none; position: fixed; inset: 0;
-      background: rgba(0,18,51,0.97); z-index: 99;
-      flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem;
+      display: none; position: fixed; inset: 0; background: var(--bg);
+      z-index: 890; flex-direction: column; align-items: center; justify-content: center; gap: 2.2rem;
     }
     .mobile-menu.open { display: flex; }
-    .mobile-menu a { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 700; color: white; text-decoration: none; }
-    .mobile-menu a:hover { color: var(--blue-bright); }
-    .close-btn { position: absolute; top: 1.8rem; right: 2rem; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+    .mobile-menu a {
+      font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 900;
+      color: var(--white); text-decoration: none; letter-spacing: -0.02em;
+    }
+    .mobile-menu a:hover { color: var(--accent); }
+    .close-btn { position: absolute; top: 1.8rem; right: 2.5rem; background: none; border: none; color: var(--white); font-size: 1.4rem; cursor: none; }
 
-    /* ── HERO ─────────────────────────────────────────── */
+    /* ─── HERO ───────────────────────────────────────── */
     .hero {
       min-height: 100vh;
-      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 55%, #002a6e 100%);
-      display: grid; grid-template-columns: 1fr 1fr;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 0 3rem 5rem;
       position: relative; overflow: hidden;
+      border-bottom: 1px solid var(--border);
     }
 
-    /* subtle dot grid */
-    .hero::before {
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 75% 30%, rgba(212,242,68,0.06) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 60% at 10% 80%, rgba(255,92,53,0.05) 0%, transparent 55%),
+        var(--bg);
+    }
+
+    /* big background word */
+    .hero-bgword {
+      position: absolute; bottom: -2rem; right: -1rem; z-index: 1;
+      font-family: 'Playfair Display', serif; font-weight: 900;
+      font-size: clamp(10rem, 22vw, 22rem);
+      line-height: 1; letter-spacing: -0.05em;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(240,237,230,0.04);
+      white-space: nowrap; pointer-events: none; user-select: none;
+    }
+
+    .hero-content { position: relative; z-index: 2; max-width: 1300px; }
+
+    .hero-label {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 2.5rem; font-weight: 500;
+    }
+    .hero-label::before {
+      content: ''; display: block; width: 28px; height: 1px; background: var(--accent);
+    }
+
+    .hero-h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 8.5vw, 9.5rem);
+      font-weight: 900; line-height: 0.96; letter-spacing: -0.03em;
+      margin-bottom: 3rem;
+    }
+    .hero-h1 em { font-style: italic; color: var(--accent); font-weight: 400; }
+    .hero-h1 .outline {
+      -webkit-text-stroke: 1.5px var(--white);
+      color: transparent;
+    }
+
+    .hero-bottom {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      gap: 3rem; flex-wrap: wrap;
+    }
+    .hero-sub {
+      font-size: 1rem; line-height: 1.75; color: var(--muted);
+      max-width: 380px;
+    }
+    .hero-actions { display: flex; gap: 1rem; align-items: center; flex-shrink: 0; }
+
+    .btn-accent {
+      background: var(--accent); color: var(--bg);
+      padding: 1rem 2rem; font-family: 'Epilogue', sans-serif; font-weight: 600;
+      font-size: 0.85rem; letter-spacing: 0.05em; text-transform: uppercase;
+      border: none; cursor: none; text-decoration: none; display: inline-block;
+      border-radius: 2px; transition: background 0.2s, transform 0.2s;
+    }
+    .btn-accent:hover { background: #1D6BE6; transform: translateY(-2px); }
+
+    .btn-ghost {
+      background: transparent; color: var(--white);
+      padding: 1rem 2rem; font-family: 'Epilogue', sans-serif; font-weight: 400;
+      font-size: 0.85rem; letter-spacing: 0.05em; text-transform: uppercase;
+      border: 1px solid var(--border); cursor: none; text-decoration: none;
+      display: inline-block; border-radius: 2px; transition: border-color 0.2s;
+    }
+    .btn-ghost:hover { border-color: rgba(240,237,230,0.4); }
+
+    .hero-scroll {
+      position: absolute; right: 3rem; bottom: 5rem;
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--dim); z-index: 2;
+    }
+    .hero-scroll .vline {
+      width: 1px; height: 50px; background: var(--dim); position: relative; overflow: hidden;
+    }
+    .hero-scroll .vline::after {
+      content: ''; position: absolute; top: -100%; left: 0;
+      width: 100%; height: 100%; background: var(--accent);
+      animation: scrollDown 2s ease-in-out infinite;
+    }
+    @keyframes scrollDown { 0%{top:-100%} 100%{top:100%} }
+
+    /* ─── MARQUEE ────────────────────────────────────── */
+    .marquee { overflow: hidden; border-bottom: 1px solid var(--border); padding: 1rem 0; background: var(--bg2); }
+    .marquee-inner { display: inline-flex; animation: mq 30s linear infinite; white-space: nowrap; }
+    .marquee-item { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; padding: 0 3rem; color: var(--muted); }
+    .marquee-item.hi { color: var(--accent); }
+    @keyframes mq { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+    /* ─── SHARED SECTION STYLES ──────────────────────── */
+    section { padding: 8rem 3rem; }
+    .inner { max-width: 1300px; margin: 0 auto; }
+    .eyebrow {
+      font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1rem; font-weight: 500;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .eyebrow::before { content: ''; display: block; width: 20px; height: 1px; background: var(--accent); }
+    h2.display {
+      font-family: 'Playfair Display', serif; font-weight: 900;
+      line-height: 1.04; letter-spacing: -0.025em;
+    }
+    h2.display em { font-style: italic; color: var(--accent); font-weight: 400; }
+
+    /* ─── INTRO STRIP ────────────────────────────────── */
+    .intro { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 6rem 3rem; }
+    .intro-inner {
+      max-width: 1300px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+    }
+    .intro h2 {
+      font-family: 'Playfair Display', serif; font-weight: 900;
+      font-size: clamp(2.2rem, 4vw, 3.8rem);
+      line-height: 1.06; letter-spacing: -0.025em; color: var(--white);
+    }
+    .intro h2 em { font-style: italic; color: var(--accent); font-weight: 400; }
+    .intro-right p {
+      font-size: 1.05rem; line-height: 1.8; color: var(--muted); margin-bottom: 1.5rem;
+    }
+    .intro-right p:last-of-type { margin-bottom: 2.5rem; }
+
+    /* ─── WHAT WE DO ─────────────────────────────────── */
+    .services { background: var(--bg); border-bottom: 1px solid var(--border); }
+    .services-top {
+      max-width: 1300px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-bottom: 5rem; gap: 4rem; flex-wrap: wrap;
+    }
+    .services-top h2 { font-size: clamp(2.5rem, 5vw, 4.5rem); max-width: 560px; }
+
+    .services-grid { max-width: 1300px; margin: 0 auto; }
+    .service-row {
+      display: grid; grid-template-columns: 60px 1fr 1fr;
+      align-items: start; gap: 3rem;
+      padding: 3rem 0; border-top: 1px solid var(--border);
+      transition: background 0.3s;
+    }
+    .service-row:last-child { border-bottom: 1px solid var(--border); }
+    .service-num {
+      font-family: 'Playfair Display', serif; font-weight: 900;
+      font-size: 0.85rem; color: var(--dim); padding-top: 4px;
+    }
+    .service-title {
+      font-family: 'Playfair Display', serif; font-weight: 700;
+      font-size: clamp(1.4rem, 2.5vw, 2rem); color: var(--white);
+      letter-spacing: -0.02em; line-height: 1.15;
+    }
+    .service-title .tag {
+      display: inline-block; background: var(--accent); color: var(--bg);
+      font-family: 'Epilogue', sans-serif; font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.25rem 0.6rem; border-radius: 2px; margin-left: 0.6rem;
+      vertical-align: middle; position: relative; top: -2px;
+    }
+    .service-body { padding-top: 4px; }
+    .service-body p { font-size: 0.92rem; line-height: 1.78; color: var(--muted); margin-bottom: 1.2rem; }
+    .service-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .service-tag {
+      font-size: 0.7rem; letter-spacing: 0.06em; color: var(--dim);
+      border: 1px solid var(--border); padding: 0.3rem 0.7rem; border-radius: 20px;
+    }
+
+    /* ─── WHO WE SERVE ───────────────────────────────── */
+    .serve { background: var(--bg3); border-bottom: 1px solid var(--border); }
+    .serve-inner { max-width: 1300px; margin: 0 auto; }
+    .serve-top { display: flex; justify-content: space-between; align-items: flex-end; gap: 4rem; flex-wrap: wrap; margin-bottom: 5rem; }
+    .serve-top h2 { font-size: clamp(2.2rem, 4vw, 3.8rem); }
+    .serve-top p { font-size: 0.95rem; line-height: 1.75; color: var(--muted); max-width: 340px; }
+
+    .serve-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+    .serve-card {
+      background: var(--bg3); padding: 2.5rem 2rem;
+      display: flex; flex-direction: column; gap: 1.2rem;
+      transition: background 0.3s;
+    }
+    .serve-card:hover { background: #1e1e1b; }
+    .serve-icon { font-size: 1.8rem; }
+    .serve-card h4 {
+      font-family: 'Playfair Display', serif; font-weight: 700;
+      font-size: 1rem; color: var(--white); letter-spacing: -0.01em; line-height: 1.3;
+    }
+    .serve-card p { font-size: 0.8rem; line-height: 1.65; color: var(--muted); }
+
+    /* ─── HOW WE WORK ────────────────────────────────── */
+    .process { background: var(--bg); border-bottom: 1px solid var(--border); }
+    .process-inner { max-width: 1300px; margin: 0 auto; }
+    .process-top { margin-bottom: 5rem; }
+    .process-top h2 { font-size: clamp(2.5rem, 5vw, 4.5rem); max-width: 700px; }
+
+    .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+    .process-step {
+      padding: 3rem 2.5rem 3rem 0;
+      border-right: 1px solid var(--border);
+      position: relative;
+    }
+    .process-step:last-child { border-right: none; padding-right: 0; }
+    .process-step:not(:first-child) { padding-left: 2.5rem; }
+    .step-num {
+      font-family: 'Playfair Display', serif; font-weight: 900;
+      font-size: 3.5rem; color: rgba(212,242,68,0.12); line-height: 1;
+      margin-bottom: 1.5rem;
+    }
+    .process-step h3 {
+      font-family: 'Playfair Display', serif; font-weight: 700;
+      font-size: 1.2rem; color: var(--white); margin-bottom: 0.8rem;
+      letter-spacing: -0.01em;
+    }
+    .process-step p { font-size: 0.87rem; line-height: 1.72; color: var(--muted); }
+
+    /* ─── IMPACT NUMBERS ─────────────────────────────── */
+    .impact { background: var(--accent); overflow: hidden; position: relative; }
+    .impact-inner {
+      max-width: 1300px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 2fr; gap: 6rem; align-items: center;
+    }
+    .impact-left h2 {
+      font-family: 'Playfair Display', serif; font-weight: 900;
+      font-size: clamp(2rem, 3.5vw, 3rem); color: var(--bg);
+      line-height: 1.1; letter-spacing: -0.025em;
+    }
+    .impact-left p { font-size: 0.95rem; color: rgba(12,12,11,0.65); margin-top: 1rem; line-height: 1.7; }
+    .impact-nums { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    .impact-num { border-left: 2px solid rgba(12,12,11,0.15); padding-left: 1.5rem; }
+    .impact-num .n {
+      font-family: 'Playfair Display', serif; font-weight: 900;
+      font-size: clamp(2.8rem, 4vw, 4rem); color: var(--bg);
+      line-height: 1; display: block; letter-spacing: -0.03em;
+    }
+    .impact-num .l { font-size: 0.82rem; color: rgba(12,12,11,0.6); margin-top: 0.3rem; display: block; }
+
+    /* ─── MEMBERSHIP ─────────────────────────────────── */
+    .membership { background: var(--bg2); border-bottom: 1px solid var(--border); }
+    .membership-inner { max-width: 1300px; margin: 0 auto; }
+    .membership-top { margin-bottom: 4.5rem; }
+    .membership-top h2 { font-size: clamp(2.5rem, 5vw, 4.5rem); }
+    .membership-top p { font-size: 1rem; color: var(--muted); max-width: 480px; margin-top: 1.2rem; line-height: 1.7; }
+
+    .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; background: var(--border); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+    .plan {
+      background: var(--bg2); padding: 3rem 2.5rem;
+      display: flex; flex-direction: column; position: relative;
+      transition: background 0.3s;
+    }
+    .plan:hover { background: var(--bg3); }
+    .plan.featured { background: var(--bg3); }
+    .plan-badge {
+      position: absolute; top: 2.5rem; right: 2.5rem;
+      background: var(--accent); color: var(--bg);
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 0.3rem 0.7rem; border-radius: 2px;
+    }
+    .plan-tier { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dim); font-weight: 500; margin-bottom: 1.5rem; }
+    .plan-price {
+      font-family: 'Playfair Display', serif; font-weight: 900;
+      font-size: 3rem; color: var(--white); line-height: 1; margin-bottom: 0.4rem;
+    }
+    .plan-price .cur { font-size: 1.4rem; vertical-align: super; }
+    .plan-period { font-size: 0.82rem; color: var(--dim); margin-bottom: 0.5rem; }
+    .plan-save { font-size: 0.78rem; color: var(--accent); margin-bottom: 2rem; display: block; font-weight: 500; }
+    .plan-line { height: 1px; background: var(--border); margin-bottom: 2rem; }
+    .plan-features { list-style: none; flex: 1; }
+    .plan-features li {
+      font-size: 0.87rem; color: var(--muted); display: flex; gap: 0.7rem;
+      margin-bottom: 0.85rem; line-height: 1.5;
+    }
+    .plan-features li::before { content: '→'; color: var(--accent); flex-shrink: 0; font-size: 0.8rem; margin-top: 1px; }
+    .plan-btn {
+      display: block; text-align: center; text-decoration: none; margin-top: 2.5rem;
+      padding: 0.9rem; font-family: 'Epilogue', sans-serif; font-weight: 600;
+      font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase;
+      border-radius: 2px; transition: all 0.2s; border: 1px solid var(--border);
+      color: var(--white); background: transparent;
+    }
+    .plan-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .plan-btn.solid { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+    .plan-btn.solid:hover { background: #1D6BE6; }
+
+    /* ─── TESTIMONIALS ───────────────────────────────── */
+    .testimonials { background: var(--bg); border-bottom: 1px solid var(--border); }
+    .testimonials-inner { max-width: 1300px; margin: 0 auto; }
+    .testimonials-top { margin-bottom: 5rem; }
+    .testimonials-top h2 { font-size: clamp(2.5rem, 5vw, 4.5rem); }
+
+    .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; background: var(--border); }
+    .testi-card {
+      background: var(--bg); padding: 3rem 2.5rem;
+      display: flex; flex-direction: column; gap: 2rem;
+      transition: background 0.3s;
+    }
+    .testi-card:hover { background: var(--bg2); }
+    .testi-quote {
+      font-family: 'Playfair Display', serif; font-size: 1.05rem;
+      font-style: italic; line-height: 1.75; color: var(--white);
+      flex: 1;
+    }
+    .testi-quote::before { content: '"'; display: block; font-size: 3rem; color: var(--accent); line-height: 0.8; margin-bottom: 0.8rem; font-style: normal; }
+    .testi-author { display: flex; align-items: center; gap: 1rem; }
+    .testi-avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: var(--bg3); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif; font-weight: 900;
+      font-size: 0.9rem; color: var(--accent); flex-shrink: 0;
+    }
+    .testi-name { font-size: 0.88rem; font-weight: 500; color: var(--white); }
+    .testi-role { font-size: 0.75rem; color: var(--dim); margin-top: 2px; }
+
+    /* ─── CTA FULL ────────────────────────────────────── */
+    .cta-full {
+      background: var(--bg2);
+      padding: 10rem 3rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      position: relative; overflow: hidden;
+    }
+    .cta-full::before {
       content: '';
       position: absolute; inset: 0;
-      background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
-      background-size: 32px 32px;
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(212,242,68,0.05) 0%, transparent 70%);
       pointer-events: none;
     }
-
-    .hero-left {
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 10rem 4rem 6rem; position: relative; z-index: 2;
+    .cta-full-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
+    .cta-full h2 {
+      font-family: 'Playfair Display', serif; font-weight: 900;
+      font-size: clamp(3rem, 7vw, 7rem);
+      line-height: 0.97; letter-spacing: -0.03em; color: var(--white);
+      margin-bottom: 2.5rem;
     }
+    .cta-full h2 em { font-style: italic; color: var(--accent); font-weight: 400; }
+    .cta-full p { font-size: 1.05rem; color: var(--muted); max-width: 540px; margin: 0 auto 3.5rem; line-height: 1.78; }
+    .cta-full-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
 
-    .hero-eyebrow {
-      display: inline-flex; align-items: center; gap: 0.6rem;
-      background: rgba(29,107,230,0.18); border: 1px solid rgba(29,107,230,0.3);
-      color: #7eb8ff; font-size: 0.72rem; font-weight: 500;
-      letter-spacing: 0.15em; text-transform: uppercase;
-      padding: 0.4rem 1rem; border-radius: 20px;
-      margin-bottom: 2rem; width: fit-content;
+    /* ─── FOOTER ─────────────────────────────────────── */
+    footer { background: var(--bg); padding: 5rem 3rem 3rem; }
+    .footer-top {
+      max-width: 1300px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1.4fr; gap: 4rem;
+      margin-bottom: 5rem; padding-bottom: 4rem;
+      border-bottom: 1px solid var(--border);
     }
-    .hero-eyebrow::before { content: '●'; font-size: 0.45rem; color: var(--blue-bright); }
-
-    h1 {
-      font-family: 'Fraunces', serif;
-      font-size: clamp(2.8rem, 5vw, 4.6rem);
-      font-weight: 900; line-height: 1.06; letter-spacing: -0.03em;
-      color: white; margin-bottom: 1.8rem;
-    }
-    h1 em { font-style: italic; font-weight: 300; color: #7eb8ff; }
-
-    .hero-sub {
-      font-size: 1.05rem; line-height: 1.78; color: rgba(244,247,255,0.65);
-      max-width: 430px; margin-bottom: 3rem;
-    }
-
-    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
-
-    .btn-primary {
-      background: var(--blue); color: white;
-      padding: 1rem 2.2rem; font-family: 'DM Sans', sans-serif; font-weight: 600;
-      font-size: 0.9rem; border: none; cursor: pointer; text-decoration: none;
-      display: inline-block; border-radius: 8px;
-      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 4px 20px rgba(29,107,230,0.4);
-    }
-    .btn-primary:hover { background: var(--blue-bright); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(29,107,230,0.5); }
-
-    .btn-outline {
-      background: transparent; color: white;
-      padding: 1rem 2.2rem; font-family: 'DM Sans', sans-serif; font-weight: 400;
-      font-size: 0.9rem; border: 1.5px solid rgba(255,255,255,0.3); cursor: pointer;
-      text-decoration: none; display: inline-block; border-radius: 8px;
-      transition: border-color 0.2s, background 0.2s;
-    }
-    .btn-outline:hover { border-color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.07); }
-
-    /* right panel */
-    .hero-right { position: relative; display: flex; align-items: center; justify-content: center; }
-
-    .hero-visual-wrap {
-      position: relative; z-index: 2; width: 400px; height: 400px;
-    }
-    .hero-circle-outer {
-      width: 400px; height: 400px; border-radius: 50%;
-      border: 1px solid rgba(29,107,230,0.25);
+    .footer-brand .nav-logo { font-size: 1.4rem; }
+    .footer-brand p { font-size: 0.87rem; line-height: 1.75; color: var(--muted); margin-top: 1.2rem; max-width: 260px; }
+    .footer-social { display: flex; gap: 0.8rem; margin-top: 2rem; }
+    .footer-social a {
+      width: 36px; height: 36px; border: 1px solid var(--border); border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      animation: spin-slow 30s linear infinite;
+      text-decoration: none; font-size: 0.75rem; color: var(--muted);
+      transition: border-color 0.2s, color 0.2s;
     }
-    .hero-circle-inner {
-      width: 300px; height: 300px; border-radius: 50%;
-      background: radial-gradient(circle at 38% 38%, rgba(29,107,230,0.35), rgba(0,18,51,0.6));
-      border: 1px solid rgba(29,107,230,0.35);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 7rem;
+    .footer-social a:hover { border-color: var(--accent); color: var(--accent); }
+    .footer-col h5 {
+      font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1.4rem; font-weight: 600;
     }
-    @keyframes spin-slow { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
-
-    /* floating badges */
-    .float-badge {
-      position: absolute; background: white; border-radius: 10px;
-      padding: 0.8rem 1.2rem; box-shadow: 0 8px 32px rgba(0,18,51,0.2);
-      display: flex; align-items: center; gap: 0.7rem;
-      animation: float 4s ease-in-out infinite;
-    }
-    .float-badge:nth-child(2) { top: 20%; right: -20px; animation-delay: 0s; }
-    .float-badge:nth-child(3) { bottom: 22%; left: -30px; animation-delay: 1.5s; }
-    .float-badge:nth-child(4) { top: 55%; right: -40px; animation-delay: 0.8s; }
-    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
-
-    .fb-icon { font-size: 1.4rem; }
-    .fb-text { display: flex; flex-direction: column; }
-    .fb-num { font-family: 'Fraunces', serif; font-weight: 900; font-size: 1.1rem; color: var(--navy); line-height: 1; }
-    .fb-label { font-size: 0.68rem; color: var(--muted); margin-top: 1px; }
-
-    .hero-stats {
-      position: absolute; bottom: 3rem; left: 4rem; right: 4rem; z-index: 2;
-      display: flex; gap: 2.5rem;
-    }
-    .hero-stat { }
-    .hero-stat .num { font-family: 'Fraunces', serif; font-size: 2.2rem; font-weight: 900; color: white; line-height: 1; display: block; }
-    .hero-stat .label { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(244,247,255,0.45); display: block; margin-top: 0.25rem; }
-
-    .scroll-hint {
-      position: absolute; bottom: 2rem; right: 4rem;
-      display: flex; align-items: center; gap: 0.7rem;
-      font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
-      color: rgba(244,247,255,0.3); z-index: 2;
-    }
-    .scroll-line { width: 36px; height: 1px; background: rgba(255,255,255,0.15); position: relative; overflow: hidden; }
-    .scroll-line::after { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: var(--blue-bright); animation: sl 2s ease-in-out infinite; }
-    @keyframes sl { 0%{left:-100%} 100%{left:100%} }
-
-    /* ── MARQUEE ─────────────────────────────────────── */
-    .marquee-band { background: var(--blue); color: white; padding: 0.9rem 0; overflow: hidden; white-space: nowrap; }
-    .marquee-track { display: inline-flex; animation: marquee 28s linear infinite; }
-    .marquee-item { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; padding: 0 2.5rem; }
-    .marquee-item::before { content: '✦'; margin-right: 2.5rem; opacity: 0.6; }
-    @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-
-    /* ── SHARED ───────────────────────────────────────── */
-    section { padding: 8rem 4rem; }
-    .section-eyebrow {
-      font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--blue); margin-bottom: 0.9rem;
-      display: flex; align-items: center; gap: 0.7rem; font-weight: 500;
-    }
-    .section-eyebrow::before { content: ''; display: block; width: 22px; height: 2px; background: currentColor; border-radius: 2px; }
-    h2 { font-family: 'Fraunces', serif; font-weight: 900; line-height: 1.08; letter-spacing: -0.025em; }
-    h2 em { font-style: italic; font-weight: 300; color: var(--blue); }
-
-    /* ── ABOUT ───────────────────────────────────────── */
-    .about { background: var(--off-white); }
-    .about-inner { max-width: 1200px; margin: 0 auto; }
-    .about-top { text-align: center; margin-bottom: 4.5rem; }
-    .about .section-eyebrow { justify-content: center; }
-    .about .section-eyebrow::before { display: none; }
-    .about h2 { font-size: clamp(2.2rem, 4vw, 3.2rem); color: var(--navy); margin-bottom: 1rem; }
-    .about-sub { font-size: 1rem; color: var(--muted); max-width: 540px; margin: 0 auto; line-height: 1.75; }
-
-    .about-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-    .about-card {
-      background: white; border: 1px solid var(--border); border-radius: 12px;
-      padding: 2.8rem 2.5rem; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
-    }
-    .about-card:hover { border-color: var(--blue); box-shadow: 0 8px 40px rgba(29,107,230,0.1); transform: translateY(-4px); }
-    .about-card-icon {
-      width: 52px; height: 52px; border-radius: 12px;
-      background: var(--blue-light); display: flex; align-items: center; justify-content: center;
-      font-size: 1.4rem; margin-bottom: 1.5rem;
-    }
-    .about-card h3 { font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 700; color: var(--navy); margin-bottom: 0.9rem; }
-    .about-card p { font-size: 0.9rem; line-height: 1.75; color: var(--muted); }
-    .about-card ul { list-style: none; }
-    .about-card li { font-size: 0.9rem; line-height: 1.7; color: var(--muted); display: flex; align-items: flex-start; gap: 0.6rem; margin-bottom: 0.55rem; }
-    .about-card li::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--blue); flex-shrink: 0; margin-top: 6px; }
-
-    /* ── SERVICES ─────────────────────────────────────── */
-    .services { background: white; }
-    .services-header { max-width: 1200px; margin: 0 auto 4rem; text-align: center; }
-    .services-header .section-eyebrow { justify-content: center; }
-    .services-header .section-eyebrow::before { display: none; }
-    .services h2 { font-size: clamp(2.2rem, 4vw, 3.2rem); color: var(--navy); margin-bottom: 0.8rem; }
-    .services-sub { font-size: 0.95rem; color: var(--muted); }
-
-    .services-grid {
-      max-width: 1200px; margin: 0 auto;
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
-    }
-    .service-card {
-      background: var(--off-white); border: 1px solid var(--border); border-radius: 12px;
-      padding: 2.5rem 2rem; position: relative; overflow: hidden;
-      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
-    }
-    .service-card:hover { border-color: var(--blue); box-shadow: 0 8px 36px rgba(29,107,230,0.1); transform: translateY(-4px); }
-    .service-icon {
-      width: 48px; height: 48px; border-radius: 10px;
-      background: var(--blue-light); display: flex; align-items: center; justify-content: center;
-      font-size: 1.4rem; margin-bottom: 1.5rem;
-    }
-    .service-card h3 { font-family: 'Fraunces', serif; font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: 0.8rem; }
-    .service-card p { font-size: 0.87rem; line-height: 1.72; color: var(--muted); }
-    .service-card ul { list-style: none; }
-    .service-card li { font-size: 0.85rem; line-height: 1.7; color: var(--muted); display: flex; gap: 0.6rem; margin-bottom: 0.45rem; }
-    .service-card li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); flex-shrink: 0; margin-top: 7px; }
-
-    /* ── WHO WE SERVE ─────────────────────────────────── */
-    .serve { background: var(--navy); }
-    .serve-inner { max-width: 1200px; margin: 0 auto; }
-    .serve-top { text-align: center; margin-bottom: 3.5rem; }
-    .serve .section-eyebrow { color: #7eb8ff; justify-content: center; }
-    .serve .section-eyebrow::before { display: none; }
-    .serve h2 { font-size: clamp(2rem, 3.5vw, 3rem); color: white; margin-bottom: 0.8rem; }
-    .serve h2 em { color: #7eb8ff; }
-    .serve-sub { font-size: 0.95rem; color: rgba(244,247,255,0.55); }
-
-    .serve-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; }
-    .serve-card {
-      background: rgba(255,255,255,0.06); border: 1px solid rgba(29,107,230,0.2);
-      border-radius: 12px; padding: 2rem 1.5rem; text-align: center;
-      transition: background 0.3s, border-color 0.3s, transform 0.3s;
-    }
-    .serve-card:hover { background: rgba(29,107,230,0.15); border-color: rgba(29,107,230,0.5); transform: translateY(-4px); }
-    .serve-card .s-icon { font-size: 1.8rem; display: block; margin-bottom: 0.9rem; }
-    .serve-card h4 { font-family: 'Fraunces', serif; font-size: 0.9rem; font-weight: 700; color: white; line-height: 1.4; }
-
-    /* ── MEMBERSHIP ───────────────────────────────────── */
-    .membership { background: var(--off-white); }
-    .membership-inner { max-width: 1200px; margin: 0 auto; }
-    .membership-top { text-align: center; margin-bottom: 4rem; }
-    .membership-top .section-eyebrow { justify-content: center; }
-    .membership-top .section-eyebrow::before { display: none; }
-    .membership h2 { font-size: clamp(2rem, 3.5vw, 3rem); color: var(--navy); margin-bottom: 0.8rem; }
-    .membership-sub { font-size: 0.95rem; color: var(--muted); }
-
-    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-    .pricing-card {
-      background: white; border: 1.5px solid var(--border); border-radius: 16px;
-      padding: 3rem 2.5rem; position: relative; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
-    }
-    .pricing-card:hover { border-color: var(--blue); box-shadow: 0 12px 40px rgba(29,107,230,0.12); transform: translateY(-4px); }
-    .pricing-card.featured { border-color: var(--blue); box-shadow: 0 8px 40px rgba(29,107,230,0.18); }
-    .featured-badge {
-      position: absolute; top: -1px; right: 2rem;
-      background: var(--blue); color: white;
-      font-size: 0.67rem; font-weight: 700; letter-spacing: 0.08em;
-      text-transform: uppercase; padding: 0.3rem 0.85rem; border-radius: 0 0 8px 8px;
-    }
-    .plan-name { font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.2rem; font-weight: 500; }
-    .plan-price { font-family: 'Fraunces', serif; font-size: 2.8rem; font-weight: 900; color: var(--navy); line-height: 1; }
-    .plan-period { font-size: 0.82rem; color: var(--muted); margin-left: 0.2rem; font-family: 'DM Sans', sans-serif; font-weight: 300; }
-    .plan-save { font-size: 0.78rem; color: var(--blue); margin: 0.5rem 0 1.8rem; display: block; font-weight: 500; }
-    .plan-divider { height: 1px; background: var(--border); margin: 1.5rem 0; }
-    .plan-features { list-style: none; margin-bottom: 2.5rem; }
-    .plan-features li { font-size: 0.88rem; color: var(--muted); display: flex; gap: 0.65rem; margin-bottom: 0.8rem; line-height: 1.5; }
-    .plan-features li::before { content: ''; width: 16px; height: 16px; border-radius: 50%; background: var(--blue-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6l3 3 5-5' stroke='%231D6BE6' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: center; margin-top: 1px; }
-    .plan-btn {
-      display: block; text-align: center; text-decoration: none;
-      padding: 0.9rem 1.5rem; font-family: 'DM Sans', sans-serif; font-weight: 600;
-      font-size: 0.9rem; border-radius: 8px; transition: all 0.2s; cursor: pointer; border: none;
-    }
-    .plan-btn-outline { background: transparent; color: var(--navy); border: 1.5px solid var(--border); }
-    .plan-btn-outline:hover { border-color: var(--blue); color: var(--blue); }
-    .plan-btn-blue { background: var(--blue); color: white; box-shadow: 0 4px 16px rgba(29,107,230,0.35); }
-    .plan-btn-blue:hover { background: var(--navy); box-shadow: 0 6px 20px rgba(0,18,51,0.25); }
-
-    /* ── IMPACT ───────────────────────────────────────── */
-    .impact {
-      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
-      position: relative; overflow: hidden;
-    }
-    .impact::before {
-      content: ''; position: absolute; inset: 0;
-      background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 28px 28px; pointer-events: none;
-    }
-    .impact-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
-    .impact-top { text-align: center; margin-bottom: 4rem; }
-    .impact-top .section-eyebrow { color: #7eb8ff; justify-content: center; }
-    .impact-top .section-eyebrow::before { display: none; }
-    .impact h2 { font-size: clamp(2rem, 3.5vw, 3rem); color: white; margin-bottom: 0.8rem; }
-    .impact h2 em { color: #7eb8ff; }
-    .impact-sub { font-size: 0.95rem; color: rgba(244,247,255,0.52); }
-
-    .impact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-    .impact-card {
-      background: rgba(255,255,255,0.06); border: 1px solid rgba(29,107,230,0.25);
-      border-radius: 16px; padding: 3rem 2.5rem; text-align: center;
-      transition: background 0.3s, border-color 0.3s;
-    }
-    .impact-card:hover { background: rgba(29,107,230,0.12); border-color: rgba(29,107,230,0.45); }
-    .impact-card .i-num { font-family: 'Fraunces', serif; font-size: 3.8rem; font-weight: 900; color: #7eb8ff; line-height: 1; display: block; margin-bottom: 0.6rem; }
-    .impact-card .i-label { font-size: 0.9rem; color: rgba(244,247,255,0.6); }
-
-    /* ── CTA ──────────────────────────────────────────── */
-    .cta-band {
-      background: var(--blue-light); text-align: center; padding: 7rem 4rem;
-      border-top: 1px solid var(--border);
-    }
-    .cta-inner { max-width: 680px; margin: 0 auto; }
-    .cta-band .section-eyebrow { justify-content: center; }
-    .cta-band .section-eyebrow::before { display: none; }
-    .cta-band h2 { font-size: clamp(2.2rem, 4.5vw, 3.5rem); color: var(--navy); margin-bottom: 1.5rem; }
-    .cta-band p { font-size: 1rem; color: var(--muted); margin-bottom: 3rem; line-height: 1.75; }
-    .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-    .btn-navy { background: var(--navy); color: white; padding: 1rem 2.2rem; font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 0.9rem; border: none; cursor: pointer; text-decoration: none; display: inline-block; border-radius: 8px; transition: background 0.2s; }
-    .btn-navy:hover { background: var(--navy-light); }
-
-    /* ── FOOTER ───────────────────────────────────────── */
-    footer { background: var(--navy); padding: 5rem 4rem 3rem; }
-    .footer-top { max-width: 1200px; margin: 0 auto 4rem; display: grid; grid-template-columns: 2fr 1fr 1fr 1.3fr; gap: 3rem; }
-    .footer-brand p { font-size: 0.88rem; line-height: 1.7; color: rgba(244,247,255,0.42); margin-top: 1.2rem; max-width: 270px; }
-    .footer-social { display: flex; gap: 0.8rem; margin-top: 1.5rem; }
-    .footer-social a { width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 0.78rem; color: rgba(244,247,255,0.45); transition: border-color 0.2s, color 0.2s, background 0.2s; }
-    .footer-social a:hover { border-color: var(--blue); color: white; background: var(--blue); }
-    .footer-col h4 { font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: #7eb8ff; margin-bottom: 1.4rem; font-weight: 500; }
     .footer-col ul { list-style: none; }
     .footer-col li { margin-bottom: 0.75rem; }
-    .footer-col a { text-decoration: none; font-size: 0.88rem; color: rgba(244,247,255,0.45); transition: color 0.2s; }
-    .footer-col a:hover { color: white; }
-    .footer-contact-item { display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.85rem; font-size: 0.88rem; color: rgba(244,247,255,0.45); }
-    .footer-contact-item .ci { color: #7eb8ff; flex-shrink: 0; }
-    .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 2.5rem; border-top: 1px solid rgba(255,255,255,0.07); display: flex; justify-content: space-between; align-items: center; }
-    .footer-bottom p { font-size: 0.8rem; color: rgba(244,247,255,0.25); }
+    .footer-col a { font-size: 0.87rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--white); }
+    .contact-item { display: flex; gap: 0.75rem; font-size: 0.87rem; color: var(--muted); margin-bottom: 0.8rem; }
+    .contact-item .ci { color: var(--accent); flex-shrink: 0; }
+    .footer-bottom {
+      max-width: 1300px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-bottom p { font-size: 0.78rem; color: var(--dim); }
+    .footer-bottom span { font-size: 0.78rem; color: var(--dim); }
 
-    /* ── ANIMATIONS ───────────────────────────────────── */
-    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
-    .d1{transition-delay:.1s} .d2{transition-delay:.2s} .d3{transition-delay:.3s} .d4{transition-delay:.4s}
+    /* ─── FADE-UP ─────────────────────────────────────── */
+    .fu { opacity: 0; transform: translateY(32px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .fu.in { opacity: 1; transform: translateY(0); }
+    .d1{transition-delay:.1s} .d2{transition-delay:.2s} .d3{transition-delay:.3s} .d4{transition-delay:.4s} .d5{transition-delay:.5s}
 
-    /* ── RESPONSIVE ───────────────────────────────────── */
+    /* ─── RESPONSIVE ─────────────────────────────────── */
     @media (max-width: 1100px) {
-      .services-grid { grid-template-columns: repeat(2, 1fr); }
       .serve-grid { grid-template-columns: repeat(3, 1fr); }
+      .process-steps { grid-template-columns: repeat(2, 1fr); gap: 3rem; }
+      .process-step { border-right: none; padding: 0; }
       .footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+      .impact-inner { grid-template-columns: 1fr; gap: 4rem; }
+      .impact-nums { grid-template-columns: repeat(3, 1fr); }
     }
     @media (max-width: 900px) {
-      nav { padding: 1.2rem 2rem; }
+      nav { padding: 1.2rem 1.5rem; }
       .nav-links { display: none; }
       .hamburger { display: flex; }
-      section { padding: 5.5rem 2rem; }
-      .hero { grid-template-columns: 1fr; min-height: 100svh; }
-      .hero-left { padding: 8rem 2rem 5rem; }
-      .hero-right { display: none; }
-      .about-cards { grid-template-columns: 1fr; }
-      .pricing-grid { grid-template-columns: 1fr; max-width: 440px; }
-      .impact-grid { grid-template-columns: 1fr; max-width: 440px; }
+      section { padding: 5rem 1.5rem; }
+      .hero { padding: 0 1.5rem 4rem; }
+      .hero-scroll { display: none; }
+      .hero-bgword { display: none; }
+      .intro-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .service-row { grid-template-columns: 40px 1fr; gap: 1.5rem; }
+      .service-body { grid-column: 2; }
+      .plans { grid-template-columns: 1fr; }
+      .testi-grid { grid-template-columns: 1fr; }
       .serve-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 640px) {
-      section { padding: 4.5rem 1.5rem; }
-      nav { padding: 1rem 1.5rem; }
-      .services-grid { grid-template-columns: 1fr; }
-      footer { padding: 4rem 1.5rem 2.5rem; }
       .footer-top { grid-template-columns: 1fr; gap: 2rem; }
-      .footer-bottom { flex-direction: column; gap: 1.5rem; text-align: center; }
-      .cta-band { padding: 5rem 1.5rem; }
-      .hero-stats { flex-direction: column; gap: 1rem; }
+      .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+      .cta-full { padding: 6rem 1.5rem; }
+      .impact-inner { padding: 0; }
+      .impact-nums { grid-template-columns: 1fr; gap: 1.5rem; }
+    }
+    @media (max-width: 600px) {
+      .hero-h1 { font-size: clamp(3rem, 11vw, 5rem); }
+      .serve-grid { grid-template-columns: 1fr 1fr; }
+      .services-top { flex-direction: column; align-items: flex-start; }
+      .serve-top { flex-direction: column; }
+      .process-steps { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
+<!-- Custom Cursor -->
+<div class="cursor-dot" id="cd"></div>
+<div class="cursor-ring" id="cr"></div>
+
 <!-- NAV -->
 <nav id="nav">
-  <a href="#" class="logo">
-    <div class="logo-mark">N</div>
-    <div class="logo-text">
-      <span>Neondesk</span>
-      <span>Africa</span>
-    </div>
-  </a>
+  <a href="#" class="nav-logo">Neondesk<em>Africa</em></a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#community">Community</a></li>
+    <li><a href="#services">What We Do</a></li>
+    <li><a href="#serve">Who We Serve</a></li>
     <li><a href="#membership">Membership</a></li>
-    <li><a href="#contact" class="nav-cta">Contact</a></li>
+    <li><a href="https://chat.whatsapp.com/IRYvNopleHB82KV0ohKapQ" class="nav-cta">Get Started</a></li>
   </ul>
-  <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+  <button class="hamburger" id="ham"><span></span><span></span><span></span></button>
 </nav>
 
 <!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobileMenu">
-  <button class="close-btn" id="closeMenu">✕</button>
-  <a href="#about" class="menu-link">About</a>
-  <a href="#services" class="menu-link">Services</a>
-  <a href="#community" class="menu-link">Community</a>
-  <a href="#membership" class="menu-link">Membership</a>
-  <a href="#contact" class="menu-link">Contact</a>
+<div class="mobile-menu" id="mob">
+  <button class="close-btn" id="closeM">✕</button>
+  <a href="#about" class="ml">About</a>
+  <a href="#services" class="ml">What We Do</a>
+  <a href="#serve" class="ml">Who We Serve</a>
+  <a href="#membership" class="ml">Membership</a>
+  <a href="https://chat.whatsapp.com/IRYvNopleHB82KV0ohKapQ" class="ml">Get Started</a>
 </div>
 
 <!-- HERO -->
-<section class="hero" id="hero">
-  <div class="hero-left">
-    <div class="hero-eyebrow fade-up">Built for African Entrepreneurs</div>
-    <h1 class="fade-up d1">
-      Empowering<br />
-      <em>African Entrepreneurs</em><br />
-      to Learn, Grow &amp; Scale
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-bgword" aria-hidden="true">Africa</div>
+
+  <div class="hero-content">
+    <div class="hero-label fu">Lagos, Nigeria — Est. 2024</div>
+    <h1 class="hero-h1 fu d1">
+      We build what<br/>
+      <em>Africa</em> needs<br/>
+      <span class="outline">to grow.</span>
     </h1>
-    <p class="hero-sub fade-up d2">
-      We provide the tools, resources, and frameworks African entrepreneurs need to build sustainable, profitable ventures — and lead Africa's next chapter.
-    </p>
-    <div class="hero-actions fade-up d3">
-      <a href="#membership" class="btn-primary">Join Our Community</a>
-      <a href="#about" class="btn-outline">Learn More</a>
-    </div>
-  </div>
-
-  <div class="hero-right">
-    <div class="hero-visual-wrap">
-      <div class="hero-circle-outer">
-        <div class="hero-circle-inner">🌍</div>
-      </div>
-      <div class="float-badge">
-        <span class="fb-icon">🚀</span>
-        <div class="fb-text"><span class="fb-num">10,000</span><span class="fb-label">Entrepreneurs by 2030</span></div>
-      </div>
-      <div class="float-badge">
-        <span class="fb-icon">👥</span>
-        <div class="fb-text"><span class="fb-num">5,000</span><span class="fb-label">Community Members</span></div>
-      </div>
-      <div class="float-badge">
-        <span class="fb-icon">💰</span>
-        <div class="fb-text"><span class="fb-num">1,000</span><span class="fb-label">Ventures Funded</span></div>
+    <div class="hero-bottom fu d2">
+      <p class="hero-sub">
+        Neondesk Africa supports entrepreneurs across the continent — providing the strategy, tools, and community to grow and scale beyond borders.
+      </p>
+      <div class="hero-actions">
+        <a href="https://chat.whatsapp.com/IRYvNopleHB82KV0ohKapQ" class="btn-accent">Join the Community</a>
+        <a href="#services" class="btn-ghost">Our Services</a>
       </div>
     </div>
   </div>
 
-  <div class="scroll-hint"><div class="scroll-line"></div>Scroll to Explore</div>
+  <div class="hero-scroll">
+    <div class="vline"></div>
+    <span>Scroll</span>
+  </div>
 </section>
 
 <!-- MARQUEE -->
-<div class="marquee-band">
-  <div class="marquee-track">
+<div class="marquee">
+  <div class="marquee-inner">
+    <span class="marquee-item hi">Neondesk Africa</span>
     <span class="marquee-item">Business Development</span>
     <span class="marquee-item">Idea Acceleration</span>
+    <span class="marquee-item hi">Scale with Confidence</span>
     <span class="marquee-item">Entrepreneurial Academy</span>
     <span class="marquee-item">Community Platform</span>
-    <span class="marquee-item">Funding Access</span>
-    <span class="marquee-item">Mentorship &amp; Coaching</span>
-    <span class="marquee-item">Growth &amp; Scale</span>
-    <span class="marquee-item">Lagos, Nigeria</span>
+    <span class="marquee-item hi">Lagos → Africa → World</span>
+    <span class="marquee-item">Mentorship & Coaching</span>
+    <span class="marquee-item">Funding Readiness</span>
+    <span class="marquee-item hi">Neondesk Africa</span>
     <span class="marquee-item">Business Development</span>
     <span class="marquee-item">Idea Acceleration</span>
+    <span class="marquee-item hi">Scale with Confidence</span>
     <span class="marquee-item">Entrepreneurial Academy</span>
     <span class="marquee-item">Community Platform</span>
-    <span class="marquee-item">Funding Access</span>
-    <span class="marquee-item">Mentorship &amp; Coaching</span>
-    <span class="marquee-item">Growth &amp; Scale</span>
-    <span class="marquee-item">Lagos, Nigeria</span>
+    <span class="marquee-item hi">Lagos → Africa → World</span>
+    <span class="marquee-item">Mentorship & Coaching</span>
+    <span class="marquee-item">Funding Readiness</span>
   </div>
 </div>
 
-<!-- ABOUT -->
-<section class="about" id="about">
-  <div class="about-inner">
-    <div class="about-top fade-up">
-      <div class="section-eyebrow">Who We Are</div>
-      <h2>About <em>Neondesk Africa</em></h2>
-      <p class="about-sub">We're building a generation of confident, capable, and empowered African entrepreneurs.</p>
+<!-- INTRO / ABOUT -->
+<section class="intro" id="about">
+  <div class="intro-inner">
+    <div class="fu">
+      <h2>
+        We don't just<br/>support businesses —<br/>
+        we <em>build futures.</em>
+      </h2>
     </div>
-    <div class="about-cards">
-      <div class="about-card fade-up">
-        <div class="about-card-icon">👁️</div>
-        <h3>Our Vision</h3>
-        <p>To become Africa's leading catalyst for entrepreneurship, innovation, and sustainable business growth.</p>
-      </div>
-      <div class="about-card fade-up d1">
-        <div class="about-card-icon">🎯</div>
-        <h3>Our Mission</h3>
-        <p>To reduce the high failure rate of startups and SMEs in Africa by equipping entrepreneurs with practical frameworks and support networks.</p>
-      </div>
-      <div class="about-card fade-up d2">
-        <div class="about-card-icon">⭐</div>
-        <h3>Why Neondesk?</h3>
-        <ul>
-          <li>Proven frameworks that eliminate guesswork</li>
-          <li>Holistic support from ideation to scaling</li>
-          <li>Powerful entrepreneurial community</li>
-          <li>Locally relevant programs</li>
-        </ul>
-      </div>
+    <div class="intro-right fu d2">
+      <p>Neondesk Africa was born from a simple belief: African entrepreneurs deserve world-class support. We exist to bridge the gap between ambition and achievement — giving founders the frameworks, networks, and hands-on guidance that actually move the needle.</p>
+      <p>Our vision is to become Africa's leading catalyst for entrepreneurship, innovation, and sustainable business growth. Our mission is to reduce the high failure rate of startups and SMEs by equipping founders with practical tools and powerful support networks.</p>
+      <a href="#services" class="btn-accent">See How We Help</a>
     </div>
   </div>
 </section>
 
 <!-- SERVICES -->
 <section class="services" id="services">
-  <div class="services-header fade-up">
-    <div class="section-eyebrow">What We Offer</div>
-    <h2>Our <em>Core Focus</em> Areas</h2>
-    <p class="services-sub">We address every layer of the entrepreneurial journey</p>
+  <div class="services-top fu">
+    <h2 class="display">
+      What<br/>
+      <em>we do.</em>
+    </h2>
+    <p style="font-size:0.95rem; color:var(--muted); max-width:340px; line-height:1.75;">
+      Four core pillars that address every layer of the entrepreneurial journey — from first idea to sustainable scale.
+    </p>
   </div>
+
   <div class="services-grid">
-    <div class="service-card fade-up">
-      <div class="service-icon">📈</div>
-      <h3>Business Development Support</h3>
-      <ul>
-        <li>Structured mentorship and coaching</li>
-        <li>Business strategy and growth planning</li>
-        <li>Access to tools, templates, and best practices</li>
-      </ul>
+    <div class="service-row fu">
+      <div class="service-num">01</div>
+      <div class="service-title">Business Development Support</div>
+      <div class="service-body">
+        <p>Structured mentorship, one-on-one coaching, and growth planning tailored to Africa's unique business landscape. We help you build the foundations that last.</p>
+        <div class="service-tags">
+          <span class="service-tag">Strategy</span>
+          <span class="service-tag">Mentorship</span>
+          <span class="service-tag">Growth Planning</span>
+          <span class="service-tag">Tools & Templates</span>
+        </div>
+      </div>
     </div>
-    <div class="service-card fade-up d1">
-      <div class="service-icon">💡</div>
-      <h3>Idea Acceleration Framework</h3>
-      <p>We provide a proven framework to help individuals transform bold ideas into viable, scalable businesses.</p>
+    <div class="service-row fu d1">
+      <div class="service-num">02</div>
+      <div class="service-title">Idea Acceleration Framework <span class="tag">Core</span></div>
+      <div class="service-body">
+        <p>A proven system to transform bold ideas into viable, scalable businesses. From validation to MVP to market — we walk with you every step of the way.</p>
+        <div class="service-tags">
+          <span class="service-tag">Validation</span>
+          <span class="service-tag">Business Modelling</span>
+          <span class="service-tag">Investor Readiness</span>
+        </div>
+      </div>
     </div>
-    <div class="service-card fade-up d2">
-      <div class="service-icon">🎓</div>
-      <h3>Entrepreneurial Academy</h3>
-      <p>Empowering entrepreneurs with essential knowledge across finance, marketing, operations, sales, and leadership.</p>
+    <div class="service-row fu d2">
+      <div class="service-num">03</div>
+      <div class="service-title">Entrepreneurial Academy</div>
+      <div class="service-body">
+        <p>Essential knowledge delivered in practical formats — finance, marketing, operations, sales, and leadership. Built for founders, not classrooms.</p>
+        <div class="service-tags">
+          <span class="service-tag">Finance</span>
+          <span class="service-tag">Marketing</span>
+          <span class="service-tag">Operations</span>
+          <span class="service-tag">Leadership</span>
+          <span class="service-tag">Sales</span>
+        </div>
+      </div>
     </div>
-    <div class="service-card fade-up d3">
-      <div class="service-icon">👥</div>
-      <h3>Community Platform</h3>
-      <p>A growing network of young entrepreneurs fostering peer learning, collaboration, and accountability.</p>
+    <div class="service-row fu d3">
+      <div class="service-num">04</div>
+      <div class="service-title">Community Platform</div>
+      <div class="service-body">
+        <p>A curated network of ambitious entrepreneurs, investors, and industry leaders. Peer learning, accountability, and the kind of connections that change trajectories.</p>
+        <div class="service-tags">
+          <span class="service-tag">Networking</span>
+          <span class="service-tag">Peer Learning</span>
+          <span class="service-tag">Investor Access</span>
+          <span class="service-tag">Accountability</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- WHO WE SERVE -->
-<section class="serve" id="community">
+<section class="serve" id="serve">
   <div class="serve-inner">
-    <div class="serve-top fade-up">
-      <div class="section-eyebrow">Our Audience</div>
-      <h2>Who <em>We Serve</em></h2>
-      <p class="serve-sub">Our primary focus is on Africa's vibrant and innovative youth population</p>
+    <div class="serve-top fu">
+      <h2 class="display">
+        Who<br/><em>we serve.</em>
+      </h2>
+      <p>Our primary focus is Africa's vibrant and innovative youth population — those bold enough to build something from nothing.</p>
     </div>
     <div class="serve-grid">
-      <div class="serve-card fade-up"><span class="s-icon">🎒</span><h4>Students</h4></div>
-      <div class="serve-card fade-up d1"><span class="s-icon">🏫</span><h4>Recent Graduates</h4></div>
-      <div class="serve-card fade-up d2"><span class="s-icon">🇳🇬</span><h4>NYSC Members</h4></div>
-      <div class="serve-card fade-up d3"><span class="s-icon">🚀</span><h4>Early-stage Entrepreneurs</h4></div>
-      <div class="serve-card fade-up d4"><span class="s-icon">💼</span><h4>Young Professionals</h4></div>
+      <div class="serve-card fu">
+        <div class="serve-icon">🎒</div>
+        <h4>Students</h4>
+        <p>Equipping the next generation with business skills before they leave campus.</p>
+      </div>
+      <div class="serve-card fu d1">
+        <div class="serve-icon">🏫</div>
+        <h4>Recent Graduates</h4>
+        <p>Helping fresh talent translate qualifications into real-world ventures.</p>
+      </div>
+      <div class="serve-card fu d2">
+        <div class="serve-icon">🇳🇬</div>
+        <h4>NYSC Members</h4>
+        <p>Supporting corp members to use their service year to build the future.</p>
+      </div>
+      <div class="serve-card fu d3">
+        <div class="serve-icon">🚀</div>
+        <h4>Early-Stage Founders</h4>
+        <p>Turning ideas into traction with structure, support, and strategic guidance.</p>
+      </div>
+      <div class="serve-card fu d4">
+        <div class="serve-icon">💼</div>
+        <h4>Young Professionals</h4>
+        <p>Helping career-driven individuals make the leap to entrepreneurship.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW WE WORK -->
+<section class="process">
+  <div class="process-inner">
+    <div class="process-top fu">
+      <div class="eyebrow">The Process</div>
+      <h2 class="display">
+        From where you are —<br/>to where you're <em>meant to be.</em>
+      </h2>
+    </div>
+    <div class="process-steps">
+      <div class="process-step fu">
+        <div class="step-num">01</div>
+        <h3>Apply & Connect</h3>
+        <p>Tell us about your business and ambitions. We match you with the right programme, track, and community for where you are.</p>
+      </div>
+      <div class="process-step fu d1">
+        <div class="step-num">02</div>
+        <h3>Strategic Assessment</h3>
+        <p>Our team conducts a deep-dive into your business to uncover gaps, strengths, and the highest-leverage growth opportunities.</p>
+      </div>
+      <div class="process-step fu d2">
+        <div class="step-num">03</div>
+        <h3>Execute with Support</h3>
+        <p>With a custom roadmap in hand, we walk with you — hands-on guidance, accountability check-ins, and expert resources as you move.</p>
+      </div>
+      <div class="process-step fu d3">
+        <div class="step-num">04</div>
+        <h3>Scale & Sustain</h3>
+        <p>Build systems and networks that compound. Grow sustainably, attract investment, and lead your industry for the long term.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT NUMBERS -->
+<section class="impact">
+  <div class="impact-inner inner">
+    <div class="impact-left fu">
+      <h2>Our impact goals for Africa.</h2>
+      <p>We're committed to measurable, lasting change across the continent by 2030.</p>
+    </div>
+    <div class="impact-nums fu d2">
+      <div class="impact-num">
+        <span class="n">10K</span>
+        <span class="l">Entrepreneurs equipped by 2030</span>
+      </div>
+      <div class="impact-num">
+        <span class="n">5K</span>
+        <span class="l">Community members by 2027</span>
+      </div>
+      <div class="impact-num">
+        <span class="n">1K</span>
+        <span class="l">Ventures funded</span>
+      </div>
     </div>
   </div>
 </section>
@@ -631,79 +808,114 @@
 <!-- MEMBERSHIP -->
 <section class="membership" id="membership">
   <div class="membership-inner">
-    <div class="membership-top fade-up">
-      <div class="section-eyebrow">Plans &amp; Pricing</div>
-      <h2>Join Our <em>Entrepreneurial Community</em></h2>
-      <p class="membership-sub">Choose the plan that works best for you</p>
+    <div class="membership-top fu">
+      <div class="eyebrow">Plans & Pricing</div>
+      <h2 class="display">
+        Join the<br/><em>Entrepreneurial Community.</em>
+      </h2>
+      <p>Choose the plan that meets you where you are. Every tier includes access to our growing network and core resources.</p>
     </div>
-    <div class="pricing-grid">
-      <div class="pricing-card fade-up">
-        <div class="plan-name">Free Plan</div>
-        <div class="plan-price">₦0<span class="plan-period">/forever</span></div>
-        <div class="plan-divider"></div>
+    <div class="plans">
+      <div class="plan fu">
+        <div class="plan-tier">Free Plan</div>
+        <div class="plan-price"><span class="cur">₦</span>0</div>
+        <div class="plan-period">Forever free</div>
+        <div class="plan-line"></div>
         <ul class="plan-features">
           <li>Access to basic community</li>
           <li>Monthly newsletter</li>
           <li>Free webinars</li>
           <li>Limited resources</li>
         </ul>
-        <a href="https://chat.whatsapp.com/IRYvNopleHB82KV0ohKapQ" class="plan-btn plan-btn-outline">Join Free</a>
+        <a href="https://chat.whatsapp.com/IRYvNopleHB82KV0ohKapQ" class="plan-btn">Join Free</a>
       </div>
-      <div class="pricing-card fade-up d1">
-        <div class="plan-name">Monthly Plan</div>
-        <div class="plan-price">₦2,000<span class="plan-period">/month</span></div>
-        <div class="plan-divider"></div>
+      <div class="plan fu d1">
+        <div class="plan-tier">Monthly Plan</div>
+        <div class="plan-price"><span class="cur">₦</span>2,000</div>
+        <div class="plan-period">Per month</div>
+        <div class="plan-line"></div>
         <ul class="plan-features">
           <li>All free features</li>
           <li>Full resource library</li>
-          <li>Monthly expert Q&amp;A</li>
+          <li>Monthly expert Q&A sessions</li>
           <li>Member discounts</li>
         </ul>
-        <a href="https://chat.whatsapp.com/IRYvNopleHB82KV0ohKapQ" class="plan-btn plan-btn-blue">Get Started</a>
+        <a href="https://chat.whatsapp.com/IRYvNopleHB82KV0ohKapQ" class="plan-btn solid">Get Started</a>
       </div>
-      <div class="pricing-card featured fade-up d2">
-        <div class="featured-badge">17% OFF</div>
-        <div class="plan-name">Annual Plan</div>
-        <div class="plan-price">₦20,000<span class="plan-period">/year</span></div>
-        <span class="plan-save">Save ₦4,000 (17% discount)</span>
-        <div class="plan-divider"></div>
+      <div class="plan featured fu d2">
+        <div class="plan-badge">Best Value</div>
+        <div class="plan-tier">Annual Plan</div>
+        <div class="plan-price"><span class="cur">₦</span>20,000</div>
+        <div class="plan-period">Per year</div>
+        <span class="plan-save">Save ₦4,000 — 17% discount</span>
+        <div class="plan-line"></div>
         <ul class="plan-features">
           <li>All monthly features</li>
           <li>Priority support</li>
           <li>Exclusive masterclasses</li>
-          <li>Early access to programs</li>
+          <li>Early access to all programs</li>
         </ul>
-        <a href="https://chat.whatsapp.com/IRYvNopleHB82KV0ohKapQ" class="plan-btn plan-btn-blue">Get Started</a>
+        <a href="https://chat.whatsapp.com/IRYvNopleHB82KV0ohKapQ" class="plan-btn solid">Get Started</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- IMPACT GOALS -->
-<section class="impact">
-  <div class="impact-inner">
-    <div class="impact-top fade-up">
-      <div class="section-eyebrow">Our Commitment</div>
-      <h2>Our <em>Impact Goals</em></h2>
-      <p class="impact-sub">We're committed to measurable impact across Africa</p>
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <div class="testimonials-top fu">
+      <div class="eyebrow">Founder Stories</div>
+      <h2 class="display">
+        Real entrepreneurs.<br/><em>Real results.</em>
+      </h2>
     </div>
-    <div class="impact-grid">
-      <div class="impact-card fade-up"><span class="i-num">10,000</span><span class="i-label">Entrepreneurs equipped by 2030</span></div>
-      <div class="impact-card fade-up d1"><span class="i-num">5,000</span><span class="i-label">Community members by 2027</span></div>
-      <div class="impact-card fade-up d2"><span class="i-num">1,000</span><span class="i-label">Ventures funded</span></div>
+    <div class="testi-grid">
+      <div class="testi-card fu">
+        <p class="testi-quote">Neondesk gave us the framework and the belief to take our Lagos-based startup to three West African markets in under a year. The mentorship alone changed everything.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">AO</div>
+          <div>
+            <div class="testi-name">Adaeze Okonkwo</div>
+            <div class="testi-role">CEO, Agritech Ventures — Lagos, Nigeria</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card fu d1">
+        <p class="testi-quote">I came in with a solid idea but no idea how to raise capital. Six months later, I'd secured seed funding and had a team of eight. Neondesk made that possible.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">KM</div>
+          <div>
+            <div class="testi-name">Kwame Mensah</div>
+            <div class="testi-role">Founder, Fintech Labs — Accra, Ghana</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card fu d2">
+        <p class="testi-quote">The network I built through Neondesk has been the single biggest accelerant for my business. These aren't just contacts — they're collaborators and champions.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">FN</div>
+          <div>
+            <div class="testi-name">Fatima Nkosi</div>
+            <div class="testi-role">Co-Founder, EdTech Hub — Nairobi, Kenya</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
-<section class="cta-band" id="contact">
-  <div class="cta-inner">
-    <div class="section-eyebrow fade-up">Ready to Begin?</div>
-    <h2 class="fade-up d1">Ready to Start Your <em>Entrepreneurial Journey?</em></h2>
-    <p class="fade-up d2">Join hundreds of ambitious African entrepreneurs already growing and scaling with Neondesk Africa. Your next chapter starts now.</p>
-    <div class="cta-btns fade-up d3">
-      <a href="#membership" class="btn-primary">Join Community</a>
-      <a href="#services" class="btn-navy">Explore Resources</a>
+<!-- CTA FULL -->
+<section class="cta-full" id="contact">
+  <div class="cta-full-inner">
+    <div class="eyebrow fu" style="justify-content:center;">Start here</div>
+    <h2 class="fu d1">
+      Ready to<br/><em>build</em><br/>something?
+    </h2>
+    <p class="fu d2">Hundreds of African entrepreneurs have already transformed their businesses with Neondesk. Your next chapter starts now.</p>
+    <div class="cta-full-btns fu d3">
+      <a href="https://chat.whatsapp.com/IRYvNopleHB82KV0ohKapQ" class="btn-accent">Join the Community</a>
+      <a href="#services" class="btn-ghost">Explore Services</a>
     </div>
   </div>
 </section>
@@ -712,30 +924,24 @@
 <footer>
   <div class="footer-top">
     <div class="footer-brand">
-      <a href="#" class="logo">
-        <div class="logo-mark">N</div>
-        <div class="logo-text">
-          <span>Neondesk</span>
-          <span>Africa</span>
-        </div>
-      </a>
-      <p>Empowering African entrepreneurs with the tools, resources, and frameworks they need to thrive.</p>
+      <a href="#" class="nav-logo">Neondesk<em>Africa</em></a>
+      <p>Empowering African entrepreneurs with the tools, resources, and frameworks they need to grow, scale, and lead.</p>
       <div class="footer-social">
-        <a href="https://www.instagram.com/neondesk.africa/?hl=en" aria-label="Twitter">In</a>
-        <a href="https://neondeskafrica.substack.com/?r=5ohjxi&utm_campaign=pub-share-checklist" aria-label="Instagram">◈</a>
+        <a href="#" aria-label="Twitter">𝕏</a>
+        <a href="#" aria-label="Instagram">◈</a>
       </div>
     </div>
     <div class="footer-col">
-      <h4>Quick Links</h4>
+      <h5>Navigate</h5>
       <ul>
         <li><a href="#about">About</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#community">Community</a></li>
+        <li><a href="#services">What We Do</a></li>
+        <li><a href="#serve">Who We Serve</a></li>
         <li><a href="#membership">Membership</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Company</h4>
+      <h5>Company</h5>
       <ul>
         <li><a href="#">Our Team</a></li>
         <li><a href="#">Blog</a></li>
@@ -744,26 +950,50 @@
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Contact Us</h4>
-      <div class="footer-contact-item"><span class="ci">✉</span> neondeskafrica@gmail.com</div>
-      <div class="footer-contact-item"><span class="ci">📞</span> +234 81 444 12 008</div>
-      <div class="footer-contact-item"><span class="ci">📍</span> Lagos, Nigeria</div>
+      <h5>Contact</h5>
+      <div class="contact-item"><span class="ci">✉</span> neondeskafrica@gmail.com</div>
+      <div class="contact-item"><span class="ci">☎</span> +234 81 444 12 008</div>
+      <div class="contact-item"><span class="ci">📍</span> Lagos, Nigeria</div>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2026 Neondesk Africa. All rights reserved.</p>
+    <p>© 2025 Neondesk Africa. All rights reserved.</p>
+    <span>Built with purpose for Africa.</span>
   </div>
 </footer>
 
 <script>
+  /* CURSOR */
+  const dot = document.getElementById('cd');
+  const ring = document.getElementById('cr');
+  window.addEventListener('mousemove', e => {
+    dot.style.left = e.clientX + 'px';
+    dot.style.top  = e.clientY + 'px';
+    ring.style.left = e.clientX + 'px';
+    ring.style.top  = e.clientY + 'px';
+  });
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => { ring.style.transform = 'translate(-50%,-50%) scale(1.8)'; ring.style.borderColor = 'rgba(212,242,68,0.7)'; });
+    el.addEventListener('mouseleave', () => { ring.style.transform = 'translate(-50%,-50%) scale(1)'; ring.style.borderColor = 'rgba(212,242,68,0.4)'; });
+  });
+
+  /* NAV SCROLL */
   const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
-  document.getElementById('hamburger').addEventListener('click', () => document.getElementById('mobileMenu').classList.add('open'));
-  document.getElementById('closeMenu').addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('open'));
-  document.querySelectorAll('.menu-link').forEach(l => l.addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('open')));
-  const obs = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 });
-  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
-  setTimeout(() => document.querySelectorAll('.hero .fade-up').forEach(el => el.classList.add('visible')), 200);
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 60));
+
+  /* MOBILE MENU */
+  document.getElementById('ham').addEventListener('click', () => document.getElementById('mob').classList.add('open'));
+  document.getElementById('closeM').addEventListener('click', () => document.getElementById('mob').classList.remove('open'));
+  document.querySelectorAll('.ml').forEach(l => l.addEventListener('click', () => document.getElementById('mob').classList.remove('open')));
+
+  /* SCROLL ANIMATIONS */
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fu').forEach(el => obs.observe(el));
+
+  /* HERO INSTANT */
+  setTimeout(() => document.querySelectorAll('.hero .fu').forEach(el => el.classList.add('in')), 150);
 </script>
 </body>
 </html>
