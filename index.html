@@ -1,938 +1,783 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Neondesk Africa — We Build What Africa Needs</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Epilogue:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-  <style>
-    /* ─── TOKENS ─────────────────────────────────────── */
-    :root {
-      --bg:       #0c0c0b;
-      --bg2:      #111110;
-      --bg3:      #181816;
-      --white:    #f0ede6;
-      --muted:    rgba(240,237,230,0.45);
-      --dim:      rgba(240,237,230,0.22);
-      --accent:   #1D6BE6;   /* Lustre-style neon lime */
-      --accent2:  #ff5c35;   /* warm orange pop */
-      --border:   rgba(240,237,230,0.09);
-    }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Neondesk Africa — Empowering African Entrepreneurs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+/* ─── TOKENS ──────────────────────────────────────────── */
+:root {
+  --navy:     #001233;
+  --navy2:    #001a4a;
+  --navy3:    #002166;
+  --blue:     #1D6BE6;
+  --blueb:    #2B7FFF;
+  --bdim:     rgba(29,107,230,0.12);
+  --txt:      #cdd6f0;
+  --muted:    rgba(205,214,240,0.52);
+  --dim:      rgba(205,214,240,0.25);
+  --border:   rgba(29,107,230,0.2);
+  --line:     rgba(255,255,255,0.08);
+}
 
-    /* ─── RESET ──────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg);
-      color: var(--white);
-      font-family: 'Epilogue', sans-serif;
-      font-weight: 300;
-      overflow-x: hidden;
-      cursor: none;
-    }
+/* ─── RESET ───────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--navy);color:var(--txt);font-family:'Manrope',sans-serif;font-weight:300;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background-image:radial-gradient(rgba(29,107,230,0.06) 1px,transparent 1px);background-size:36px 36px}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
 
-    /* ─── CUSTOM CURSOR ──────────────────────────────── */
-    .cursor-dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: var(--accent);
-      position: fixed; top: 0; left: 0; z-index: 10000;
-      pointer-events: none; transform: translate(-50%, -50%);
-      transition: transform 0.1s;
-    }
-    .cursor-ring {
-      width: 36px; height: 36px; border-radius: 50%;
-      border: 1px solid rgba(212,242,68,0.4);
-      position: fixed; top: 0; left: 0; z-index: 9999;
-      pointer-events: none; transform: translate(-50%, -50%);
-      transition: all 0.18s ease;
-    }
+/* ─── NAV ─────────────────────────────────────────────── */
+nav{position:fixed;top:0;left:0;right:0;z-index:900;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 3.5rem;transition:background .4s,border-color .4s}
+nav.scrolled{background:rgba(0,18,51,.96);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.logo{display:flex;align-items:center;gap:.5rem}
+.lmark{width:32px;height:32px;border-radius:7px;background:var(--blue);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:.95rem;color:#fff;flex-shrink:0}
+.lwords{display:flex;flex-direction:column;line-height:1.1}
+.lwords b{font-family:'Playfair Display',serif;font-weight:900;font-size:1rem;color:#fff;letter-spacing:-.01em}
+.lwords small{font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);font-weight:600}
+.nav-links{display:flex;align-items:center;gap:2.2rem;list-style:none}
+.nav-links a{font-size:.82rem;color:var(--muted);transition:color .2s}
+.nav-links a:hover{color:#fff}
+.nav-cta{background:var(--blue)!important;color:#fff!important;padding:.55rem 1.3rem;border-radius:5px;font-weight:600!important;font-size:.8rem!important;transition:background .2s!important}
+.nav-cta:hover{background:var(--blueb)!important}
+.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none}
+.hbg span{display:block;width:22px;height:1.5px;background:#fff}
+.mob{display:none;position:fixed;inset:0;background:rgba(0,18,51,.98);z-index:890;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
+.mob.open{display:flex}
+.mob a{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:900;color:#fff}
+.mob a:hover{color:var(--blueb)}
+.mob-x{position:absolute;top:1.6rem;right:2.5rem;background:none;border:none;color:#fff;font-size:1.4rem;cursor:pointer}
 
-    /* ─── GRAIN OVERLAY ──────────────────────────────── */
-    body::after {
-      content: '';
-      position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
-      pointer-events: none; z-index: 9998; opacity: 0.4; mix-blend-mode: overlay;
-    }
+/* ─── SECTION BASE ────────────────────────────────────── */
+.sec{padding:7rem 3.5rem;position:relative;z-index:1}
+.wrap{max-width:1280px;margin:0 auto}
+.ey{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--blue);font-weight:700;margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
+.ey::before{content:'';width:18px;height:2px;background:var(--blue);border-radius:2px;display:block}
+h2.disp{font-family:'Playfair Display',serif;font-weight:900;line-height:1.06;letter-spacing:-.025em;color:#fff}
+h2.disp em{font-style:italic;color:var(--blueb);font-weight:400}
 
-    /* ─── NAV ────────────────────────────────────────── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 900;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1.6rem 3rem;
-      transition: background 0.4s, backdrop-filter 0.4s;
-    }
-    nav.scrolled {
-      background: rgba(12,12,11,0.92);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-    }
+/* ─── HERO ────────────────────────────────────────────── */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden}
+.hero-l{display:flex;flex-direction:column;justify-content:flex-end;padding:10rem 4rem 5rem;background:var(--navy);position:relative;z-index:2}
+.htag{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--blue);font-weight:700;margin-bottom:1.8rem}
+h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(3rem,5.5vw,5.5rem);line-height:1.02;letter-spacing:-.03em;color:#fff;margin-bottom:2.5rem}
+h1 em{font-style:italic;color:var(--blueb);font-weight:700}
+.wlink{display:inline-flex;align-items:center;gap:.6rem;font-size:.85rem;color:var(--muted);transition:color .2s}
+.wlink:hover{color:#fff}
+.wlink svg{transition:transform .2s}
+.wlink:hover svg{transform:translateX(4px)}
+.hero-r{position:relative;overflow:hidden;background:var(--navy2)}
+.hgrid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;height:100%;gap:2px}
+.hcard{position:relative;overflow:hidden;background:var(--navy3);display:flex;align-items:flex-end;padding:1.2rem;cursor:default}
+.hcard::before{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,18,51,.85) 0%,transparent 55%);z-index:1}
+.hcard:hover .hbg2{transform:scale(1.05)}
+.hbg2{position:absolute;inset:0;transition:transform .5s ease}
+.hbg2.c1{background:linear-gradient(135deg,#001a4a 0%,#0a2a6e 100%)}
+.hbg2.c2{background:linear-gradient(135deg,#0d1f5c 0%,#162d7a 100%)}
+.hbg2.c3{background:linear-gradient(135deg,#091440 0%,#0f2260 100%)}
+.hico{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:3rem;opacity:.15;z-index:0}
+.hplay{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;z-index:2;color:#fff;font-size:.9rem;transition:background .2s,border-color .2s}
+.hcard:hover .hplay{background:var(--blue);border-color:var(--blue)}
+.hinfo{position:relative;z-index:2}
+.hinfo span{display:block;font-size:.72rem;color:rgba(255,255,255,.5);letter-spacing:.04em;margin-bottom:.2rem}
+.hinfo strong{font-size:.82rem;color:#fff;font-weight:600}
+.hbig{grid-row:1/3}
 
-    .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-weight: 900; font-size: 1.25rem;
-      color: var(--white); text-decoration: none;
-      letter-spacing: -0.02em;
-      display: flex; flex-direction: column; line-height: 1.1;
-    }
-    .nav-logo em {
-      font-style: normal; color: var(--accent);
-      font-size: 0.52rem; letter-spacing: 0.22em;
-      text-transform: uppercase; font-family: 'Epilogue', sans-serif;
-      font-weight: 500; margin-top: 2px;
-    }
+/* ─── MARQUEE ─────────────────────────────────────────── */
+.mq-wrap{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--navy2);overflow:hidden;padding:.9rem 0}
+.mq-track{display:inline-flex;animation:mq 32s linear infinite;white-space:nowrap}
+.mi{font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:0 2.8rem;color:var(--muted)}
+.mi.ac{color:var(--blue)}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-    .nav-links {
-      display: flex; align-items: center; gap: 2.5rem; list-style: none;
-    }
-    .nav-links a {
-      font-size: 0.82rem; letter-spacing: 0.05em;
-      color: var(--muted); text-decoration: none;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--white); }
+/* ─── WHAT WE DO STRIP ────────────────────────────────── */
+.what{background:var(--navy2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.what-in{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1.4fr;gap:6rem;align-items:center}
+.what-in h2{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2rem,3.5vw,3.2rem);line-height:1.08;letter-spacing:-.02em;color:#fff}
+.what-in h2 em{font-style:italic;color:var(--blueb);font-weight:400}
+.what-r p{font-size:.97rem;line-height:1.82;color:var(--muted)}
+.what-r strong{color:#fff;font-weight:600}
 
-    .nav-cta {
-      font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--bg) !important; background: var(--accent);
-      padding: 0.6rem 1.4rem; border-radius: 2px; font-weight: 600 !important;
-      transition: background 0.2s !important;
-    }
-    .nav-cta:hover { background: #1D6BE6 !important; }
+/* ─── PILLARS ─────────────────────────────────────────── */
+.pillars{background:var(--navy)}
+.pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.pcard{background:var(--navy);padding:2.5rem 2rem;display:flex;flex-direction:column;gap:1.4rem;position:relative;overflow:hidden;transition:background .3s;cursor:default}
+.pcard::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--blue);transform:scaleX(0);transform-origin:left;transition:transform .35s}
+.pcard:hover{background:var(--navy2)}
+.pcard:hover::after{transform:scaleX(1)}
+.parr{width:36px;height:36px;border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--blue);font-size:.8rem;transition:background .25s,border-color .25s}
+.pcard:hover .parr{background:var(--blue);border-color:var(--blue);color:#fff}
+.pico{font-size:1.8rem}
+.ptg{font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);font-weight:700}
+.pcard h3{font-family:'Playfair Display',serif;font-weight:700;font-size:1.15rem;color:#fff;letter-spacing:-.01em;line-height:1.3}
+.pcard p{font-size:.82rem;line-height:1.72;color:var(--muted)}
+.ptags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:auto;padding-top:.5rem}
+.ptag{font-size:.62rem;letter-spacing:.05em;color:var(--dim);border:1px solid var(--line);padding:.22rem .55rem;border-radius:20px}
 
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: none; background: none; border: none; }
-    .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--white); }
+/* ─── WHO WE SERVE ────────────────────────────────────── */
+.serve{background:var(--navy2)}
+.serve-head{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end;margin-bottom:4rem}
+.serve-head p{font-size:.95rem;line-height:1.8;color:var(--muted)}
+.srow{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.sc{background:var(--navy2);padding:2.5rem 1.8rem;display:flex;flex-direction:column;gap:1rem;transition:background .3s}
+.sc:hover{background:#001740}
+.sico{font-size:2rem}
+.sc h4{font-family:'Playfair Display',serif;font-weight:700;font-size:.98rem;color:#fff;line-height:1.3}
+.sc p{font-size:.78rem;line-height:1.65;color:var(--muted)}
 
-    /* MOBILE MENU */
-    .mobile-menu {
-      display: none; position: fixed; inset: 0; background: var(--bg);
-      z-index: 890; flex-direction: column; align-items: center; justify-content: center; gap: 2.2rem;
-    }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a {
-      font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 900;
-      color: var(--white); text-decoration: none; letter-spacing: -0.02em;
-    }
-    .mobile-menu a:hover { color: var(--accent); }
-    .close-btn { position: absolute; top: 1.8rem; right: 2.5rem; background: none; border: none; color: var(--white); font-size: 1.4rem; cursor: none; }
+/* ─── BRANDS ──────────────────────────────────────────── */
+.brands{background:var(--navy);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.brands-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:4rem;gap:3rem;flex-wrap:wrap}
+.brands-head h2{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(1.8rem,3vw,2.8rem);color:#fff;letter-spacing:-.02em;line-height:1.12}
+.brands-head h2 em{font-style:italic;color:var(--blueb);font-weight:400}
+.brands-head p{font-size:.92rem;color:var(--muted);max-width:320px;line-height:1.7}
+.bgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.bcard{background:var(--navy);padding:2.2rem 1.5rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;transition:background .3s;cursor:default;min-height:150px}
+.bcard:hover{background:var(--navy2)}
+.bcard:hover .bname{color:#fff}
+.bimg-wrap{height:52px;display:flex;align-items:center;justify-content:center;width:100%}
+.bimg-wrap img{max-height:46px;max-width:130px;width:auto;object-fit:contain;filter:brightness(0) invert(1);opacity:.55;transition:opacity .3s}
+.bcard:hover .bimg-wrap img{opacity:.9}
+.bsvg{display:none;height:46px;align-items:center;justify-content:center}
+.bname{font-size:.68rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:center;transition:color .3s;line-height:1.3}
+.btag{font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);font-weight:700;border:1px solid var(--border);padding:.18rem .5rem;border-radius:3px}
 
-    /* ─── HERO ───────────────────────────────────────── */
-    .hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column; justify-content: flex-end;
-      padding: 0 3rem 5rem;
-      position: relative; overflow: hidden;
-      border-bottom: 1px solid var(--border);
-    }
+/* ─── TESTIMONIAL ─────────────────────────────────────── */
+.testi{background:var(--navy2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.testi-split{display:grid;grid-template-columns:1fr 1fr;min-height:480px}
+.testi-img{background:linear-gradient(135deg,#001a4a,#0d2a6e);display:flex;align-items:center;justify-content:center;font-size:5rem;position:relative;overflow:hidden}
+.testi-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,transparent,rgba(0,26,74,.3))}
+.testi-body{padding:4rem 4rem 4rem 5rem;display:flex;flex-direction:column;justify-content:center;gap:2rem}
+.tq{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1rem,1.8vw,1.3rem);line-height:1.7;color:#fff}
+.tq::before{content:'"';display:block;font-size:3rem;line-height:.7;color:var(--blue);margin-bottom:.8rem;font-style:normal}
+.tname{font-weight:700;font-size:.88rem;color:#fff}
+.trole{font-size:.75rem;color:var(--muted);margin-top:.2rem}
+.tdots{display:flex;gap:.5rem}
+.tdot{width:8px;height:8px;border-radius:50%;background:var(--line)}
+.tdot.on{background:var(--blue)}
 
-    .hero-bg {
-      position: absolute; inset: 0; z-index: 0;
-      background:
-        radial-gradient(ellipse 60% 50% at 75% 30%, rgba(212,242,68,0.06) 0%, transparent 65%),
-        radial-gradient(ellipse 40% 60% at 10% 80%, rgba(255,92,53,0.05) 0%, transparent 55%),
-        var(--bg);
-    }
+/* ─── IDEOLOGY ────────────────────────────────────────── */
+.ideo{background:var(--navy)}
+.ideo-in{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.ideo-img{width:100%;aspect-ratio:4/3;border-radius:6px;background:linear-gradient(135deg,#001a4a 0%,#0a2a6e 100%);display:flex;align-items:center;justify-content:center;font-size:4rem;border:1px solid var(--border);position:relative;overflow:hidden}
+.ideo-img::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 40%,rgba(29,107,230,.2),transparent 60%)}
+.ideo-hdg{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(1.5rem,2.5vw,2rem);color:#fff;line-height:1.2;margin-bottom:2rem;letter-spacing:-.02em}
+.ideo-hdg em{color:var(--blueb);font-style:italic;font-weight:400}
+.beliefs{list-style:none;display:flex;flex-direction:column;gap:1.2rem}
+.belief{display:flex;gap:1rem;align-items:flex-start;padding-bottom:1.2rem;border-bottom:1px solid var(--line)}
+.belief:last-child{border-bottom:none}
+.bdot{width:8px;height:8px;border-radius:50%;background:var(--blue);flex-shrink:0;margin-top:6px}
+.btitle{font-weight:700;font-size:.88rem;color:#fff;margin-bottom:.3rem}
+.bbody{font-size:.83rem;line-height:1.65;color:var(--muted)}
 
-    /* big background word */
-    .hero-bgword {
-      position: absolute; bottom: -2rem; right: -1rem; z-index: 1;
-      font-family: 'Playfair Display', serif; font-weight: 900;
-      font-size: clamp(10rem, 22vw, 22rem);
-      line-height: 1; letter-spacing: -0.05em;
-      color: transparent;
-      -webkit-text-stroke: 1px rgba(240,237,230,0.04);
-      white-space: nowrap; pointer-events: none; user-select: none;
-    }
+/* ─── IMPACT BAR ──────────────────────────────────────── */
+.ibar{background:var(--blue);padding:5rem 3.5rem}
+.ibar-in{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr repeat(3,1fr);gap:3rem;align-items:center}
+.ibar h2{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(1.5rem,2.5vw,2.2rem);color:var(--navy);line-height:1.15;letter-spacing:-.02em}
+.istat{border-left:2px solid rgba(0,18,51,.2);padding-left:2rem}
+.inum{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2.5rem,4vw,3.8rem);color:var(--navy);line-height:1;display:block}
+.ilbl{font-size:.8rem;color:rgba(0,18,51,.65);margin-top:.3rem;display:block;line-height:1.4}
 
-    .hero-content { position: relative; z-index: 2; max-width: 1300px; }
+/* ─── MEMBERSHIP ──────────────────────────────────────── */
+.memb{background:var(--navy2)}
+.memb-head{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end;margin-bottom:4rem}
+.memb-head p{font-size:.93rem;line-height:1.78;color:var(--muted)}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.plan{background:var(--navy2);padding:3rem 2.5rem;display:flex;flex-direction:column;position:relative;transition:background .3s}
+.plan:hover{background:#001740}
+.plan.best{background:var(--navy3);border:1px solid var(--blue);margin:-1px}
+.pbadge{position:absolute;top:2.8rem;right:2.5rem;background:var(--blue);color:#fff;font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.28rem .65rem;border-radius:3px}
+.ptier{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:1.5rem}
+.pprice{font-family:'Playfair Display',serif;font-weight:900;font-size:3rem;color:#fff;line-height:1;margin-bottom:.4rem;letter-spacing:-.02em}
+.pprice sup{font-size:1.3rem;vertical-align:super}
+.pper{font-size:.8rem;color:var(--muted)}
+.psave{font-size:.75rem;color:var(--blue);margin-top:.4rem;font-weight:600}
+.pline{height:1px;background:var(--line);margin:1.8rem 0}
+.pfeats{list-style:none;flex:1}
+.pfeats li{font-size:.84rem;color:var(--muted);display:flex;gap:.65rem;margin-bottom:.85rem;line-height:1.5;align-items:flex-start}
+.pfeats li::before{content:'✓';color:var(--blue);font-size:.75rem;flex-shrink:0;margin-top:1px}
+.pbtn{display:block;text-align:center;margin-top:2.5rem;padding:.9rem;font-family:'Manrope',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:.07em;text-transform:uppercase;border-radius:5px;transition:all .2s;border:1.5px solid var(--line);color:#fff;background:transparent}
+.pbtn:hover{border-color:var(--blue);color:var(--blueb)}
+.pbtn.fill{background:var(--blue);border-color:var(--blue);color:#fff}
+.pbtn.fill:hover{background:var(--blueb)}
 
-    .hero-label {
-      display: inline-flex; align-items: center; gap: 0.6rem;
-      font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 2.5rem; font-weight: 500;
-    }
-    .hero-label::before {
-      content: ''; display: block; width: 28px; height: 1px; background: var(--accent);
-    }
+/* ─── CONTACT ─────────────────────────────────────────── */
+.contact{background:var(--navy);border-top:1px solid var(--line)}
+.contact-in{display:grid;grid-template-columns:1fr 1fr;gap:6rem}
+.contact-r{padding-top:1rem}
+.contact-r h3{font-family:'Playfair Display',serif;font-weight:700;font-size:1.4rem;color:#fff;margin-bottom:1.5rem;letter-spacing:-.01em}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.ff{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
+.ff label{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.ff input,.ff select,.ff textarea{background:var(--navy2);border:1px solid var(--border);color:#fff;font-family:'Manrope',sans-serif;font-size:.87rem;padding:.8rem 1rem;border-radius:4px;outline:none;transition:border-color .2s;width:100%}
+.ff input:focus,.ff select:focus,.ff textarea:focus{border-color:var(--blue)}
+.ff input::placeholder,.ff textarea::placeholder{color:var(--dim)}
+.ff select{color:var(--muted)}
+.ff select option{background:var(--navy2);color:#fff}
+.ff textarea{resize:none;height:100px}
+.sbtn{background:var(--blue);color:#fff;border:none;cursor:pointer;padding:1rem 2rem;font-family:'Manrope',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.07em;text-transform:uppercase;border-radius:5px;transition:background .2s;margin-top:.5rem}
+.sbtn:hover{background:var(--blueb)}
+.citem{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.5rem}
+.cicon{width:38px;height:38px;border-radius:8px;background:var(--bdim);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.ctxt label{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:700;display:block;margin-bottom:.25rem}
+.ctxt span{font-size:.87rem;color:var(--txt)}
+.ctxt a{color:var(--txt);transition:color .2s}
+.ctxt a:hover{color:#fff}
 
-    .hero-h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(3.5rem, 8.5vw, 9.5rem);
-      font-weight: 900; line-height: 0.96; letter-spacing: -0.03em;
-      margin-bottom: 3rem;
-    }
-    .hero-h1 em { font-style: italic; color: var(--accent); font-weight: 400; }
-    .hero-h1 .outline {
-      -webkit-text-stroke: 1.5px var(--white);
-      color: transparent;
-    }
+/* ─── FOOTER ──────────────────────────────────────────── */
+footer{background:var(--navy2);border-top:1px solid var(--line);padding:5rem 3.5rem 2.5rem}
+.ft{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:4rem;padding-bottom:4rem;border-bottom:1px solid var(--line);margin-bottom:2.5rem}
+.fb p{font-size:.85rem;line-height:1.75;color:var(--muted);margin-top:1rem;max-width:260px}
+.fsoc{display:flex;gap:.6rem;margin-top:1.5rem}
+.fsoc a{width:34px;height:34px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;color:var(--muted);transition:border-color .2s,color .2s}
+.fsoc a:hover{border-color:var(--blue);color:var(--blue)}
+.fcol h5{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);font-weight:700;margin-bottom:1.4rem}
+.fcol ul{list-style:none}
+.fcol li{margin-bottom:.7rem}
+.fcol a{font-size:.85rem;color:var(--muted);transition:color .2s}
+.fcol a:hover{color:#fff}
+.fci{display:flex;gap:.7rem;font-size:.85rem;color:var(--muted);margin-bottom:.8rem;align-items:flex-start}
+.fci-i{color:var(--blue);flex-shrink:0}
+.fbot{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+.fbot p{font-size:.75rem;color:var(--dim)}
+.flinks{display:flex;gap:2rem}
+.flinks a{font-size:.72rem;color:var(--dim);transition:color .2s}
+.flinks a:hover{color:var(--muted)}
 
-    .hero-bottom {
-      display: flex; align-items: flex-end; justify-content: space-between;
-      gap: 3rem; flex-wrap: wrap;
-    }
-    .hero-sub {
-      font-size: 1rem; line-height: 1.75; color: var(--muted);
-      max-width: 380px;
-    }
-    .hero-actions { display: flex; gap: 1rem; align-items: center; flex-shrink: 0; }
+/* ─── FADE UP ─────────────────────────────────────────── */
+.fu{opacity:0;transform:translateY(26px);transition:opacity .75s ease,transform .75s ease}
+.fu.in{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
 
-    .btn-accent {
-      background: var(--accent); color: var(--bg);
-      padding: 1rem 2rem; font-family: 'Epilogue', sans-serif; font-weight: 600;
-      font-size: 0.85rem; letter-spacing: 0.05em; text-transform: uppercase;
-      border: none; cursor: none; text-decoration: none; display: inline-block;
-      border-radius: 2px; transition: background 0.2s, transform 0.2s;
-    }
-    .btn-accent:hover { background: #1D6BE6; transform: translateY(-2px); }
-
-    .btn-ghost {
-      background: transparent; color: var(--white);
-      padding: 1rem 2rem; font-family: 'Epilogue', sans-serif; font-weight: 400;
-      font-size: 0.85rem; letter-spacing: 0.05em; text-transform: uppercase;
-      border: 1px solid var(--border); cursor: none; text-decoration: none;
-      display: inline-block; border-radius: 2px; transition: border-color 0.2s;
-    }
-    .btn-ghost:hover { border-color: rgba(240,237,230,0.4); }
-
-    .hero-scroll {
-      position: absolute; right: 3rem; bottom: 5rem;
-      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-      font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--dim); z-index: 2;
-    }
-    .hero-scroll .vline {
-      width: 1px; height: 50px; background: var(--dim); position: relative; overflow: hidden;
-    }
-    .hero-scroll .vline::after {
-      content: ''; position: absolute; top: -100%; left: 0;
-      width: 100%; height: 100%; background: var(--accent);
-      animation: scrollDown 2s ease-in-out infinite;
-    }
-    @keyframes scrollDown { 0%{top:-100%} 100%{top:100%} }
-
-    /* ─── MARQUEE ────────────────────────────────────── */
-    .marquee { overflow: hidden; border-bottom: 1px solid var(--border); padding: 1rem 0; background: var(--bg2); }
-    .marquee-inner { display: inline-flex; animation: mq 30s linear infinite; white-space: nowrap; }
-    .marquee-item { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; padding: 0 3rem; color: var(--muted); }
-    .marquee-item.hi { color: var(--accent); }
-    @keyframes mq { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-
-    /* ─── SHARED SECTION STYLES ──────────────────────── */
-    section { padding: 8rem 3rem; }
-    .inner { max-width: 1300px; margin: 0 auto; }
-    .eyebrow {
-      font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 1rem; font-weight: 500;
-      display: flex; align-items: center; gap: 0.6rem;
-    }
-    .eyebrow::before { content: ''; display: block; width: 20px; height: 1px; background: var(--accent); }
-    h2.display {
-      font-family: 'Playfair Display', serif; font-weight: 900;
-      line-height: 1.04; letter-spacing: -0.025em;
-    }
-    h2.display em { font-style: italic; color: var(--accent); font-weight: 400; }
-
-    /* ─── INTRO STRIP ────────────────────────────────── */
-    .intro { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 6rem 3rem; }
-    .intro-inner {
-      max-width: 1300px; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
-    }
-    .intro h2 {
-      font-family: 'Playfair Display', serif; font-weight: 900;
-      font-size: clamp(2.2rem, 4vw, 3.8rem);
-      line-height: 1.06; letter-spacing: -0.025em; color: var(--white);
-    }
-    .intro h2 em { font-style: italic; color: var(--accent); font-weight: 400; }
-    .intro-right p {
-      font-size: 1.05rem; line-height: 1.8; color: var(--muted); margin-bottom: 1.5rem;
-    }
-    .intro-right p:last-of-type { margin-bottom: 2.5rem; }
-
-    /* ─── WHAT WE DO ─────────────────────────────────── */
-    .services { background: var(--bg); border-bottom: 1px solid var(--border); }
-    .services-top {
-      max-width: 1300px; margin: 0 auto;
-      display: flex; justify-content: space-between; align-items: flex-end;
-      margin-bottom: 5rem; gap: 4rem; flex-wrap: wrap;
-    }
-    .services-top h2 { font-size: clamp(2.5rem, 5vw, 4.5rem); max-width: 560px; }
-
-    .services-grid { max-width: 1300px; margin: 0 auto; }
-    .service-row {
-      display: grid; grid-template-columns: 60px 1fr 1fr;
-      align-items: start; gap: 3rem;
-      padding: 3rem 0; border-top: 1px solid var(--border);
-      transition: background 0.3s;
-    }
-    .service-row:last-child { border-bottom: 1px solid var(--border); }
-    .service-num {
-      font-family: 'Playfair Display', serif; font-weight: 900;
-      font-size: 0.85rem; color: var(--dim); padding-top: 4px;
-    }
-    .service-title {
-      font-family: 'Playfair Display', serif; font-weight: 700;
-      font-size: clamp(1.4rem, 2.5vw, 2rem); color: var(--white);
-      letter-spacing: -0.02em; line-height: 1.15;
-    }
-    .service-title .tag {
-      display: inline-block; background: var(--accent); color: var(--bg);
-      font-family: 'Epilogue', sans-serif; font-size: 0.62rem; font-weight: 700;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      padding: 0.25rem 0.6rem; border-radius: 2px; margin-left: 0.6rem;
-      vertical-align: middle; position: relative; top: -2px;
-    }
-    .service-body { padding-top: 4px; }
-    .service-body p { font-size: 0.92rem; line-height: 1.78; color: var(--muted); margin-bottom: 1.2rem; }
-    .service-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-    .service-tag {
-      font-size: 0.7rem; letter-spacing: 0.06em; color: var(--dim);
-      border: 1px solid var(--border); padding: 0.3rem 0.7rem; border-radius: 20px;
-    }
-
-    /* ─── WHO WE SERVE ───────────────────────────────── */
-    .serve { background: var(--bg3); border-bottom: 1px solid var(--border); }
-    .serve-inner { max-width: 1300px; margin: 0 auto; }
-    .serve-top { display: flex; justify-content: space-between; align-items: flex-end; gap: 4rem; flex-wrap: wrap; margin-bottom: 5rem; }
-    .serve-top h2 { font-size: clamp(2.2rem, 4vw, 3.8rem); }
-    .serve-top p { font-size: 0.95rem; line-height: 1.75; color: var(--muted); max-width: 340px; }
-
-    .serve-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
-    .serve-card {
-      background: var(--bg3); padding: 2.5rem 2rem;
-      display: flex; flex-direction: column; gap: 1.2rem;
-      transition: background 0.3s;
-    }
-    .serve-card:hover { background: #1e1e1b; }
-    .serve-icon { font-size: 1.8rem; }
-    .serve-card h4 {
-      font-family: 'Playfair Display', serif; font-weight: 700;
-      font-size: 1rem; color: var(--white); letter-spacing: -0.01em; line-height: 1.3;
-    }
-    .serve-card p { font-size: 0.8rem; line-height: 1.65; color: var(--muted); }
-
-    /* ─── HOW WE WORK ────────────────────────────────── */
-    .process { background: var(--bg); border-bottom: 1px solid var(--border); }
-    .process-inner { max-width: 1300px; margin: 0 auto; }
-    .process-top { margin-bottom: 5rem; }
-    .process-top h2 { font-size: clamp(2.5rem, 5vw, 4.5rem); max-width: 700px; }
-
-    .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
-    .process-step {
-      padding: 3rem 2.5rem 3rem 0;
-      border-right: 1px solid var(--border);
-      position: relative;
-    }
-    .process-step:last-child { border-right: none; padding-right: 0; }
-    .process-step:not(:first-child) { padding-left: 2.5rem; }
-    .step-num {
-      font-family: 'Playfair Display', serif; font-weight: 900;
-      font-size: 3.5rem; color: rgba(212,242,68,0.12); line-height: 1;
-      margin-bottom: 1.5rem;
-    }
-    .process-step h3 {
-      font-family: 'Playfair Display', serif; font-weight: 700;
-      font-size: 1.2rem; color: var(--white); margin-bottom: 0.8rem;
-      letter-spacing: -0.01em;
-    }
-    .process-step p { font-size: 0.87rem; line-height: 1.72; color: var(--muted); }
-
-    /* ─── IMPACT NUMBERS ─────────────────────────────── */
-    .impact { background: var(--accent); overflow: hidden; position: relative; }
-    .impact-inner {
-      max-width: 1300px; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr 2fr; gap: 6rem; align-items: center;
-    }
-    .impact-left h2 {
-      font-family: 'Playfair Display', serif; font-weight: 900;
-      font-size: clamp(2rem, 3.5vw, 3rem); color: var(--bg);
-      line-height: 1.1; letter-spacing: -0.025em;
-    }
-    .impact-left p { font-size: 0.95rem; color: rgba(12,12,11,0.65); margin-top: 1rem; line-height: 1.7; }
-    .impact-nums { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-    .impact-num { border-left: 2px solid rgba(12,12,11,0.15); padding-left: 1.5rem; }
-    .impact-num .n {
-      font-family: 'Playfair Display', serif; font-weight: 900;
-      font-size: clamp(2.8rem, 4vw, 4rem); color: var(--bg);
-      line-height: 1; display: block; letter-spacing: -0.03em;
-    }
-    .impact-num .l { font-size: 0.82rem; color: rgba(12,12,11,0.6); margin-top: 0.3rem; display: block; }
-
-    /* ─── MEMBERSHIP ─────────────────────────────────── */
-    .membership { background: var(--bg2); border-bottom: 1px solid var(--border); }
-    .membership-inner { max-width: 1300px; margin: 0 auto; }
-    .membership-top { margin-bottom: 4.5rem; }
-    .membership-top h2 { font-size: clamp(2.5rem, 5vw, 4.5rem); }
-    .membership-top p { font-size: 1rem; color: var(--muted); max-width: 480px; margin-top: 1.2rem; line-height: 1.7; }
-
-    .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; background: var(--border); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
-    .plan {
-      background: var(--bg2); padding: 3rem 2.5rem;
-      display: flex; flex-direction: column; position: relative;
-      transition: background 0.3s;
-    }
-    .plan:hover { background: var(--bg3); }
-    .plan.featured { background: var(--bg3); }
-    .plan-badge {
-      position: absolute; top: 2.5rem; right: 2.5rem;
-      background: var(--accent); color: var(--bg);
-      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; padding: 0.3rem 0.7rem; border-radius: 2px;
-    }
-    .plan-tier { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dim); font-weight: 500; margin-bottom: 1.5rem; }
-    .plan-price {
-      font-family: 'Playfair Display', serif; font-weight: 900;
-      font-size: 3rem; color: var(--white); line-height: 1; margin-bottom: 0.4rem;
-    }
-    .plan-price .cur { font-size: 1.4rem; vertical-align: super; }
-    .plan-period { font-size: 0.82rem; color: var(--dim); margin-bottom: 0.5rem; }
-    .plan-save { font-size: 0.78rem; color: var(--accent); margin-bottom: 2rem; display: block; font-weight: 500; }
-    .plan-line { height: 1px; background: var(--border); margin-bottom: 2rem; }
-    .plan-features { list-style: none; flex: 1; }
-    .plan-features li {
-      font-size: 0.87rem; color: var(--muted); display: flex; gap: 0.7rem;
-      margin-bottom: 0.85rem; line-height: 1.5;
-    }
-    .plan-features li::before { content: '→'; color: var(--accent); flex-shrink: 0; font-size: 0.8rem; margin-top: 1px; }
-    .plan-btn {
-      display: block; text-align: center; text-decoration: none; margin-top: 2.5rem;
-      padding: 0.9rem; font-family: 'Epilogue', sans-serif; font-weight: 600;
-      font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase;
-      border-radius: 2px; transition: all 0.2s; border: 1px solid var(--border);
-      color: var(--white); background: transparent;
-    }
-    .plan-btn:hover { border-color: var(--accent); color: var(--accent); }
-    .plan-btn.solid { background: var(--accent); color: var(--bg); border-color: var(--accent); }
-    .plan-btn.solid:hover { background: #1D6BE6; }
-
-    /* ─── TESTIMONIALS ───────────────────────────────── */
-    .testimonials { background: var(--bg); border-bottom: 1px solid var(--border); }
-    .testimonials-inner { max-width: 1300px; margin: 0 auto; }
-    .testimonials-top { margin-bottom: 5rem; }
-    .testimonials-top h2 { font-size: clamp(2.5rem, 5vw, 4.5rem); }
-
-    .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; background: var(--border); }
-    .testi-card {
-      background: var(--bg); padding: 3rem 2.5rem;
-      display: flex; flex-direction: column; gap: 2rem;
-      transition: background 0.3s;
-    }
-    .testi-card:hover { background: var(--bg2); }
-    .testi-quote {
-      font-family: 'Playfair Display', serif; font-size: 1.05rem;
-      font-style: italic; line-height: 1.75; color: var(--white);
-      flex: 1;
-    }
-    .testi-quote::before { content: '"'; display: block; font-size: 3rem; color: var(--accent); line-height: 0.8; margin-bottom: 0.8rem; font-style: normal; }
-    .testi-author { display: flex; align-items: center; gap: 1rem; }
-    .testi-avatar {
-      width: 42px; height: 42px; border-radius: 50%;
-      background: var(--bg3); border: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Playfair Display', serif; font-weight: 900;
-      font-size: 0.9rem; color: var(--accent); flex-shrink: 0;
-    }
-    .testi-name { font-size: 0.88rem; font-weight: 500; color: var(--white); }
-    .testi-role { font-size: 0.75rem; color: var(--dim); margin-top: 2px; }
-
-    /* ─── CTA FULL ────────────────────────────────────── */
-    .cta-full {
-      background: var(--bg2);
-      padding: 10rem 3rem;
-      text-align: center;
-      border-bottom: 1px solid var(--border);
-      position: relative; overflow: hidden;
-    }
-    .cta-full::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(212,242,68,0.05) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .cta-full-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
-    .cta-full h2 {
-      font-family: 'Playfair Display', serif; font-weight: 900;
-      font-size: clamp(3rem, 7vw, 7rem);
-      line-height: 0.97; letter-spacing: -0.03em; color: var(--white);
-      margin-bottom: 2.5rem;
-    }
-    .cta-full h2 em { font-style: italic; color: var(--accent); font-weight: 400; }
-    .cta-full p { font-size: 1.05rem; color: var(--muted); max-width: 540px; margin: 0 auto 3.5rem; line-height: 1.78; }
-    .cta-full-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-
-    /* ─── FOOTER ─────────────────────────────────────── */
-    footer { background: var(--bg); padding: 5rem 3rem 3rem; }
-    .footer-top {
-      max-width: 1300px; margin: 0 auto;
-      display: grid; grid-template-columns: 2fr 1fr 1fr 1.4fr; gap: 4rem;
-      margin-bottom: 5rem; padding-bottom: 4rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .footer-brand .nav-logo { font-size: 1.4rem; }
-    .footer-brand p { font-size: 0.87rem; line-height: 1.75; color: var(--muted); margin-top: 1.2rem; max-width: 260px; }
-    .footer-social { display: flex; gap: 0.8rem; margin-top: 2rem; }
-    .footer-social a {
-      width: 36px; height: 36px; border: 1px solid var(--border); border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      text-decoration: none; font-size: 0.75rem; color: var(--muted);
-      transition: border-color 0.2s, color 0.2s;
-    }
-    .footer-social a:hover { border-color: var(--accent); color: var(--accent); }
-    .footer-col h5 {
-      font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 1.4rem; font-weight: 600;
-    }
-    .footer-col ul { list-style: none; }
-    .footer-col li { margin-bottom: 0.75rem; }
-    .footer-col a { font-size: 0.87rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
-    .footer-col a:hover { color: var(--white); }
-    .contact-item { display: flex; gap: 0.75rem; font-size: 0.87rem; color: var(--muted); margin-bottom: 0.8rem; }
-    .contact-item .ci { color: var(--accent); flex-shrink: 0; }
-    .footer-bottom {
-      max-width: 1300px; margin: 0 auto;
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .footer-bottom p { font-size: 0.78rem; color: var(--dim); }
-    .footer-bottom span { font-size: 0.78rem; color: var(--dim); }
-
-    /* ─── FADE-UP ─────────────────────────────────────── */
-    .fu { opacity: 0; transform: translateY(32px); transition: opacity 0.8s ease, transform 0.8s ease; }
-    .fu.in { opacity: 1; transform: translateY(0); }
-    .d1{transition-delay:.1s} .d2{transition-delay:.2s} .d3{transition-delay:.3s} .d4{transition-delay:.4s} .d5{transition-delay:.5s}
-
-    /* ─── RESPONSIVE ─────────────────────────────────── */
-    @media (max-width: 1100px) {
-      .serve-grid { grid-template-columns: repeat(3, 1fr); }
-      .process-steps { grid-template-columns: repeat(2, 1fr); gap: 3rem; }
-      .process-step { border-right: none; padding: 0; }
-      .footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
-      .impact-inner { grid-template-columns: 1fr; gap: 4rem; }
-      .impact-nums { grid-template-columns: repeat(3, 1fr); }
-    }
-    @media (max-width: 900px) {
-      nav { padding: 1.2rem 1.5rem; }
-      .nav-links { display: none; }
-      .hamburger { display: flex; }
-      section { padding: 5rem 1.5rem; }
-      .hero { padding: 0 1.5rem 4rem; }
-      .hero-scroll { display: none; }
-      .hero-bgword { display: none; }
-      .intro-inner { grid-template-columns: 1fr; gap: 3rem; }
-      .service-row { grid-template-columns: 40px 1fr; gap: 1.5rem; }
-      .service-body { grid-column: 2; }
-      .plans { grid-template-columns: 1fr; }
-      .testi-grid { grid-template-columns: 1fr; }
-      .serve-grid { grid-template-columns: repeat(2, 1fr); }
-      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
-      .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
-      .cta-full { padding: 6rem 1.5rem; }
-      .impact-inner { padding: 0; }
-      .impact-nums { grid-template-columns: 1fr; gap: 1.5rem; }
-    }
-    @media (max-width: 600px) {
-      .hero-h1 { font-size: clamp(3rem, 11vw, 5rem); }
-      .serve-grid { grid-template-columns: 1fr 1fr; }
-      .services-top { flex-direction: column; align-items: flex-start; }
-      .serve-top { flex-direction: column; }
-      .process-steps { grid-template-columns: 1fr; }
-    }
-  </style>
+/* ─── RESPONSIVE ──────────────────────────────────────── */
+@media(max-width:1100px){
+  .pgrid{grid-template-columns:repeat(2,1fr)}
+  .bgrid{grid-template-columns:repeat(2,1fr)}
+  .ft{grid-template-columns:1fr 1fr;gap:2.5rem}
+  .ibar-in{grid-template-columns:1fr 1fr;gap:2rem}
+}
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem}
+  .nav-links{display:none}
+  .hbg{display:flex}
+  .sec{padding:5rem 1.5rem}
+  .hero{grid-template-columns:1fr;min-height:100svh}
+  .hero-l{padding:8rem 1.5rem 4rem}
+  .hero-r{height:360px}
+  .what-in{grid-template-columns:1fr;gap:2.5rem}
+  .serve-head{grid-template-columns:1fr;gap:1.5rem}
+  .srow{grid-template-columns:repeat(2,1fr)}
+  .brands-head{flex-direction:column;align-items:flex-start}
+  .plans{grid-template-columns:1fr}
+  .plan.best{margin:-2px}
+  .contact-in{grid-template-columns:1fr;gap:4rem}
+  .ideo-in{grid-template-columns:1fr;gap:3.5rem}
+  .memb-head{grid-template-columns:1fr;gap:1.5rem}
+  .testi-split{grid-template-columns:1fr}
+  .testi-img{height:240px}
+  .testi-body{padding:3rem 2rem}
+  .ibar-in{grid-template-columns:1fr;gap:2.5rem}
+  footer{padding:4rem 1.5rem 2.5rem}
+  .ft{grid-template-columns:1fr;gap:2rem}
+  .fbot{flex-direction:column;gap:1.2rem;text-align:center}
+}
+@media(max-width:640px){
+  h1{font-size:clamp(2.5rem,10vw,4rem)}
+  .srow{grid-template-columns:1fr}
+  .pgrid{grid-template-columns:1fr}
+  .bgrid{grid-template-columns:1fr 1fr}
+  .hgrid{grid-template-columns:1fr}
+  .hbig{grid-row:auto}
+  .frow{grid-template-columns:1fr}
+  .ibar{padding:4rem 1.5rem}
+}
+</style>
 </head>
 <body>
 
-<!-- Custom Cursor -->
-<div class="cursor-dot" id="cd"></div>
-<div class="cursor-ring" id="cr"></div>
-
 <!-- NAV -->
-<nav id="nav">
-  <a href="#" class="nav-logo">Neondesk<em>Africa</em></a>
+<nav id="mainNav">
+  <a href="#" class="logo">
+    <div class="lmark">N</div>
+    <div class="lwords"><b>Neondesk</b><small>Africa</small></div>
+  </a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#services">What We Do</a></li>
     <li><a href="#serve">Who We Serve</a></li>
     <li><a href="#membership">Membership</a></li>
-    <li><a href="https://chat.whatsapp.com/IRYvNopleHB82KV0ohKapQ" class="nav-cta">Get Started</a></li>
+    <li><a href="#contact" class="nav-cta">Get Started</a></li>
   </ul>
-  <button class="hamburger" id="ham"><span></span><span></span><span></span></button>
+  <button class="hbg" id="ham" aria-label="Open menu"><span></span><span></span><span></span></button>
 </nav>
 
 <!-- MOBILE MENU -->
-<div class="mobile-menu" id="mob">
-  <button class="close-btn" id="closeM">✕</button>
+<div class="mob" id="mobMenu">
+  <button class="mob-x" id="mobClose">✕</button>
   <a href="#about" class="ml">About</a>
   <a href="#services" class="ml">What We Do</a>
   <a href="#serve" class="ml">Who We Serve</a>
   <a href="#membership" class="ml">Membership</a>
-  <a href="https://chat.whatsapp.com/IRYvNopleHB82KV0ohKapQ" class="ml">Get Started</a>
+  <a href="#contact" class="ml">Get Started</a>
 </div>
 
-<!-- HERO -->
+<!-- ══════════════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════════════ -->
 <section class="hero" id="home">
-  <div class="hero-bg"></div>
-  <div class="hero-bgword" aria-hidden="true">Africa</div>
-
-  <div class="hero-content">
-    <div class="hero-label fu">Lagos, Nigeria — Est. 2024</div>
-    <h1 class="hero-h1 fu d1">
-      We build what<br/>
-      <em>Africa</em> needs<br/>
-      <span class="outline">to grow.</span>
-    </h1>
-    <div class="hero-bottom fu d2">
-      <p class="hero-sub">
-        Neondesk Africa supports entrepreneurs across the continent — providing the strategy, tools, and community to grow and scale beyond borders.
-      </p>
-      <div class="hero-actions">
-        <a href="https://chat.whatsapp.com/IRYvNopleHB82KV0ohKapQ" class="btn-accent">Join the Community</a>
-        <a href="#services" class="btn-ghost">Our Services</a>
+  <div class="hero-l">
+    <p class="htag fu">Defining the African Narrative</p>
+    <h1 class="fu d1">Empowering<br/><em>African Entrepreneurs</em><br/>to Grow &amp; Scale.</h1>
+    <a href="#services" class="wlink fu d2">
+      What We Do
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+  <div class="hero-r">
+    <div class="hgrid">
+      <div class="hcard hbig">
+        <div class="hbg2 c1"></div>
+        <div class="hico">🚀</div>
+        <div class="hplay">▶</div>
+        <div class="hinfo"><span>Business Development · Mentorship</span><strong>Idea Acceleration Framework</strong></div>
+      </div>
+      <div class="hcard">
+        <div class="hbg2 c2"></div>
+        <div class="hico">🎓</div>
+        <div class="hplay">▶</div>
+        <div class="hinfo"><span>Education · Skills</span><strong>Entrepreneurial Academy</strong></div>
+      </div>
+      <div class="hcard">
+        <div class="hbg2 c3"></div>
+        <div class="hico">👥</div>
+        <div class="hplay">▶</div>
+        <div class="hinfo"><span>Networking · Community</span><strong>Community Platform</strong></div>
       </div>
     </div>
   </div>
-
-  <div class="hero-scroll">
-    <div class="vline"></div>
-    <span>Scroll</span>
-  </div>
 </section>
 
-<!-- MARQUEE -->
-<div class="marquee">
-  <div class="marquee-inner">
-    <span class="marquee-item hi">Neondesk Africa</span>
-    <span class="marquee-item">Business Development</span>
-    <span class="marquee-item">Idea Acceleration</span>
-    <span class="marquee-item hi">Scale with Confidence</span>
-    <span class="marquee-item">Entrepreneurial Academy</span>
-    <span class="marquee-item">Community Platform</span>
-    <span class="marquee-item hi">Lagos → Africa → World</span>
-    <span class="marquee-item">Mentorship & Coaching</span>
-    <span class="marquee-item">Funding Readiness</span>
-    <span class="marquee-item hi">Neondesk Africa</span>
-    <span class="marquee-item">Business Development</span>
-    <span class="marquee-item">Idea Acceleration</span>
-    <span class="marquee-item hi">Scale with Confidence</span>
-    <span class="marquee-item">Entrepreneurial Academy</span>
-    <span class="marquee-item">Community Platform</span>
-    <span class="marquee-item hi">Lagos → Africa → World</span>
-    <span class="marquee-item">Mentorship & Coaching</span>
-    <span class="marquee-item">Funding Readiness</span>
+<!-- ══════════════════════════════════════════════════════
+     MARQUEE
+═══════════════════════════════════════════════════════ -->
+<div class="mq-wrap">
+  <div class="mq-track">
+    <span class="mi ac">Neondesk Africa</span><span class="mi">Business Development</span><span class="mi">Idea Acceleration</span><span class="mi ac">Grow. Scale. Lead.</span><span class="mi">Entrepreneurial Academy</span><span class="mi">Community Platform</span><span class="mi ac">Lagos to Africa to World</span><span class="mi">Mentorship &amp; Coaching</span><span class="mi">Funding Readiness</span>
+    <span class="mi ac">Neondesk Africa</span><span class="mi">Business Development</span><span class="mi">Idea Acceleration</span><span class="mi ac">Grow. Scale. Lead.</span><span class="mi">Entrepreneurial Academy</span><span class="mi">Community Platform</span><span class="mi ac">Lagos to Africa to World</span><span class="mi">Mentorship &amp; Coaching</span><span class="mi">Funding Readiness</span>
   </div>
 </div>
 
-<!-- INTRO / ABOUT -->
-<section class="intro" id="about">
-  <div class="intro-inner">
+<!-- ══════════════════════════════════════════════════════
+     WHAT WE DO
+═══════════════════════════════════════════════════════ -->
+<section class="what sec" id="about">
+  <div class="what-in wrap">
     <div class="fu">
-      <h2>
-        We don't just<br/>support businesses —<br/>
-        we <em>build futures.</em>
-      </h2>
+      <div class="ey">What We Do</div>
+      <h2>Supporting African<br/>Entrepreneurs to<br/><em>Grow &amp; Scale.</em></h2>
     </div>
-    <div class="intro-right fu d2">
-      <p>Neondesk Africa was born from a simple belief: African entrepreneurs deserve world-class support. We exist to bridge the gap between ambition and achievement — giving founders the frameworks, networks, and hands-on guidance that actually move the needle.</p>
-      <p>Our vision is to become Africa's leading catalyst for entrepreneurship, innovation, and sustainable business growth. Our mission is to reduce the high failure rate of startups and SMEs by equipping founders with practical tools and powerful support networks.</p>
-      <a href="#services" class="btn-accent">See How We Help</a>
+    <div class="what-r fu d2">
+      <p>We are building the future of <strong>African entrepreneurship</strong> — one business, one founder, one community at a time. Through strategy, education, and purpose-driven programs, we don't just support businesses — we <strong>amplify vision, spark movements, and elevate African excellence.</strong></p>
+      <br/>
+      <p>Whether you're a business owner, a changemaker, a student, or an early-stage founder — if you've got something the world needs to hear, we'll help you build it louder, clearer, and bolder.</p>
     </div>
   </div>
 </section>
 
-<!-- SERVICES -->
-<section class="services" id="services">
-  <div class="services-top fu">
-    <h2 class="display">
-      What<br/>
-      <em>we do.</em>
-    </h2>
-    <p style="font-size:0.95rem; color:var(--muted); max-width:340px; line-height:1.75;">
-      Four core pillars that address every layer of the entrepreneurial journey — from first idea to sustainable scale.
-    </p>
+<!-- ══════════════════════════════════════════════════════
+     FOUR PILLARS
+═══════════════════════════════════════════════════════ -->
+<section class="pillars sec" id="services">
+  <div class="wrap">
+    <div class="fu" style="margin-bottom:3.5rem">
+      <div class="ey">Our Pillars</div>
+      <h2 class="disp" style="font-size:clamp(2rem,3.5vw,3rem)">Four pillars. <em>One mission.</em></h2>
+    </div>
+    <div class="pgrid">
+      <div class="pcard fu">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start"><div class="pico">📈</div><div class="parr">→</div></div>
+        <div class="ptg">Pillar 01</div>
+        <h3>Business Development Support</h3>
+        <p>Structured mentorship, strategy sessions, and growth planning tailored to Africa's unique business landscape. We help you build foundations that last.</p>
+        <div class="ptags"><span class="ptag">Strategy</span><span class="ptag">Mentorship</span><span class="ptag">Growth Planning</span></div>
+      </div>
+      <div class="pcard fu d1">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start"><div class="pico">💡</div><div class="parr">→</div></div>
+        <div class="ptg">Pillar 02</div>
+        <h3>Idea Acceleration Framework</h3>
+        <p>A proven system to transform bold ideas into viable, scalable businesses — from validation to MVP to market, with support every step of the way.</p>
+        <div class="ptags"><span class="ptag">Validation</span><span class="ptag">Business Model</span><span class="ptag">Investor Readiness</span></div>
+      </div>
+      <div class="pcard fu d2">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start"><div class="pico">🎓</div><div class="parr">→</div></div>
+        <div class="ptg">Pillar 03</div>
+        <h3>Entrepreneurial Academy</h3>
+        <p>Essential knowledge in practical formats — finance, marketing, operations, sales, and leadership — built for founders, not classrooms.</p>
+        <div class="ptags"><span class="ptag">Finance</span><span class="ptag">Marketing</span><span class="ptag">Leadership</span><span class="ptag">Sales</span></div>
+      </div>
+      <div class="pcard fu d3">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start"><div class="pico">👥</div><div class="parr">→</div></div>
+        <div class="ptg">Pillar 04</div>
+        <h3>Community Platform</h3>
+        <p>A curated network of ambitious entrepreneurs, investors, and industry leaders — peer learning, accountability, and connections that change trajectories.</p>
+        <div class="ptags"><span class="ptag">Networking</span><span class="ptag">Peer Learning</span><span class="ptag">Investor Access</span></div>
+      </div>
+    </div>
   </div>
+</section>
 
-  <div class="services-grid">
-    <div class="service-row fu">
-      <div class="service-num">01</div>
-      <div class="service-title">Business Development Support</div>
-      <div class="service-body">
-        <p>Structured mentorship, one-on-one coaching, and growth planning tailored to Africa's unique business landscape. We help you build the foundations that last.</p>
-        <div class="service-tags">
-          <span class="service-tag">Strategy</span>
-          <span class="service-tag">Mentorship</span>
-          <span class="service-tag">Growth Planning</span>
-          <span class="service-tag">Tools & Templates</span>
+<!-- ══════════════════════════════════════════════════════
+     WHO WE SERVE
+═══════════════════════════════════════════════════════ -->
+<section class="serve sec" id="serve">
+  <div class="wrap">
+    <div class="serve-head">
+      <div class="fu">
+        <div class="ey">Who We Serve</div>
+        <h2 class="disp" style="font-size:clamp(2rem,3.5vw,3.2rem)">Africa's vibrant,<br/><em>innovative youth.</em></h2>
+      </div>
+      <p class="fu d2">Our primary focus is on Africa's next generation of builders — those bold enough to create something from nothing and change their communities in the process.</p>
+    </div>
+    <div class="srow">
+      <div class="sc fu"><div class="sico">🎒</div><h4>Students</h4><p>Equipping the next generation with business skills before they leave campus.</p></div>
+      <div class="sc fu d1"><div class="sico">🏫</div><h4>Recent Graduates</h4><p>Helping fresh talent translate qualifications into real-world ventures.</p></div>
+      <div class="sc fu d2"><div class="sico">🇳🇬</div><h4>NYSC Members</h4><p>Supporting corp members to use their service year to build the future.</p></div>
+      <div class="sc fu d3"><div class="sico">🚀</div><h4>Early-Stage Founders</h4><p>Turning ideas into traction with structure, support, and strategic clarity.</p></div>
+      <div class="sc fu d4"><div class="sico">💼</div><h4>Young Professionals</h4><p>Helping career-driven individuals make the confident leap to entrepreneurship.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     BRANDS WE'VE WORKED WITH
+═══════════════════════════════════════════════════════ -->
+<section class="brands sec">
+  <div class="wrap">
+    <div class="brands-head">
+      <div class="fu">
+        <div class="ey">Our Clients</div>
+        <h2>Brands we've<br/><em>worked with.</em></h2>
+      </div>
+      <p class="fu d1">From Nigeria's largest telecoms to innovative startups — we've had the privilege of working with remarkable brands across Africa.</p>
+    </div>
+
+    <div class="bgrid">
+
+      <!-- Airtel Nigeria -->
+      <div class="bcard fu">
+        <div class="bimg-wrap">
+          <img src="https://logo.clearbit.com/airtel.com.ng" alt="Airtel Nigeria" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <div class="bsvg">
+            <svg viewBox="0 0 110 40" height="34" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="18" cy="20" r="15" fill="#e40000"/>
+              <path d="M18 7 C18 7 28 14 28 20 C28 26 23 30 18 30 C13 30 8 26 8 20 C8 14 18 7 18 7Z" fill="#ff6600" opacity="0.6"/>
+              <text x="38" y="26" font-family="Arial Black" font-weight="900" font-size="16" fill="white">airtel</text>
+            </svg>
+          </div>
         </div>
+        <div class="bname">Airtel Nigeria</div>
+        <div class="btag">Telecoms</div>
       </div>
-    </div>
-    <div class="service-row fu d1">
-      <div class="service-num">02</div>
-      <div class="service-title">Idea Acceleration Framework <span class="tag">Core</span></div>
-      <div class="service-body">
-        <p>A proven system to transform bold ideas into viable, scalable businesses. From validation to MVP to market — we walk with you every step of the way.</p>
-        <div class="service-tags">
-          <span class="service-tag">Validation</span>
-          <span class="service-tag">Business Modelling</span>
-          <span class="service-tag">Investor Readiness</span>
+
+      <!-- Bank of Industry -->
+      <div class="bcard fu d1">
+        <div class="bimg-wrap">
+          <img src="https://logo.clearbit.com/boi.ng" alt="Bank of Industry" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <div class="bsvg">
+            <svg viewBox="0 0 130 40" height="34" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0" y="4" width="30" height="32" rx="4" fill="#006633"/>
+              <text x="5" y="26" font-family="Arial Black" font-weight="900" font-size="12" fill="white">BOI</text>
+              <text x="36" y="18" font-family="Arial" font-weight="700" font-size="10" fill="white">Bank of</text>
+              <text x="36" y="31" font-family="Arial" font-weight="700" font-size="10" fill="white">Industry</text>
+            </svg>
+          </div>
         </div>
+        <div class="bname">Bank of Industry</div>
+        <div class="btag">Finance</div>
       </div>
-    </div>
-    <div class="service-row fu d2">
-      <div class="service-num">03</div>
-      <div class="service-title">Entrepreneurial Academy</div>
-      <div class="service-body">
-        <p>Essential knowledge delivered in practical formats — finance, marketing, operations, sales, and leadership. Built for founders, not classrooms.</p>
-        <div class="service-tags">
-          <span class="service-tag">Finance</span>
-          <span class="service-tag">Marketing</span>
-          <span class="service-tag">Operations</span>
-          <span class="service-tag">Leadership</span>
-          <span class="service-tag">Sales</span>
+
+      <!-- CAP PLC -->
+      <div class="bcard fu d2">
+        <div class="bimg-wrap">
+          <img src="https://logo.clearbit.com/capplc.com" alt="CAP PLC" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <div class="bsvg">
+            <svg viewBox="0 0 130 40" height="34" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0" y="2" width="36" height="36" rx="4" fill="#cc0000"/>
+              <text x="4" y="26" font-family="Arial Black" font-weight="900" font-size="14" fill="white">CAP</text>
+              <text x="42" y="16" font-family="Arial" font-weight="700" font-size="9" fill="white">Chemical &amp;</text>
+              <text x="42" y="27" font-family="Arial" font-weight="700" font-size="9" fill="white">Allied Products</text>
+              <text x="42" y="36" font-family="Arial" font-size="8" fill="rgba(255,255,255,0.6)">PLC</text>
+            </svg>
+          </div>
         </div>
+        <div class="bname">CAP PLC</div>
+        <div class="btag">Manufacturing</div>
       </div>
-    </div>
-    <div class="service-row fu d3">
-      <div class="service-num">04</div>
-      <div class="service-title">Community Platform</div>
-      <div class="service-body">
-        <p>A curated network of ambitious entrepreneurs, investors, and industry leaders. Peer learning, accountability, and the kind of connections that change trajectories.</p>
-        <div class="service-tags">
-          <span class="service-tag">Networking</span>
-          <span class="service-tag">Peer Learning</span>
-          <span class="service-tag">Investor Access</span>
-          <span class="service-tag">Accountability</span>
+
+      <!-- Chat Transact -->
+      <div class="bcard fu d3">
+        <div class="bimg-wrap">
+          <img src="https://logo.clearbit.com/chattransact.com" alt="Chat Transact" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <div class="bsvg">
+            <svg viewBox="0 0 140 40" height="34" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0" y="4" width="34" height="30" rx="8" fill="#1D6BE6"/>
+              <path d="M7 12 Q17 8 27 12 L27 24 Q17 28 7 24 Z" fill="white" opacity="0.9"/>
+              <path d="M10 26 L6 34 L18 28 Z" fill="white" opacity="0.9"/>
+              <text x="40" y="20" font-family="Arial" font-weight="700" font-size="10" fill="white">Chat</text>
+              <text x="40" y="32" font-family="Arial" font-weight="700" font-size="10" fill="white">Transact</text>
+            </svg>
+          </div>
         </div>
+        <div class="bname">Chat Transact</div>
+        <div class="btag">Fintech</div>
+      </div>
+
+      <!-- Brunch Avenue -->
+      <div class="bcard fu">
+        <div class="bimg-wrap">
+          <img src="https://logo.clearbit.com/brunchavenue.com" alt="Brunch Avenue" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <div class="bsvg">
+            <svg viewBox="0 0 140 40" height="34" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="18" cy="20" r="15" fill="#c8953a"/>
+              <text x="7" y="25" font-family="Georgia" font-weight="700" font-size="12" fill="white">BA</text>
+              <text x="38" y="17" font-family="Georgia" font-style="italic" font-size="11" fill="white">Brunch</text>
+              <text x="38" y="30" font-family="Georgia" font-style="italic" font-size="11" fill="white">Avenue</text>
+            </svg>
+          </div>
+        </div>
+        <div class="bname">Brunch Avenue</div>
+        <div class="btag">Hospitality</div>
+      </div>
+
+      <!-- Mayana Africa -->
+      <div class="bcard fu d1">
+        <div class="bimg-wrap">
+          <img src="https://logo.clearbit.com/mayanaafrica.com" alt="Mayana Africa" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <div class="bsvg">
+            <svg viewBox="0 0 140 40" height="34" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 36 L12 8 L20 28 L28 8 L36 36" stroke="#d4902a" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <text x="44" y="18" font-family="Georgia" font-weight="700" font-size="12" fill="white">Mayana</text>
+              <text x="44" y="32" font-family="Georgia" font-size="10" fill="#d4902a">Africa</text>
+            </svg>
+          </div>
+        </div>
+        <div class="bname">Mayana Africa</div>
+        <div class="btag">Lifestyle</div>
+      </div>
+
+      <!-- Hybrid Tech -->
+      <div class="bcard fu d2">
+        <div class="bimg-wrap">
+          <img src="https://logo.clearbit.com/hybrid-tec.com" alt="Hybrid Tech" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <div class="bsvg">
+            <svg viewBox="0 0 140 40" height="34" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="4,20 12,6 30,6 38,20 30,34 12,34" fill="none" stroke="#2B7FFF" stroke-width="2"/>
+              <text x="11" y="25" font-family="Arial Black" font-weight="900" font-size="10" fill="#2B7FFF">HT</text>
+              <text x="46" y="18" font-family="Arial" font-weight="700" font-size="11" fill="white">Hybrid</text>
+              <text x="46" y="31" font-family="Arial" font-weight="700" font-size="11" fill="white">Tech</text>
+            </svg>
+          </div>
+        </div>
+        <div class="bname">Hybrid Tech</div>
+        <div class="btag">Technology</div>
+      </div>
+
+      <!-- Everything But Coffee -->
+      <div class="bcard fu d3">
+        <div class="bimg-wrap">
+          <img src="https://logo.clearbit.com/everythingbutcoffeebiz.com" alt="Everything But Coffee" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <div class="bsvg">
+            <svg viewBox="0 0 160 40" height="34" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="18" cy="20" r="14" fill="#6B3F1A"/>
+              <text x="9" y="25" font-family="Arial" font-size="14" fill="white">☕</text>
+              <line x1="28" y1="14" x2="28" y2="30" stroke="#ff4444" stroke-width="2"/>
+              <text x="34" y="17" font-family="Georgia" font-style="italic" font-size="9" fill="white">Everything</text>
+              <text x="34" y="27" font-family="Georgia" font-style="italic" font-size="9" fill="white">But Coffee</text>
+              <text x="34" y="36" font-family="Georgia" font-size="7" fill="rgba(255,255,255,0.5)">Biz</text>
+            </svg>
+          </div>
+        </div>
+        <div class="bname">Everything But Coffee</div>
+        <div class="btag">Business</div>
+      </div>
+
+    </div><!-- /bgrid -->
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     TESTIMONIAL
+═══════════════════════════════════════════════════════ -->
+<section class="testi sec">
+  <div class="wrap" style="padding:0;max-width:100%">
+    <div class="testi-split">
+      <div class="testi-img">🌍</div>
+      <div class="testi-body">
+        <div class="ey fu">Founder Stories</div>
+        <p class="tq fu d1">Neondesk gave us the framework and the clarity to take our Lagos-based startup to three West African markets in under a year. They spoke the language of our ambition — and helped us build something real.</p>
+        <div class="fu d2">
+          <div class="tname">Adaeze Okonkwo</div>
+          <div class="trole">CEO, Agritech Ventures — Lagos, Nigeria</div>
+        </div>
+        <div class="tdots fu d3"><div class="tdot on"></div><div class="tdot"></div><div class="tdot"></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- WHO WE SERVE -->
-<section class="serve" id="serve">
-  <div class="serve-inner">
-    <div class="serve-top fu">
-      <h2 class="display">
-        Who<br/><em>we serve.</em>
-      </h2>
-      <p>Our primary focus is Africa's vibrant and innovative youth population — those bold enough to build something from nothing.</p>
+<!-- ══════════════════════════════════════════════════════
+     IDEOLOGY
+═══════════════════════════════════════════════════════ -->
+<section class="ideo sec">
+  <div class="ideo-in wrap">
+    <div class="fu">
+      <div class="ey">Our Ideology</div>
+      <h2 class="disp" style="font-size:clamp(2rem,3.5vw,3rem);margin-bottom:2.5rem">Together, we are building the future of Africa —<br/><em>one business at a time.</em></h2>
+      <div class="ideo-img">🏙️</div>
     </div>
-    <div class="serve-grid">
-      <div class="serve-card fu">
-        <div class="serve-icon">🎒</div>
-        <h4>Students</h4>
-        <p>Equipping the next generation with business skills before they leave campus.</p>
-      </div>
-      <div class="serve-card fu d1">
-        <div class="serve-icon">🏫</div>
-        <h4>Recent Graduates</h4>
-        <p>Helping fresh talent translate qualifications into real-world ventures.</p>
-      </div>
-      <div class="serve-card fu d2">
-        <div class="serve-icon">🇳🇬</div>
-        <h4>NYSC Members</h4>
-        <p>Supporting corp members to use their service year to build the future.</p>
-      </div>
-      <div class="serve-card fu d3">
-        <div class="serve-icon">🚀</div>
-        <h4>Early-Stage Founders</h4>
-        <p>Turning ideas into traction with structure, support, and strategic guidance.</p>
-      </div>
-      <div class="serve-card fu d4">
-        <div class="serve-icon">💼</div>
-        <h4>Young Professionals</h4>
-        <p>Helping career-driven individuals make the leap to entrepreneurship.</p>
-      </div>
+    <div class="fu d2">
+      <div class="ideo-hdg">Rooted in Africa.<br/><em>Built for Impact,<br/>Driven by Growth.</em></div>
+      <ul class="beliefs">
+        <li class="belief"><div class="bdot"></div><div><div class="btitle">Strategy is Power</div><div class="bbody">Every African entrepreneur deserves a clear, executable strategy. We don't do generic — everything we build is tailored to your context, your market, and your ambition.</div></div></li>
+        <li class="belief"><div class="bdot"></div><div><div class="btitle">Community is Currency</div><div class="bbody">The right network changes everything. We build intentional communities where entrepreneurs learn, hold each other accountable, and open doors for one another.</div></div></li>
+        <li class="belief"><div class="bdot"></div><div><div class="btitle">Impact is the Mission</div><div class="bbody">Every business we support creates jobs, builds wealth, and strengthens communities. Entrepreneurship is Africa's greatest tool for transformation.</div></div></li>
+      </ul>
     </div>
   </div>
 </section>
 
-<!-- HOW WE WORK -->
-<section class="process">
-  <div class="process-inner">
-    <div class="process-top fu">
-      <div class="eyebrow">The Process</div>
-      <h2 class="display">
-        From where you are —<br/>to where you're <em>meant to be.</em>
-      </h2>
-    </div>
-    <div class="process-steps">
-      <div class="process-step fu">
-        <div class="step-num">01</div>
-        <h3>Apply & Connect</h3>
-        <p>Tell us about your business and ambitions. We match you with the right programme, track, and community for where you are.</p>
-      </div>
-      <div class="process-step fu d1">
-        <div class="step-num">02</div>
-        <h3>Strategic Assessment</h3>
-        <p>Our team conducts a deep-dive into your business to uncover gaps, strengths, and the highest-leverage growth opportunities.</p>
-      </div>
-      <div class="process-step fu d2">
-        <div class="step-num">03</div>
-        <h3>Execute with Support</h3>
-        <p>With a custom roadmap in hand, we walk with you — hands-on guidance, accountability check-ins, and expert resources as you move.</p>
-      </div>
-      <div class="process-step fu d3">
-        <div class="step-num">04</div>
-        <h3>Scale & Sustain</h3>
-        <p>Build systems and networks that compound. Grow sustainably, attract investment, and lead your industry for the long term.</p>
-      </div>
-    </div>
+<!-- ══════════════════════════════════════════════════════
+     IMPACT BAR
+═══════════════════════════════════════════════════════ -->
+<div class="ibar">
+  <div class="ibar-in">
+    <h2 class="fu">Our Impact Goals for Africa</h2>
+    <div class="istat fu d1"><span class="inum">10,000</span><span class="ilbl">Entrepreneurs equipped by 2030</span></div>
+    <div class="istat fu d2"><span class="inum">5,000</span><span class="ilbl">Community members by 2027</span></div>
+    <div class="istat fu d3"><span class="inum">1,000</span><span class="ilbl">Ventures funded</span></div>
   </div>
-</section>
+</div>
 
-<!-- IMPACT NUMBERS -->
-<section class="impact">
-  <div class="impact-inner inner">
-    <div class="impact-left fu">
-      <h2>Our impact goals for Africa.</h2>
-      <p>We're committed to measurable, lasting change across the continent by 2030.</p>
-    </div>
-    <div class="impact-nums fu d2">
-      <div class="impact-num">
-        <span class="n">10K</span>
-        <span class="l">Entrepreneurs equipped by 2030</span>
+<!-- ══════════════════════════════════════════════════════
+     MEMBERSHIP
+═══════════════════════════════════════════════════════ -->
+<section class="memb sec" id="membership">
+  <div class="wrap">
+    <div class="memb-head">
+      <div class="fu">
+        <div class="ey">Plans &amp; Pricing</div>
+        <h2 class="disp" style="font-size:clamp(2rem,3.5vw,3.2rem)">Join Our<br/><em>Entrepreneurial Community.</em></h2>
       </div>
-      <div class="impact-num">
-        <span class="n">5K</span>
-        <span class="l">Community members by 2027</span>
-      </div>
-      <div class="impact-num">
-        <span class="n">1K</span>
-        <span class="l">Ventures funded</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- MEMBERSHIP -->
-<section class="membership" id="membership">
-  <div class="membership-inner">
-    <div class="membership-top fu">
-      <div class="eyebrow">Plans & Pricing</div>
-      <h2 class="display">
-        Join the<br/><em>Entrepreneurial Community.</em>
-      </h2>
-      <p>Choose the plan that meets you where you are. Every tier includes access to our growing network and core resources.</p>
+      <p class="fu d1">Choose the plan that meets you where you are. Every tier includes access to our growing network and core entrepreneurial resources.</p>
     </div>
     <div class="plans">
       <div class="plan fu">
-        <div class="plan-tier">Free Plan</div>
-        <div class="plan-price"><span class="cur">₦</span>0</div>
-        <div class="plan-period">Forever free</div>
-        <div class="plan-line"></div>
-        <ul class="plan-features">
+        <div class="ptier">Free Plan</div>
+        <div class="pprice"><sup>&#8358;</sup>0</div>
+        <div class="pper">Forever free</div>
+        <div class="pline"></div>
+        <ul class="pfeats">
           <li>Access to basic community</li>
           <li>Monthly newsletter</li>
           <li>Free webinars</li>
           <li>Limited resources</li>
         </ul>
-        <a href="https://chat.whatsapp.com/IRYvNopleHB82KV0ohKapQ" class="plan-btn">Join Free</a>
+        <a href="#contact" class="pbtn">Join Free</a>
       </div>
       <div class="plan fu d1">
-        <div class="plan-tier">Monthly Plan</div>
-        <div class="plan-price"><span class="cur">₦</span>2,000</div>
-        <div class="plan-period">Per month</div>
-        <div class="plan-line"></div>
-        <ul class="plan-features">
+        <div class="ptier">Monthly Plan</div>
+        <div class="pprice"><sup>&#8358;</sup>2,000</div>
+        <div class="pper">Per month</div>
+        <div class="pline"></div>
+        <ul class="pfeats">
           <li>All free features</li>
           <li>Full resource library</li>
-          <li>Monthly expert Q&A sessions</li>
+          <li>Monthly expert Q&amp;A sessions</li>
           <li>Member discounts</li>
         </ul>
-        <a href="https://chat.whatsapp.com/IRYvNopleHB82KV0ohKapQ" class="plan-btn solid">Get Started</a>
+        <a href="#contact" class="pbtn fill">Get Started</a>
       </div>
-      <div class="plan featured fu d2">
-        <div class="plan-badge">Best Value</div>
-        <div class="plan-tier">Annual Plan</div>
-        <div class="plan-price"><span class="cur">₦</span>20,000</div>
-        <div class="plan-period">Per year</div>
-        <span class="plan-save">Save ₦4,000 — 17% discount</span>
-        <div class="plan-line"></div>
-        <ul class="plan-features">
+      <div class="plan best fu d2">
+        <div class="pbadge">Best Value</div>
+        <div class="ptier">Annual Plan</div>
+        <div class="pprice"><sup>&#8358;</sup>20,000</div>
+        <div class="pper">Per year</div>
+        <div class="psave">Save &#8358;4,000 — 17% off</div>
+        <div class="pline"></div>
+        <ul class="pfeats">
           <li>All monthly features</li>
           <li>Priority support</li>
           <li>Exclusive masterclasses</li>
           <li>Early access to all programs</li>
         </ul>
-        <a href="https://chat.whatsapp.com/IRYvNopleHB82KV0ohKapQ" class="plan-btn solid">Get Started</a>
+        <a href="#contact" class="pbtn fill">Get Started</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
-<section class="testimonials">
-  <div class="testimonials-inner">
-    <div class="testimonials-top fu">
-      <div class="eyebrow">Founder Stories</div>
-      <h2 class="display">
-        Real entrepreneurs.<br/><em>Real results.</em>
-      </h2>
+<!-- ══════════════════════════════════════════════════════
+     CONTACT
+═══════════════════════════════════════════════════════ -->
+<section class="contact sec" id="contact">
+  <div class="contact-in wrap">
+    <div class="fu">
+      <div class="ey">Get In Touch</div>
+      <h2 class="disp" style="font-size:clamp(1.8rem,3vw,2.8rem);margin-bottom:1rem">Request a free<br/><em>consultation.</em></h2>
+      <p style="font-size:.93rem;color:var(--muted);margin-bottom:2rem;line-height:1.75">For project enquiries, membership questions, or partnership opportunities — we'd love to hear from you.</p>
+      <form onsubmit="return false">
+        <div class="frow">
+          <div class="ff"><label>Name (required)</label><input type="text" placeholder="Your name"/></div>
+          <div class="ff"><label>Company (optional)</label><input type="text" placeholder="Your company name"/></div>
+        </div>
+        <div class="frow">
+          <div class="ff"><label>Email (required)</label><input type="email" placeholder="Your email address"/></div>
+          <div class="ff"><label>Phone (optional)</label><input type="tel" placeholder="Your phone number"/></div>
+        </div>
+        <div class="ff"><label>Subject (optional)</label><input type="text" placeholder="How can we help?"/></div>
+        <div class="ff">
+          <label>Choose a Budget (USD)</label>
+          <select><option value="">Select a range</option><option>Under $500</option><option>$500 – $2,000</option><option>$2,000 – $5,000</option><option>$5,000+</option></select>
+        </div>
+        <button class="sbtn" type="submit">Get a Quote</button>
+      </form>
     </div>
-    <div class="testi-grid">
-      <div class="testi-card fu">
-        <p class="testi-quote">Neondesk gave us the framework and the belief to take our Lagos-based startup to three West African markets in under a year. The mentorship alone changed everything.</p>
-        <div class="testi-author">
-          <div class="testi-avatar">AO</div>
-          <div>
-            <div class="testi-name">Adaeze Okonkwo</div>
-            <div class="testi-role">CEO, Agritech Ventures — Lagos, Nigeria</div>
-          </div>
-        </div>
-      </div>
-      <div class="testi-card fu d1">
-        <p class="testi-quote">I came in with a solid idea but no idea how to raise capital. Six months later, I'd secured seed funding and had a team of eight. Neondesk made that possible.</p>
-        <div class="testi-author">
-          <div class="testi-avatar">KM</div>
-          <div>
-            <div class="testi-name">Kwame Mensah</div>
-            <div class="testi-role">Founder, Fintech Labs — Accra, Ghana</div>
-          </div>
-        </div>
-      </div>
-      <div class="testi-card fu d2">
-        <p class="testi-quote">The network I built through Neondesk has been the single biggest accelerant for my business. These aren't just contacts — they're collaborators and champions.</p>
-        <div class="testi-author">
-          <div class="testi-avatar">FN</div>
-          <div>
-            <div class="testi-name">Fatima Nkosi</div>
-            <div class="testi-role">Co-Founder, EdTech Hub — Nairobi, Kenya</div>
-          </div>
-        </div>
-      </div>
+
+    <div class="contact-r fu d2">
+      <div class="ey">Email Us</div>
+      <h3>Talk to our team directly.</h3>
+      <p style="font-size:.9rem;color:var(--muted);margin-bottom:2.5rem;line-height:1.75">For project enquiries — reach us at neondeskafrica&#64;gmail.com</p>
+      <div class="citem"><div class="cicon">&#9993;</div><div class="ctxt"><label>Email</label><span>neondeskafrica&#64;gmail.com</span></div></div>
+      <div class="citem"><div class="cicon">&#128222;</div><div class="ctxt"><label>Phone</label><span>+234 81 444 12 008</span></div></div>
+      <div class="citem"><div class="cicon">&#128205;</div><div class="ctxt"><label>Location</label><span>Lagos State, Nigeria</span></div></div>
+      <div class="citem"><div class="cicon">&#128279;</div><div class="ctxt"><label>Socials</label><span>&#64;neondeskafrica on X &amp; Instagram</span></div></div>
     </div>
   </div>
 </section>
 
-<!-- CTA FULL -->
-<section class="cta-full" id="contact">
-  <div class="cta-full-inner">
-    <div class="eyebrow fu" style="justify-content:center;">Start here</div>
-    <h2 class="fu d1">
-      Ready to<br/><em>build</em><br/>something?
-    </h2>
-    <p class="fu d2">Hundreds of African entrepreneurs have already transformed their businesses with Neondesk. Your next chapter starts now.</p>
-    <div class="cta-full-btns fu d3">
-      <a href="https://chat.whatsapp.com/IRYvNopleHB82KV0ohKapQ" class="btn-accent">Join the Community</a>
-      <a href="#services" class="btn-ghost">Explore Services</a>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
+<!-- ══════════════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════════════ -->
 <footer>
-  <div class="footer-top">
-    <div class="footer-brand">
-      <a href="#" class="nav-logo">Neondesk<em>Africa</em></a>
+  <div class="ft">
+    <div class="fb">
+      <a href="#" class="logo">
+        <div class="lmark">N</div>
+        <div class="lwords"><b>Neondesk</b><small>Africa</small></div>
+      </a>
       <p>Empowering African entrepreneurs with the tools, resources, and frameworks they need to grow, scale, and lead.</p>
-      <div class="footer-social">
-        <a href="#" aria-label="Twitter">𝕏</a>
-        <a href="#" aria-label="Instagram">◈</a>
+      <div class="fsoc">
+        <a href="#" aria-label="Twitter">&#120143;</a>
+        <a href="#" aria-label="Instagram">&#9672;</a>
+        <a href="#" aria-label="LinkedIn">in</a>
       </div>
     </div>
-    <div class="footer-col">
-      <h5>Navigate</h5>
+    <div class="fcol">
+      <h5>Quick Links</h5>
       <ul>
         <li><a href="#about">About</a></li>
         <li><a href="#services">What We Do</a></li>
@@ -940,60 +785,61 @@
         <li><a href="#membership">Membership</a></li>
       </ul>
     </div>
-    <div class="footer-col">
+    <div class="fcol">
       <h5>Company</h5>
       <ul>
         <li><a href="#">Our Team</a></li>
         <li><a href="#">Blog</a></li>
         <li><a href="#">Events</a></li>
-        <li><a href="#">Partners</a></li>
+        <li><a href="#">Career</a></li>
       </ul>
     </div>
-    <div class="footer-col">
-      <h5>Contact</h5>
-      <div class="contact-item"><span class="ci">✉</span> neondeskafrica@gmail.com</div>
-      <div class="contact-item"><span class="ci">☎</span> +234 81 444 12 008</div>
-      <div class="contact-item"><span class="ci">📍</span> Lagos, Nigeria</div>
+    <div class="fcol">
+      <h5>Contact Us</h5>
+      <div class="fci"><span class="fci-i">&#9993;</span> neondeskafrica&#64;gmail.com</div>
+      <div class="fci"><span class="fci-i">&#9742;</span> +234 81 444 12 008</div>
+      <div class="fci"><span class="fci-i">&#128205;</span> Lagos State, Nigeria</div>
     </div>
   </div>
-  <div class="footer-bottom">
-    <p>© 2025 Neondesk Africa. All rights reserved.</p>
-    <span>Built with purpose for Africa.</span>
+  <div class="fbot">
+    <p>&#169; 2025 Neondesk Africa. All rights reserved.</p>
+    <div class="flinks">
+      <a href="#">Security</a>
+      <a href="#">Privacy &amp; Cookie Policy</a>
+      <a href="#">Terms of Service</a>
+    </div>
   </div>
 </footer>
 
 <script>
-  /* CURSOR */
-  const dot = document.getElementById('cd');
-  const ring = document.getElementById('cr');
-  window.addEventListener('mousemove', e => {
-    dot.style.left = e.clientX + 'px';
-    dot.style.top  = e.clientY + 'px';
-    ring.style.left = e.clientX + 'px';
-    ring.style.top  = e.clientY + 'px';
+(function(){
+  /* NAV scroll */
+  var nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', function(){ nav.classList.toggle('scrolled', window.scrollY > 60); });
+
+  /* Mobile menu */
+  document.getElementById('ham').addEventListener('click', function(){ document.getElementById('mobMenu').classList.add('open'); });
+  document.getElementById('mobClose').addEventListener('click', function(){ document.getElementById('mobMenu').classList.remove('open'); });
+  document.querySelectorAll('.ml').forEach(function(l){ l.addEventListener('click', function(){ document.getElementById('mobMenu').classList.remove('open'); }); });
+
+  /* Scroll fade-in — hero items show immediately */
+  setTimeout(function(){
+    document.querySelectorAll('.hero .fu').forEach(function(el){ el.classList.add('in'); });
+  }, 150);
+
+  /* IntersectionObserver for all other .fu elements */
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.fu').forEach(function(el){ obs.observe(el); });
+
+  /* Brand logo fallback — show SVG if Clearbit image fails */
+  document.querySelectorAll('.bimg-wrap img').forEach(function(img){
+    function showSvg(){ img.style.display='none'; var s=img.nextElementSibling; if(s) s.style.display='flex'; }
+    img.addEventListener('error', showSvg);
+    img.addEventListener('load', function(){ if(!img.naturalWidth){ showSvg(); } });
   });
-  document.querySelectorAll('a, button').forEach(el => {
-    el.addEventListener('mouseenter', () => { ring.style.transform = 'translate(-50%,-50%) scale(1.8)'; ring.style.borderColor = 'rgba(212,242,68,0.7)'; });
-    el.addEventListener('mouseleave', () => { ring.style.transform = 'translate(-50%,-50%) scale(1)'; ring.style.borderColor = 'rgba(212,242,68,0.4)'; });
-  });
-
-  /* NAV SCROLL */
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 60));
-
-  /* MOBILE MENU */
-  document.getElementById('ham').addEventListener('click', () => document.getElementById('mob').classList.add('open'));
-  document.getElementById('closeM').addEventListener('click', () => document.getElementById('mob').classList.remove('open'));
-  document.querySelectorAll('.ml').forEach(l => l.addEventListener('click', () => document.getElementById('mob').classList.remove('open')));
-
-  /* SCROLL ANIMATIONS */
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.fu').forEach(el => obs.observe(el));
-
-  /* HERO INSTANT */
-  setTimeout(() => document.querySelectorAll('.hero .fu').forEach(el => el.classList.add('in')), 150);
+})();
 </script>
 </body>
 </html>
