@@ -3,297 +3,284 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Neondesk Africa — Empowering African Entrepreneurs</title>
+<title>Neondesk Africa | Supporting &amp; Scaling African Entrepreneurs</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
-/* ─── TOKENS ──────────────────────────────────────────── */
-:root {
-  --navy:     #001233;
-  --navy2:    #001a4a;
-  --navy3:    #002166;
-  --blue:     #1D6BE6;
-  --blueb:    #2B7FFF;
-  --bdim:     rgba(29,107,230,0.12);
-  --txt:      #cdd6f0;
-  --muted:    rgba(205,214,240,0.52);
-  --dim:      rgba(205,214,240,0.25);
-  --border:   rgba(29,107,230,0.2);
-  --line:     rgba(255,255,255,0.08);
+/* ─── TOKENS ──────────────────────────── */
+:root{
+  --blue:   #1D6BE6;
+  --blueb:  #2B7FFF;
+  --navy:   #001233;
+  --black:  #0d0d0d;
+  --white:  #ffffff;
+  --off:    #f7f7f5;
+  --gray:   #f0f0ed;
+  --bdr:    #e4e4df;
+  --txt:    #1a1a1a;
+  --muted:  #666;
+  --light:  #aaa;
 }
-
-/* ─── RESET ───────────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--navy);color:var(--txt);font-family:'Manrope',sans-serif;font-weight:300;overflow-x:hidden}
-body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background-image:radial-gradient(rgba(29,107,230,0.06) 1px,transparent 1px);background-size:36px 36px}
+body{background:var(--white);color:var(--txt);font-family:'Inter',sans-serif;font-weight:400;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
 
-/* ─── NAV ─────────────────────────────────────────────── */
-nav{position:fixed;top:0;left:0;right:0;z-index:900;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 3.5rem;transition:background .4s,border-color .4s}
-nav.scrolled{background:rgba(0,18,51,.96);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+/* ─── NAV ─────────────────────────────── */
+nav{position:fixed;top:0;left:0;right:0;z-index:900;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 3rem;background:rgba(255,255,255,.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--bdr)}
 .logo{display:flex;align-items:center;gap:.5rem}
-.lmark{width:32px;height:32px;border-radius:7px;background:var(--blue);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:.95rem;color:#fff;flex-shrink:0}
-.lwords{display:flex;flex-direction:column;line-height:1.1}
-.lwords b{font-family:'Playfair Display',serif;font-weight:900;font-size:1rem;color:#fff;letter-spacing:-.01em}
-.lwords small{font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);font-weight:600}
-.nav-links{display:flex;align-items:center;gap:2.2rem;list-style:none}
+.lmark{width:30px;height:30px;border-radius:6px;background:var(--blue);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:.9rem;color:#fff;flex-shrink:0}
+.lw{display:flex;flex-direction:column;line-height:1.1}
+.lw b{font-family:'Playfair Display',serif;font-weight:900;font-size:.95rem;color:var(--black);letter-spacing:-.01em}
+.lw small{font-size:.46rem;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);font-weight:700}
+.nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
 .nav-links a{font-size:.82rem;color:var(--muted);transition:color .2s}
-.nav-links a:hover{color:#fff}
-.nav-cta{background:var(--blue)!important;color:#fff!important;padding:.55rem 1.3rem;border-radius:5px;font-weight:600!important;font-size:.8rem!important;transition:background .2s!important}
-.nav-cta:hover{background:var(--blueb)!important}
-.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none}
-.hbg span{display:block;width:22px;height:1.5px;background:#fff}
-.mob{display:none;position:fixed;inset:0;background:rgba(0,18,51,.98);z-index:890;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
+.nav-links a:hover{color:var(--black)}
+.nav-cta{background:var(--black)!important;color:#fff!important;padding:.5rem 1.2rem;border-radius:4px;font-weight:600!important;font-size:.78rem!important;transition:background .2s!important}
+.nav-cta:hover{background:var(--blue)!important}
+.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hbg span{display:block;width:22px;height:1.5px;background:var(--black)}
+.mob{display:none;position:fixed;inset:0;background:#fff;z-index:890;flex-direction:column;align-items:center;justify-content:center;gap:2.8rem}
 .mob.open{display:flex}
-.mob a{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:900;color:#fff}
-.mob a:hover{color:var(--blueb)}
-.mob-x{position:absolute;top:1.6rem;right:2.5rem;background:none;border:none;color:#fff;font-size:1.4rem;cursor:pointer}
+.mob a{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:900;color:var(--black)}
+.mob a:hover{color:var(--blue)}
+.mob-x{position:absolute;top:1.5rem;right:2.5rem;background:none;border:none;color:var(--black);font-size:1.4rem;cursor:pointer}
 
-/* ─── SECTION BASE ────────────────────────────────────── */
-.sec{padding:7rem 3.5rem;position:relative;z-index:1}
-.wrap{max-width:1280px;margin:0 auto}
-.ey{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--blue);font-weight:700;margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
-.ey::before{content:'';width:18px;height:2px;background:var(--blue);border-radius:2px;display:block}
-h2.disp{font-family:'Playfair Display',serif;font-weight:900;line-height:1.06;letter-spacing:-.025em;color:#fff}
-h2.disp em{font-style:italic;color:var(--blueb);font-weight:400}
+/* ─── HERO ────────────────────────────── */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 3rem 5rem;border-bottom:1px solid var(--bdr);position:relative;overflow:hidden;background:var(--white)}
+.hero-tag{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:2.5rem;display:flex;align-items:center;gap:.7rem}
+.hero-tag::before{content:'';width:20px;height:1px;background:var(--muted);display:block}
+.hero-words{display:flex;flex-direction:column;gap:0;margin-bottom:3rem}
+.hw{overflow:hidden}
+.hw span{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(4.5rem,11vw,11rem);line-height:.95;letter-spacing:-.04em;color:var(--black);display:block;opacity:0;transform:translateY(105%);animation:wordUp .9s cubic-bezier(.16,1,.3,1) forwards}
+.hw span.out{-webkit-text-stroke:2px var(--black);color:transparent}
+.hw span.blue{color:var(--blue)}
+.hw:nth-child(1) span{animation-delay:.05s}
+.hw:nth-child(2) span{animation-delay:.18s}
+.hw:nth-child(3) span{animation-delay:.3s}
+.hw:nth-child(4) span{animation-delay:.42s}
+@keyframes wordUp{to{opacity:1;transform:translateY(0)}}
+.hero-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:4rem;flex-wrap:wrap;padding-top:3rem;border-top:1px solid var(--bdr)}
+.hero-desc p{font-size:1rem;line-height:1.78;color:var(--muted);max-width:460px}
+.hero-desc p strong{color:var(--txt);font-weight:600}
+.hero-ctas{display:flex;gap:1rem;flex-shrink:0}
+.btn-dark{background:var(--black);color:#fff;padding:.9rem 1.8rem;border-radius:4px;font-size:.84rem;font-weight:600;display:inline-block;transition:background .2s}
+.btn-dark:hover{background:var(--blue)}
+.btn-line{background:transparent;color:var(--black);padding:.9rem 1.8rem;border-radius:4px;font-size:.84rem;font-weight:500;border:1.5px solid var(--bdr);display:inline-block;transition:border-color .2s}
+.btn-line:hover{border-color:var(--black)}
 
-/* ─── HERO ────────────────────────────────────────────── */
-.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden}
-.hero-l{display:flex;flex-direction:column;justify-content:flex-end;padding:10rem 4rem 5rem;background:var(--navy);position:relative;z-index:2}
-.htag{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--blue);font-weight:700;margin-bottom:1.8rem}
-h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(3rem,5.5vw,5.5rem);line-height:1.02;letter-spacing:-.03em;color:#fff;margin-bottom:2.5rem}
-h1 em{font-style:italic;color:var(--blueb);font-weight:700}
-.wlink{display:inline-flex;align-items:center;gap:.6rem;font-size:.85rem;color:var(--muted);transition:color .2s}
-.wlink:hover{color:#fff}
-.wlink svg{transition:transform .2s}
-.wlink:hover svg{transform:translateX(4px)}
-.hero-r{position:relative;overflow:hidden;background:var(--navy2)}
-.hgrid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;height:100%;gap:2px}
-.hcard{position:relative;overflow:hidden;background:var(--navy3);display:flex;align-items:flex-end;padding:1.2rem;cursor:default}
-.hcard::before{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,18,51,.85) 0%,transparent 55%);z-index:1}
-.hcard:hover .hbg2{transform:scale(1.05)}
-.hbg2{position:absolute;inset:0;transition:transform .5s ease}
-.hbg2.c1{background:linear-gradient(135deg,#001a4a 0%,#0a2a6e 100%)}
-.hbg2.c2{background:linear-gradient(135deg,#0d1f5c 0%,#162d7a 100%)}
-.hbg2.c3{background:linear-gradient(135deg,#091440 0%,#0f2260 100%)}
-.hico{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:3rem;opacity:.15;z-index:0}
-.hplay{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;z-index:2;color:#fff;font-size:.9rem;transition:background .2s,border-color .2s}
-.hcard:hover .hplay{background:var(--blue);border-color:var(--blue)}
-.hinfo{position:relative;z-index:2}
-.hinfo span{display:block;font-size:.72rem;color:rgba(255,255,255,.5);letter-spacing:.04em;margin-bottom:.2rem}
-.hinfo strong{font-size:.82rem;color:#fff;font-weight:600}
-.hbig{grid-row:1/3}
-
-/* ─── MARQUEE ─────────────────────────────────────────── */
-.mq-wrap{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--navy2);overflow:hidden;padding:.9rem 0}
-.mq-track{display:inline-flex;animation:mq 32s linear infinite;white-space:nowrap}
-.mi{font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:0 2.8rem;color:var(--muted)}
-.mi.ac{color:var(--blue)}
+/* ─── MARQUEE ─────────────────────────── */
+.mq{overflow:hidden;border-bottom:1px solid var(--bdr);padding:.8rem 0;background:var(--off)}
+.mq-inner{display:inline-flex;animation:mq 32s linear infinite;white-space:nowrap}
+.mi{font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:0 2.5rem;color:var(--light)}
+.mi.hi{color:var(--blue)}
 @keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-/* ─── WHAT WE DO STRIP ────────────────────────────────── */
-.what{background:var(--navy2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.what-in{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1.4fr;gap:6rem;align-items:center}
-.what-in h2{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2rem,3.5vw,3.2rem);line-height:1.08;letter-spacing:-.02em;color:#fff}
-.what-in h2 em{font-style:italic;color:var(--blueb);font-weight:400}
-.what-r p{font-size:.97rem;line-height:1.82;color:var(--muted)}
-.what-r strong{color:#fff;font-weight:600}
+/* ─── SHARED ──────────────────────────── */
+.sec{padding:8rem 3rem}
+.wrap{max-width:1200px;margin:0 auto}
+.lbl{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--blue);font-weight:700;margin-bottom:.8rem}
+h2.big{font-family:'Playfair Display',serif;font-weight:900;line-height:1.06;letter-spacing:-.025em;color:var(--black)}
+h2.big em{font-style:italic;font-weight:400;color:var(--blue)}
+.bdiv{border-top:1px solid var(--bdr)}
+.bdiv-b{border-bottom:1px solid var(--bdr)}
 
-/* ─── PILLARS ─────────────────────────────────────────── */
-.pillars{background:var(--navy)}
-.pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden}
-.pcard{background:var(--navy);padding:2.5rem 2rem;display:flex;flex-direction:column;gap:1.4rem;position:relative;overflow:hidden;transition:background .3s;cursor:default}
-.pcard::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--blue);transform:scaleX(0);transform-origin:left;transition:transform .35s}
-.pcard:hover{background:var(--navy2)}
-.pcard:hover::after{transform:scaleX(1)}
-.parr{width:36px;height:36px;border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--blue);font-size:.8rem;transition:background .25s,border-color .25s}
-.pcard:hover .parr{background:var(--blue);border-color:var(--blue);color:#fff}
-.pico{font-size:1.8rem}
-.ptg{font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);font-weight:700}
-.pcard h3{font-family:'Playfair Display',serif;font-weight:700;font-size:1.15rem;color:#fff;letter-spacing:-.01em;line-height:1.3}
-.pcard p{font-size:.82rem;line-height:1.72;color:var(--muted)}
-.ptags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:auto;padding-top:.5rem}
-.ptag{font-size:.62rem;letter-spacing:.05em;color:var(--dim);border:1px solid var(--line);padding:.22rem .55rem;border-radius:20px}
+/* ─── ABOUT ───────────────────────────── */
+.about{background:var(--white)}
+.about-in{display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:center}
+.about-in h2{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2rem,3.5vw,3.4rem);line-height:1.08;letter-spacing:-.025em}
+.about-in h2 em{font-style:italic;color:var(--blue);font-weight:400}
+.about-r p{font-size:.97rem;line-height:1.82;color:var(--muted);margin-bottom:1.4rem}
+.about-r p strong{color:var(--txt);font-weight:600}
+.about-r p:last-child{margin-bottom:0}
 
-/* ─── WHO WE SERVE ────────────────────────────────────── */
-.serve{background:var(--navy2)}
-.serve-head{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end;margin-bottom:4rem}
-.serve-head p{font-size:.95rem;line-height:1.8;color:var(--muted)}
-.srow{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden}
-.sc{background:var(--navy2);padding:2.5rem 1.8rem;display:flex;flex-direction:column;gap:1rem;transition:background .3s}
-.sc:hover{background:#001740}
-.sico{font-size:2rem}
-.sc h4{font-family:'Playfair Display',serif;font-weight:700;font-size:.98rem;color:#fff;line-height:1.3}
-.sc p{font-size:.78rem;line-height:1.65;color:var(--muted)}
+/* ─── TWO DIVISIONS ───────────────────── */
+.divs{background:var(--off)}
+.divs-hd{margin-bottom:4.5rem}
+.divs-hd h2{font-size:clamp(2.2rem,4vw,3.5rem);margin-bottom:.7rem}
+.divs-hd p{font-size:.95rem;color:var(--muted);max-width:560px;line-height:1.72}
+.divs-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--bdr);border:1px solid var(--bdr);border-radius:8px;overflow:hidden}
 
-/* ─── BRANDS ──────────────────────────────────────────── */
-.brands{background:var(--navy);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.brands-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:4rem;gap:3rem;flex-wrap:wrap}
-.brands-head h2{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(1.8rem,3vw,2.8rem);color:#fff;letter-spacing:-.02em;line-height:1.12}
-.brands-head h2 em{font-style:italic;color:var(--blueb);font-weight:400}
-.brands-head p{font-size:.92rem;color:var(--muted);max-width:320px;line-height:1.7}
-.bgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden}
-.bcard{background:var(--navy);padding:2.2rem 1.5rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;transition:background .3s;cursor:default;min-height:150px}
-.bcard:hover{background:var(--navy2)}
-.bcard:hover .bname{color:#fff}
-.bimg-wrap{height:52px;display:flex;align-items:center;justify-content:center;width:100%}
-.bimg-wrap img{max-height:46px;max-width:130px;width:auto;object-fit:contain;filter:brightness(0) invert(1);opacity:.55;transition:opacity .3s}
-.bcard:hover .bimg-wrap img{opacity:.9}
-.bsvg{display:none;height:46px;align-items:center;justify-content:center}
-.bname{font-size:.68rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:center;transition:color .3s;line-height:1.3}
-.btag{font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);font-weight:700;border:1px solid var(--border);padding:.18rem .5rem;border-radius:3px}
+/* division card */
+.div-card{background:#fff;padding:4rem 3.2rem;display:flex;flex-direction:column;gap:2.5rem;transition:background .25s;position:relative;overflow:hidden}
+.div-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--blue);transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
+.div-card:hover{background:var(--off)}
+.div-card:hover::after{transform:scaleX(1)}
+.div-tag{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--light);font-weight:700}
+.div-card h3{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2rem,3.5vw,3rem);letter-spacing:-.03em;line-height:1.05;color:var(--black)}
+.div-card h3 em{font-style:italic;color:var(--blue);font-weight:400}
+.div-card > p{font-size:.95rem;line-height:1.8;color:var(--muted);max-width:420px}
+.div-offerings{list-style:none;display:flex;flex-direction:column;gap:.7rem;border-top:1px solid var(--bdr);padding-top:2rem}
+.div-offerings li{font-size:.87rem;color:var(--muted);display:flex;align-items:flex-start;gap:.7rem;line-height:1.5}
+.div-offerings li::before{content:'→';color:var(--blue);font-size:.8rem;flex-shrink:0;margin-top:1px}
+.div-link{display:inline-flex;align-items:center;gap:.5rem;font-size:.82rem;font-weight:700;color:var(--blue);letter-spacing:.01em;transition:gap .2s;margin-top:.5rem}
+.div-link:hover{gap:.9rem}
 
-/* ─── TESTIMONIAL ─────────────────────────────────────── */
-.testi{background:var(--navy2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.testi-split{display:grid;grid-template-columns:1fr 1fr;min-height:480px}
-.testi-img{background:linear-gradient(135deg,#001a4a,#0d2a6e);display:flex;align-items:center;justify-content:center;font-size:5rem;position:relative;overflow:hidden}
-.testi-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,transparent,rgba(0,26,74,.3))}
-.testi-body{padding:4rem 4rem 4rem 5rem;display:flex;flex-direction:column;justify-content:center;gap:2rem}
-.tq{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1rem,1.8vw,1.3rem);line-height:1.7;color:#fff}
-.tq::before{content:'"';display:block;font-size:3rem;line-height:.7;color:var(--blue);margin-bottom:.8rem;font-style:normal}
-.tname{font-weight:700;font-size:.88rem;color:#fff}
-.trole{font-size:.75rem;color:var(--muted);margin-top:.2rem}
-.tdots{display:flex;gap:.5rem}
-.tdot{width:8px;height:8px;border-radius:50%;background:var(--line)}
-.tdot.on{background:var(--blue)}
+/* ─── THE CHALLENGE ───────────────────── */
+.challenge{background:var(--white)}
+.challenge-in{display:grid;grid-template-columns:5fr 7fr;gap:8rem;align-items:start}
+.challenge-sticky{position:sticky;top:8rem}
+.challenge-sticky h2{font-size:clamp(2rem,3vw,2.8rem);margin-bottom:1.2rem}
+.challenge-sticky p{font-size:.93rem;line-height:1.78;color:var(--muted)}
+.ch-list{display:flex;flex-direction:column}
+.ch-item{padding:1.8rem 0;border-bottom:1px solid var(--bdr);display:flex;gap:1.5rem;align-items:flex-start}
+.ch-item:first-child{border-top:1px solid var(--bdr)}
+.ch-n{font-size:.62rem;letter-spacing:.1em;color:var(--light);font-weight:700;flex-shrink:0;padding-top:4px;min-width:22px}
+.ch-item h4{font-weight:700;font-size:.95rem;color:var(--black);margin-bottom:.35rem;letter-spacing:-.01em}
+.ch-item p{font-size:.86rem;line-height:1.7;color:var(--muted)}
 
-/* ─── IDEOLOGY ────────────────────────────────────────── */
-.ideo{background:var(--navy)}
-.ideo-in{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
-.ideo-img{width:100%;aspect-ratio:4/3;border-radius:6px;background:linear-gradient(135deg,#001a4a 0%,#0a2a6e 100%);display:flex;align-items:center;justify-content:center;font-size:4rem;border:1px solid var(--border);position:relative;overflow:hidden}
-.ideo-img::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 40%,rgba(29,107,230,.2),transparent 60%)}
-.ideo-hdg{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(1.5rem,2.5vw,2rem);color:#fff;line-height:1.2;margin-bottom:2rem;letter-spacing:-.02em}
-.ideo-hdg em{color:var(--blueb);font-style:italic;font-weight:400}
-.beliefs{list-style:none;display:flex;flex-direction:column;gap:1.2rem}
-.belief{display:flex;gap:1rem;align-items:flex-start;padding-bottom:1.2rem;border-bottom:1px solid var(--line)}
-.belief:last-child{border-bottom:none}
-.bdot{width:8px;height:8px;border-radius:50%;background:var(--blue);flex-shrink:0;margin-top:6px}
-.btitle{font-weight:700;font-size:.88rem;color:#fff;margin-bottom:.3rem}
-.bbody{font-size:.83rem;line-height:1.65;color:var(--muted)}
+/* ─── HOW WE SOLVE ────────────────────── */
+.solve{background:var(--off)}
+.solve-hd{margin-bottom:5rem}
+.solve-hd h2{font-size:clamp(2rem,3.5vw,3rem);margin-bottom:.7rem}
+.solve-hd p{font-size:.95rem;color:var(--muted);max-width:520px;line-height:1.72}
+.solve-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--bdr);border:1px solid var(--bdr);border-radius:8px;overflow:hidden}
+.sc{background:#fff;padding:3rem 2.4rem;display:flex;flex-direction:column;gap:1.2rem;transition:background .25s}
+.sc:hover{background:var(--gray)}
+.sc-n{font-family:'Playfair Display',serif;font-weight:900;font-size:3.5rem;color:rgba(29,107,230,.08);line-height:1}
+.sc h3{font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;color:var(--black);letter-spacing:-.01em;line-height:1.3}
+.sc p{font-size:.85rem;line-height:1.72;color:var(--muted)}
 
-/* ─── IMPACT BAR ──────────────────────────────────────── */
-.ibar{background:var(--blue);padding:5rem 3.5rem}
-.ibar-in{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr repeat(3,1fr);gap:3rem;align-items:center}
-.ibar h2{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(1.5rem,2.5vw,2.2rem);color:var(--navy);line-height:1.15;letter-spacing:-.02em}
-.istat{border-left:2px solid rgba(0,18,51,.2);padding-left:2rem}
-.inum{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2.5rem,4vw,3.8rem);color:var(--navy);line-height:1;display:block}
-.ilbl{font-size:.8rem;color:rgba(0,18,51,.65);margin-top:.3rem;display:block;line-height:1.4}
+/* ─── TRACK RECORD ────────────────────── */
+.track{background:var(--black);color:#fff}
+.track-hd{margin-bottom:5rem}
+.track-hd h2{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2.2rem,4vw,3.8rem);letter-spacing:-.03em;line-height:1.04;color:#fff;margin-bottom:1rem}
+.track-hd h2 em{font-style:italic;color:var(--blueb);font-weight:400}
+.track-hd p{font-size:.97rem;line-height:1.8;color:rgba(255,255,255,.45);max-width:680px}
+.track-rows{border-top:1px solid rgba(255,255,255,.08)}
+.tr{display:grid;grid-template-columns:72px 1fr;gap:3rem;align-items:baseline;padding:2.2rem 0;border-bottom:1px solid rgba(255,255,255,.08);transition:padding-left .3s}
+.tr:hover{padding-left:.6rem}
+.tr-n{font-family:'Playfair Display',serif;font-weight:900;font-size:.78rem;color:rgba(255,255,255,.2);letter-spacing:.06em}
+.tr h3{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(1.1rem,2vw,1.65rem);color:#fff;letter-spacing:-.015em;line-height:1.3}
+.track-bottom{margin-top:5rem;padding-top:5rem;border-top:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:space-between;gap:3rem;flex-wrap:wrap}
+.track-bottom p{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(1.6rem,3vw,2.8rem);color:#fff;letter-spacing:-.025em;line-height:1.1;max-width:560px}
+.track-bottom p em{font-style:italic;color:var(--blueb);font-weight:400}
 
-/* ─── MEMBERSHIP ──────────────────────────────────────── */
-.memb{background:var(--navy2)}
-.memb-head{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end;margin-bottom:4rem}
-.memb-head p{font-size:.93rem;line-height:1.78;color:var(--muted)}
-.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden}
-.plan{background:var(--navy2);padding:3rem 2.5rem;display:flex;flex-direction:column;position:relative;transition:background .3s}
-.plan:hover{background:#001740}
-.plan.best{background:var(--navy3);border:1px solid var(--blue);margin:-1px}
-.pbadge{position:absolute;top:2.8rem;right:2.5rem;background:var(--blue);color:#fff;font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.28rem .65rem;border-radius:3px}
-.ptier{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:1.5rem}
-.pprice{font-family:'Playfair Display',serif;font-weight:900;font-size:3rem;color:#fff;line-height:1;margin-bottom:.4rem;letter-spacing:-.02em}
-.pprice sup{font-size:1.3rem;vertical-align:super}
-.pper{font-size:.8rem;color:var(--muted)}
-.psave{font-size:.75rem;color:var(--blue);margin-top:.4rem;font-weight:600}
-.pline{height:1px;background:var(--line);margin:1.8rem 0}
-.pfeats{list-style:none;flex:1}
-.pfeats li{font-size:.84rem;color:var(--muted);display:flex;gap:.65rem;margin-bottom:.85rem;line-height:1.5;align-items:flex-start}
-.pfeats li::before{content:'✓';color:var(--blue);font-size:.75rem;flex-shrink:0;margin-top:1px}
-.pbtn{display:block;text-align:center;margin-top:2.5rem;padding:.9rem;font-family:'Manrope',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:.07em;text-transform:uppercase;border-radius:5px;transition:all .2s;border:1.5px solid var(--line);color:#fff;background:transparent}
-.pbtn:hover{border-color:var(--blue);color:var(--blueb)}
-.pbtn.fill{background:var(--blue);border-color:var(--blue);color:#fff}
-.pbtn.fill:hover{background:var(--blueb)}
+/* ─── WHO WE SERVE ────────────────────── */
+.serve{background:var(--white)}
+.serve-hd{display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:end;margin-bottom:5rem}
+.serve-hd h2{font-size:clamp(2rem,3.5vw,3.2rem)}
+.serve-hd p{font-size:.95rem;line-height:1.78;color:var(--muted)}
+.fit-wrap{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--bdr);border:1px solid var(--bdr);border-radius:8px;overflow:hidden}
+.fit-col{background:#fff;padding:3.5rem 3rem}
+.fit-col.no-bg{background:var(--off)}
+.fit-h{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;margin-bottom:2rem;display:flex;align-items:center;gap:.5rem}
+.fit-h.yes-c{color:var(--blue)}
+.fit-h.no-c{color:var(--muted)}
+.fit-h::before{content:'';width:14px;height:2px;background:currentColor;display:block;border-radius:2px}
+.fit-list{list-style:none;display:flex;flex-direction:column;gap:1.2rem}
+.fit-list li{font-size:.9rem;line-height:1.62;color:var(--muted);display:flex;gap:.9rem;align-items:flex-start}
+.fit-list li .ic{flex-shrink:0;font-weight:700;margin-top:1px;font-size:.78rem}
+.yes-c-ic{color:var(--blue)}
+.no-c-ic{color:#d0324b}
 
-/* ─── CONTACT ─────────────────────────────────────────── */
-.contact{background:var(--navy);border-top:1px solid var(--line)}
-.contact-in{display:grid;grid-template-columns:1fr 1fr;gap:6rem}
-.contact-r{padding-top:1rem}
-.contact-r h3{font-family:'Playfair Display',serif;font-weight:700;font-size:1.4rem;color:#fff;margin-bottom:1.5rem;letter-spacing:-.01em}
-.frow{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
-.ff{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
-.ff label{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
-.ff input,.ff select,.ff textarea{background:var(--navy2);border:1px solid var(--border);color:#fff;font-family:'Manrope',sans-serif;font-size:.87rem;padding:.8rem 1rem;border-radius:4px;outline:none;transition:border-color .2s;width:100%}
-.ff input:focus,.ff select:focus,.ff textarea:focus{border-color:var(--blue)}
-.ff input::placeholder,.ff textarea::placeholder{color:var(--dim)}
-.ff select{color:var(--muted)}
-.ff select option{background:var(--navy2);color:#fff}
-.ff textarea{resize:none;height:100px}
-.sbtn{background:var(--blue);color:#fff;border:none;cursor:pointer;padding:1rem 2rem;font-family:'Manrope',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.07em;text-transform:uppercase;border-radius:5px;transition:background .2s;margin-top:.5rem}
-.sbtn:hover{background:var(--blueb)}
-.citem{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.5rem}
-.cicon{width:38px;height:38px;border-radius:8px;background:var(--bdim);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
-.ctxt label{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:700;display:block;margin-bottom:.25rem}
-.ctxt span{font-size:.87rem;color:var(--txt)}
-.ctxt a{color:var(--txt);transition:color .2s}
-.ctxt a:hover{color:#fff}
+/* ─── BRANDS ──────────────────────────── */
+.brands{background:var(--off)}
+.brands-hd{margin-bottom:4rem}
+.brands-hd h2{font-size:clamp(2rem,3vw,2.8rem);margin-bottom:.5rem}
+.brands-hd p{font-size:.93rem;color:var(--muted);max-width:480px;line-height:1.7}
+.bgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--bdr);border:1px solid var(--bdr);border-radius:8px;overflow:hidden}
+.bc{background:#fff;padding:2.5rem 2rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.85rem;transition:background .25s;min-height:140px}
+.bc:hover{background:var(--off)}
+.bc:hover .bn{color:var(--black)}
+.bi{height:44px;display:flex;align-items:center;justify-content:center;width:100%}
+.bi img{max-height:40px;max-width:130px;width:auto;object-fit:contain;filter:grayscale(1);opacity:.55;transition:opacity .3s,filter .3s}
+.bc:hover .bi img{opacity:1;filter:grayscale(0)}
+.bsvg{display:none;height:40px;align-items:center;justify-content:center}
+.bn{font-size:.65rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--light);text-align:center;transition:color .25s;line-height:1.3}
+.btg{font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);font-weight:700;border:1px solid rgba(29,107,230,.2);padding:.14rem .42rem;border-radius:3px}
 
-/* ─── FOOTER ──────────────────────────────────────────── */
-footer{background:var(--navy2);border-top:1px solid var(--line);padding:5rem 3.5rem 2.5rem}
-.ft{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:4rem;padding-bottom:4rem;border-bottom:1px solid var(--line);margin-bottom:2.5rem}
-.fb p{font-size:.85rem;line-height:1.75;color:var(--muted);margin-top:1rem;max-width:260px}
-.fsoc{display:flex;gap:.6rem;margin-top:1.5rem}
-.fsoc a{width:34px;height:34px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;color:var(--muted);transition:border-color .2s,color .2s}
+/* ─── FAQ ─────────────────────────────── */
+.faq{background:var(--white)}
+.faq-hd{margin-bottom:4rem}
+.faq-hd h2{font-size:clamp(2.2rem,4vw,3.5rem)}
+.faq-rows{border-top:1px solid var(--bdr)}
+.fq{border-bottom:1px solid var(--bdr)}
+.fq-q{width:100%;background:none;border:none;text-align:left;padding:1.8rem 0;display:flex;justify-content:space-between;align-items:center;gap:2rem;cursor:pointer}
+.fq-q span{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(.95rem,1.8vw,1.2rem);color:var(--black);letter-spacing:-.01em;line-height:1.35}
+.fq-icon{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--bdr);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.95rem;color:var(--muted);transition:all .25s}
+.fq.open .fq-icon{background:var(--blue);border-color:var(--blue);color:#fff;transform:rotate(45deg)}
+.fq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .4s}
+.fq.open .fq-a{max-height:400px;padding-bottom:1.8rem}
+.fq-a p{font-size:.92rem;line-height:1.8;color:var(--muted);max-width:720px}
+
+/* ─── NEWSLETTER / CTA ────────────────── */
+.nl-wrap{background:var(--black);padding:6rem 3rem}
+.nl-inner{max-width:1200px;margin:0 auto}
+.nl-top{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;padding-bottom:5rem;border-bottom:1px solid rgba(255,255,255,.08)}
+.nl-l h2{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(1.8rem,3vw,2.8rem);color:#fff;letter-spacing:-.025em;line-height:1.1}
+.nl-l h2 em{font-style:italic;color:var(--blueb);font-weight:400}
+.nl-l p{font-size:.88rem;color:rgba(255,255,255,.4);margin-top:.8rem;line-height:1.7}
+.nl-sub-lbl{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);font-weight:600;margin-bottom:.8rem}
+.nl-form{display:flex;border:1.5px solid rgba(255,255,255,.12);border-radius:5px;overflow:hidden}
+.nl-form input{flex:1;background:transparent;border:none;padding:.85rem 1.2rem;color:#fff;font-family:'Inter',sans-serif;font-size:.88rem;outline:none}
+.nl-form input::placeholder{color:rgba(255,255,255,.25)}
+.nl-form button{background:var(--blue);color:#fff;border:none;padding:.85rem 1.4rem;font-family:'Inter',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .2s;white-space:nowrap}
+.nl-form button:hover{background:var(--blueb)}
+
+/* big CTA block */
+.cta-block{padding-top:6rem;text-align:center}
+.cta-block h2{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(3rem,7vw,8rem);color:#fff;letter-spacing:-.05em;line-height:.9;margin-bottom:2.5rem}
+.cta-block h2 em{font-style:italic;color:var(--blueb);font-weight:400}
+.cta-block p{font-size:.97rem;color:rgba(255,255,255,.42);max-width:520px;margin:0 auto 3rem;line-height:1.75}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-white{background:#fff;color:var(--black);padding:.95rem 2rem;border-radius:4px;font-size:.84rem;font-weight:700;display:inline-block;transition:background .2s}
+.btn-white:hover{background:var(--off)}
+.btn-ghost{background:transparent;color:#fff;padding:.95rem 2rem;border-radius:4px;font-size:.84rem;font-weight:500;border:1.5px solid rgba(255,255,255,.2);display:inline-block;transition:border-color .2s}
+.btn-ghost:hover{border-color:rgba(255,255,255,.5)}
+
+/* ─── FOOTER ──────────────────────────── */
+footer{background:var(--off);border-top:1px solid var(--bdr);padding:4.5rem 3rem 2.5rem}
+.ft{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:3rem;padding-bottom:3.5rem;border-bottom:1px solid var(--bdr);margin-bottom:2rem}
+.fb p{font-size:.82rem;line-height:1.72;color:var(--muted);margin-top:.8rem;max-width:220px}
+.fsoc{display:flex;gap:.5rem;margin-top:1.2rem}
+.fsoc a{width:32px;height:32px;border:1px solid var(--bdr);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;color:var(--muted);transition:border-color .2s,color .2s}
 .fsoc a:hover{border-color:var(--blue);color:var(--blue)}
-.fcol h5{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);font-weight:700;margin-bottom:1.4rem}
+.fcol h5{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:1.2rem}
 .fcol ul{list-style:none}
-.fcol li{margin-bottom:.7rem}
-.fcol a{font-size:.85rem;color:var(--muted);transition:color .2s}
-.fcol a:hover{color:#fff}
-.fci{display:flex;gap:.7rem;font-size:.85rem;color:var(--muted);margin-bottom:.8rem;align-items:flex-start}
-.fci-i{color:var(--blue);flex-shrink:0}
-.fbot{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
-.fbot p{font-size:.75rem;color:var(--dim)}
+.fcol li{margin-bottom:.6rem}
+.fcol a{font-size:.82rem;color:var(--muted);transition:color .2s}
+.fcol a:hover{color:var(--black)}
+.fbot{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+.fbot p{font-size:.72rem;color:var(--light)}
 .flinks{display:flex;gap:2rem}
-.flinks a{font-size:.72rem;color:var(--dim);transition:color .2s}
+.flinks a{font-size:.7rem;color:var(--light);transition:color .2s}
 .flinks a:hover{color:var(--muted)}
 
-/* ─── FADE UP ─────────────────────────────────────────── */
-.fu{opacity:0;transform:translateY(26px);transition:opacity .75s ease,transform .75s ease}
+/* ─── FADE UP ─────────────────────────── */
+.fu{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
 .fu.in{opacity:1;transform:translateY(0)}
 .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
 
-/* ─── RESPONSIVE ──────────────────────────────────────── */
-@media(max-width:1100px){
-  .pgrid{grid-template-columns:repeat(2,1fr)}
+/* ─── RESPONSIVE ──────────────────────── */
+@media(max-width:1024px){
+  .about-in,.challenge-in,.serve-hd,.nl-top{grid-template-columns:1fr;gap:3rem}
+  .divs-grid,.fit-wrap{grid-template-columns:1fr}
+  .solve-grid{grid-template-columns:1fr 1fr}
   .bgrid{grid-template-columns:repeat(2,1fr)}
-  .ft{grid-template-columns:1fr 1fr;gap:2.5rem}
-  .ibar-in{grid-template-columns:1fr 1fr;gap:2rem}
+  .ft{grid-template-columns:1fr 1fr;gap:2rem}
+  .challenge-sticky{position:static}
+  .track-bottom{flex-direction:column;align-items:flex-start}
 }
-@media(max-width:900px){
+@media(max-width:768px){
   nav{padding:1rem 1.5rem}
   .nav-links{display:none}
   .hbg{display:flex}
   .sec{padding:5rem 1.5rem}
-  .hero{grid-template-columns:1fr;min-height:100svh}
-  .hero-l{padding:8rem 1.5rem 4rem}
-  .hero-r{height:360px}
-  .what-in{grid-template-columns:1fr;gap:2.5rem}
-  .serve-head{grid-template-columns:1fr;gap:1.5rem}
-  .srow{grid-template-columns:repeat(2,1fr)}
-  .brands-head{flex-direction:column;align-items:flex-start}
-  .plans{grid-template-columns:1fr}
-  .plan.best{margin:-2px}
-  .contact-in{grid-template-columns:1fr;gap:4rem}
-  .ideo-in{grid-template-columns:1fr;gap:3.5rem}
-  .memb-head{grid-template-columns:1fr;gap:1.5rem}
-  .testi-split{grid-template-columns:1fr}
-  .testi-img{height:240px}
-  .testi-body{padding:3rem 2rem}
-  .ibar-in{grid-template-columns:1fr;gap:2.5rem}
-  footer{padding:4rem 1.5rem 2.5rem}
-  .ft{grid-template-columns:1fr;gap:2rem}
-  .fbot{flex-direction:column;gap:1.2rem;text-align:center}
+  .hero{padding:0 1.5rem 4rem}
+  .hero-bottom{flex-direction:column;align-items:flex-start}
+  .solve-grid{grid-template-columns:1fr}
+  .tr{grid-template-columns:40px 1fr;gap:1.5rem}
+  .nl-wrap{padding:4rem 1.5rem}
+  .ft{grid-template-columns:1fr}
+  .fbot{flex-direction:column;gap:1rem;text-align:center}
+  .cta-block h2{font-size:clamp(2.5rem,10vw,5rem)}
 }
-@media(max-width:640px){
-  h1{font-size:clamp(2.5rem,10vw,4rem)}
-  .srow{grid-template-columns:1fr}
-  .pgrid{grid-template-columns:1fr}
+@media(max-width:480px){
   .bgrid{grid-template-columns:1fr 1fr}
-  .hgrid{grid-template-columns:1fr}
-  .hbig{grid-row:auto}
-  .frow{grid-template-columns:1fr}
-  .ibar{padding:4rem 1.5rem}
+  .flinks{flex-direction:column;gap:.6rem;align-items:center}
 }
 </style>
 </head>
@@ -303,473 +290,373 @@ footer{background:var(--navy2);border-top:1px solid var(--line);padding:5rem 3.5
 <nav id="mainNav">
   <a href="#" class="logo">
     <div class="lmark">N</div>
-    <div class="lwords"><b>Neondesk</b><small>Africa</small></div>
+    <div class="lw"><b>Neondesk</b><small>Africa</small></div>
   </a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
-    <li><a href="#services">What We Do</a></li>
-    <li><a href="#serve">Who We Serve</a></li>
-    <li><a href="#membership">Membership</a></li>
-    <li><a href="#contact" class="nav-cta">Get Started</a></li>
+    <li><a href="#studio">Neondesk Studio</a></li>
+    <li><a href="#lab">Neondesk Lab</a></li>
+    <li><a href="#track">Track Record</a></li>
+    <li><a href="#contact" class="nav-cta">Get In Touch</a></li>
   </ul>
-  <button class="hbg" id="ham" aria-label="Open menu"><span></span><span></span><span></span></button>
+  <button class="hbg" id="ham"><span></span><span></span><span></span></button>
 </nav>
 
-<!-- MOBILE MENU -->
-<div class="mob" id="mobMenu">
-  <button class="mob-x" id="mobClose">✕</button>
+<div class="mob" id="mob">
+  <button class="mob-x" id="mobX">✕</button>
   <a href="#about" class="ml">About</a>
-  <a href="#services" class="ml">What We Do</a>
-  <a href="#serve" class="ml">Who We Serve</a>
-  <a href="#membership" class="ml">Membership</a>
-  <a href="#contact" class="ml">Get Started</a>
+  <a href="#studio" class="ml">Neondesk Studio</a>
+  <a href="#lab" class="ml">Neondesk Lab</a>
+  <a href="#track" class="ml">Track Record</a>
+  <a href="#contact" class="ml">Get In Touch</a>
 </div>
 
-<!-- ══════════════════════════════════════════════════════
-     HERO
-═══════════════════════════════════════════════════════ -->
+<!-- ═══ HERO ═══════════════════════════════════════ -->
 <section class="hero" id="home">
-  <div class="hero-l">
-    <p class="htag fu">Defining the African Narrative</p>
-    <h1 class="fu d1">Empowering<br/><em>African Entrepreneurs</em><br/>to Grow &amp; Scale.</h1>
-    <a href="#services" class="wlink fu d2">
-      What We Do
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
+  <p class="hero-tag">Supporting &amp; Scaling African Entrepreneurs</p>
+  <div class="hero-words">
+    <div class="hw"><span>Empowering</span></div>
+    <div class="hw"><span class="blue">African</span></div>
+    <div class="hw"><span>Entrepreneurs</span></div>
+    <div class="hw"><span class="out">to Grow.</span></div>
   </div>
-  <div class="hero-r">
-    <div class="hgrid">
-      <div class="hcard hbig">
-        <div class="hbg2 c1"></div>
-        <div class="hico">🚀</div>
-        <div class="hplay">▶</div>
-        <div class="hinfo"><span>Business Development · Mentorship</span><strong>Idea Acceleration Framework</strong></div>
-      </div>
-      <div class="hcard">
-        <div class="hbg2 c2"></div>
-        <div class="hico">🎓</div>
-        <div class="hplay">▶</div>
-        <div class="hinfo"><span>Education · Skills</span><strong>Entrepreneurial Academy</strong></div>
-      </div>
-      <div class="hcard">
-        <div class="hbg2 c3"></div>
-        <div class="hico">👥</div>
-        <div class="hplay">▶</div>
-        <div class="hinfo"><span>Networking · Community</span><strong>Community Platform</strong></div>
-      </div>
+  <div class="hero-bottom">
+    <div class="hero-desc">
+      <p>Neondesk Africa is a business support company with two divisions — <strong>Neondesk Studio</strong> builds programs and products for African entrepreneurs, and <strong>Neondesk Lab</strong> works directly with businesses to grow their revenue, acquire customers, and scale sustainably across Africa.</p>
+    </div>
+    <div class="hero-ctas">
+      <a href="#divisions" class="btn-dark">Our Divisions</a>
+      <a href="#contact" class="btn-line">Get In Touch</a>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════
-     MARQUEE
-═══════════════════════════════════════════════════════ -->
-<div class="mq-wrap">
-  <div class="mq-track">
-    <span class="mi ac">Neondesk Africa</span><span class="mi">Business Development</span><span class="mi">Idea Acceleration</span><span class="mi ac">Grow. Scale. Lead.</span><span class="mi">Entrepreneurial Academy</span><span class="mi">Community Platform</span><span class="mi ac">Lagos to Africa to World</span><span class="mi">Mentorship &amp; Coaching</span><span class="mi">Funding Readiness</span>
-    <span class="mi ac">Neondesk Africa</span><span class="mi">Business Development</span><span class="mi">Idea Acceleration</span><span class="mi ac">Grow. Scale. Lead.</span><span class="mi">Entrepreneurial Academy</span><span class="mi">Community Platform</span><span class="mi ac">Lagos to Africa to World</span><span class="mi">Mentorship &amp; Coaching</span><span class="mi">Funding Readiness</span>
+<!-- MARQUEE -->
+<div class="mq">
+  <div class="mq-inner">
+    <span class="mi hi">Neondesk Africa</span><span class="mi">Neondesk Studio</span><span class="mi">Neondesk Lab</span><span class="mi hi">Grow. Scale. Lead.</span><span class="mi">Business Development</span><span class="mi">Entrepreneurial Programs</span><span class="mi hi">Lagos, Nigeria</span><span class="mi">Mentorship</span><span class="mi">Revenue Growth</span><span class="mi hi">Est. 2024</span>
+    <span class="mi hi">Neondesk Africa</span><span class="mi">Neondesk Studio</span><span class="mi">Neondesk Lab</span><span class="mi hi">Grow. Scale. Lead.</span><span class="mi">Business Development</span><span class="mi">Entrepreneurial Programs</span><span class="mi hi">Lagos, Nigeria</span><span class="mi">Mentorship</span><span class="mi">Revenue Growth</span><span class="mi hi">Est. 2024</span>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════════════
-     WHAT WE DO
-═══════════════════════════════════════════════════════ -->
-<section class="what sec" id="about">
-  <div class="what-in wrap">
+<!-- ═══ ABOUT ════════════════════════════════════════ -->
+<section class="about sec bdiv-b" id="about">
+  <div class="about-in wrap">
     <div class="fu">
-      <div class="ey">What We Do</div>
-      <h2>Supporting African<br/>Entrepreneurs to<br/><em>Grow &amp; Scale.</em></h2>
+      <div class="lbl">About Neondesk Africa</div>
+      <h2>Neondesk Africa is a business support company with one mission: to <em>grow African entrepreneurs</em> and their businesses.</h2>
     </div>
-    <div class="what-r fu d2">
-      <p>We are building the future of <strong>African entrepreneurship</strong> — one business, one founder, one community at a time. Through strategy, education, and purpose-driven programs, we don't just support businesses — we <strong>amplify vision, spark movements, and elevate African excellence.</strong></p>
-      <br/>
-      <p>Whether you're a business owner, a changemaker, a student, or an early-stage founder — if you've got something the world needs to hear, we'll help you build it louder, clearer, and bolder.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════════════════
-     FOUR PILLARS
-═══════════════════════════════════════════════════════ -->
-<section class="pillars sec" id="services">
-  <div class="wrap">
-    <div class="fu" style="margin-bottom:3.5rem">
-      <div class="ey">Our Pillars</div>
-      <h2 class="disp" style="font-size:clamp(2rem,3.5vw,3rem)">Four pillars. <em>One mission.</em></h2>
-    </div>
-    <div class="pgrid">
-      <div class="pcard fu">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start"><div class="pico">📈</div><div class="parr">→</div></div>
-        <div class="ptg">Pillar 01</div>
-        <h3>Business Development Support</h3>
-        <p>Structured mentorship, strategy sessions, and growth planning tailored to Africa's unique business landscape. We help you build foundations that last.</p>
-        <div class="ptags"><span class="ptag">Strategy</span><span class="ptag">Mentorship</span><span class="ptag">Growth Planning</span></div>
-      </div>
-      <div class="pcard fu d1">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start"><div class="pico">💡</div><div class="parr">→</div></div>
-        <div class="ptg">Pillar 02</div>
-        <h3>Idea Acceleration Framework</h3>
-        <p>A proven system to transform bold ideas into viable, scalable businesses — from validation to MVP to market, with support every step of the way.</p>
-        <div class="ptags"><span class="ptag">Validation</span><span class="ptag">Business Model</span><span class="ptag">Investor Readiness</span></div>
-      </div>
-      <div class="pcard fu d2">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start"><div class="pico">🎓</div><div class="parr">→</div></div>
-        <div class="ptg">Pillar 03</div>
-        <h3>Entrepreneurial Academy</h3>
-        <p>Essential knowledge in practical formats — finance, marketing, operations, sales, and leadership — built for founders, not classrooms.</p>
-        <div class="ptags"><span class="ptag">Finance</span><span class="ptag">Marketing</span><span class="ptag">Leadership</span><span class="ptag">Sales</span></div>
-      </div>
-      <div class="pcard fu d3">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start"><div class="pico">👥</div><div class="parr">→</div></div>
-        <div class="ptg">Pillar 04</div>
-        <h3>Community Platform</h3>
-        <p>A curated network of ambitious entrepreneurs, investors, and industry leaders — peer learning, accountability, and connections that change trajectories.</p>
-        <div class="ptags"><span class="ptag">Networking</span><span class="ptag">Peer Learning</span><span class="ptag">Investor Access</span></div>
-      </div>
+    <div class="about-r fu d2">
+      <p>What started as a platform to connect Nigerian entrepreneurs with mentors and education has evolved into a full business support company. We have two focused divisions — <strong>Neondesk Studio</strong> builds and launches proprietary programs and products that equip African entrepreneurs with the tools they need, and <strong>Neondesk Lab</strong> works directly with established businesses to build growth systems, get more customers, and scale revenue.</p>
+      <p>We operate across Africa because that's where the work matters most. We believe African entrepreneurs don't just deserve access to capital — they deserve access to the <strong>knowledge, systems, and networks</strong> that make businesses actually grow.</p>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════
-     WHO WE SERVE
-═══════════════════════════════════════════════════════ -->
-<section class="serve sec" id="serve">
+<!-- ═══ TWO DIVISIONS ════════════════════════════════ -->
+<section class="divs sec bdiv-b" id="divisions">
   <div class="wrap">
-    <div class="serve-head">
+    <div class="divs-hd fu">
+      <div class="lbl">Two Divisions</div>
+      <h2 class="big">Two Divisions. One Mission:<br/><em>Grow Africa's Entrepreneurs.</em></h2>
+      <p style="margin-top:.8rem">Two divisions, each built for a different side of the equation — one builds for entrepreneurs, one builds with businesses.</p>
+    </div>
+    <div class="divs-grid">
+
+      <!-- STUDIO -->
+      <div class="div-card fu" id="studio">
+        <div class="div-tag">Division 01</div>
+        <h3>Neondesk<br/><em>Studio</em></h3>
+        <p>We build and launch proprietary programs, courses, and tools for entrepreneurs in Africa. Neondesk Studio creates the resources entrepreneurs need — from structured learning programs to a community platform — and makes them accessible to anyone with the ambition to build.</p>
+        <ul class="div-offerings">
+          <li>Entrepreneurial education programs built for African realities</li>
+          <li>Business launch and idea acceleration framework</li>
+          <li>Mentorship programs connecting founders with seasoned operators</li>
+          <li>Community platform for peer learning and accountability</li>
+          <li>Resource library: templates, guides, and business tools</li>
+        </ul>
+        <a href="#studio-detail" class="div-link">Learn more →</a>
+      </div>
+
+      <!-- LAB -->
+      <div class="div-card fu d1" id="lab">
+        <div class="div-tag">Division 02</div>
+        <h3>Neondesk<br/><em>Lab</em></h3>
+        <p>We work directly with established businesses in Nigeria and across Africa to get them more customers and grow their revenue. Neondesk Lab goes into your business, identifies exactly why growth isn't working, and builds the systems to fix it — consistently.</p>
+        <ul class="div-offerings">
+          <li>Full growth diagnostic — find what's actually holding your business back</li>
+          <li>Customer acquisition strategy tailored to the African market</li>
+          <li>Revenue growth systems that run without constant intervention</li>
+          <li>Market expansion across Nigeria and new African markets</li>
+          <li>Business development support for SMEs ready to scale</li>
+        </ul>
+        <a href="#lab-detail" class="div-link">Learn more →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ THE CHALLENGE ════════════════════════════════ -->
+<section class="challenge sec bdiv-b">
+  <div class="challenge-in wrap">
+    <div class="fu">
+      <div class="challenge-sticky">
+        <div class="lbl">The Problem</div>
+        <h2 class="big">The challenges African entrepreneurs face.</h2>
+        <p style="margin-top:1rem;font-size:.93rem;line-height:1.78;color:var(--muted)">These are the real, recurring problems we see every day across Nigeria and Africa. If any of these sound familiar — you're exactly who we built Neondesk for.</p>
+      </div>
+    </div>
+    <div class="ch-list fu d2">
+      <div class="ch-item"><span class="ch-n">01</span><div><h4>You have a great idea but no clear path to build it.</h4><p>Ambition without direction burns out fast. Most entrepreneurs know what they want — not how to build it into something that lasts.</p></div></div>
+      <div class="ch-item"><span class="ch-n">02</span><div><h4>Your business growth is inconsistent.</h4><p>Good month today, bad month tomorrow. No predictable system to understand what's driving results or how to repeat them.</p></div></div>
+      <div class="ch-item"><span class="ch-n">03</span><div><h4>Customer acquisition is expensive and unclear.</h4><p>You're spending money to get customers but it's not showing in revenue. You can't tell what's actually working.</p></div></div>
+      <div class="ch-item"><span class="ch-n">04</span><div><h4>You have no access to the right networks.</h4><p>In Africa, who you know still opens doors. Without access to the right investors, mentors, and partners — growth stalls.</p></div></div>
+      <div class="ch-item"><span class="ch-n">05</span><div><h4>You have campaigns. Not a system.</h4><p>When something works, you can't repeat it. When it fails, you don't know why. That's not a business strategy — that's guessing.</p></div></div>
+      <div class="ch-item"><span class="ch-n">06</span><div><h4>Business education doesn't reflect African realities.</h4><p>Most programs recycle Western frameworks that don't translate. You need knowledge built for this market — not borrowed from another one.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HOW WE SOLVE IT ══════════════════════════════ -->
+<section class="solve sec bdiv-b">
+  <div class="wrap">
+    <div class="solve-hd fu">
+      <div class="lbl">How We Solve It</div>
+      <h2 class="big">Here's what we <em>actually do.</em></h2>
+      <p style="margin-top:.8rem">We don't give generic advice from a distance. We go into the work — with proper systems, accountability, and context built specifically for Africa.</p>
+    </div>
+    <div class="solve-grid">
+      <div class="sc fu">
+        <div class="sc-n">01</div>
+        <h3>We diagnose exactly what's holding your business back.</h3>
+        <p>Before we prescribe anything, we understand your business — your model, your market, your customers, and where growth is leaking out.</p>
+      </div>
+      <div class="sc fu d1">
+        <div class="sc-n">02</div>
+        <h3>We build systems to fix it — and keep it fixed.</h3>
+        <p>A proper growth engine that runs consistently, tracks what matters, and tells you exactly what's driving results so you can repeat it.</p>
+      </div>
+      <div class="sc fu d2">
+        <div class="sc-n">03</div>
+        <h3>We get you more quality customers.</h3>
+        <p>We find where your customers are, how to reach them efficiently, and how to acquire them at a cost that makes your business profitable.</p>
+      </div>
+      <div class="sc fu">
+        <div class="sc-n">04</div>
+        <h3>We equip entrepreneurs with Africa-relevant knowledge.</h3>
+        <p>Through Neondesk Studio, we deliver education that speaks to African market realities — not recycled frameworks built for another context.</p>
+      </div>
+      <div class="sc fu d1">
+        <div class="sc-n">05</div>
+        <h3>We connect you to the people who move businesses forward.</h3>
+        <p>Investors, mentors, collaborators, and partners. We open the right doors through our growing network of operators and leaders across Africa.</p>
+      </div>
+      <div class="sc fu d2">
+        <div class="sc-n">06</div>
+        <h3>We know Nigeria. We understand Africa.</h3>
+        <p>We've grown businesses here. We understand what actually works in Lagos, Abuja, Accra, Nairobi — and we bring that context to every engagement.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TRACK RECORD ═════════════════════════════════ -->
+<section class="track sec" id="track">
+  <div class="wrap">
+    <div class="track-hd fu">
+      <div class="lbl" style="color:rgba(255,255,255,.3)">Our Track Record</div>
+      <h2>Since launching, Neondesk has:<br/><em>made entrepreneurs grow.</em></h2>
+      <p style="margin-top:1.2rem">We have turned ideas into businesses. Helped entrepreneurs find their first customers. Built communities that hold people accountable. Opened doors that were previously closed.</p>
+    </div>
+    <div class="track-rows">
+      <div class="tr fu"><span class="tr-n">01</span><h3>Supported entrepreneurs across Nigeria in building and launching their first businesses from the ground up.</h3></div>
+      <div class="tr fu d1"><span class="tr-n">02</span><h3>Helped businesses in food, technology, and services acquire more customers and grow revenue consistently month over month.</h3></div>
+      <div class="tr fu d2"><span class="tr-n">03</span><h3>Delivered business education programs to students, NYSC members, and young professionals across Nigeria.</h3></div>
+      <div class="tr fu"><span class="tr-n">04</span><h3>Built a growing community of ambitious African entrepreneurs who hold each other accountable and open doors for each other.</h3></div>
+      <div class="tr fu d1"><span class="tr-n">05</span><h3> Supported major Nigerian brands including Airtel Nigeria and the Bank of Industry.</h3></div>
+    </div>
+    <div class="track-bottom fu">
+      <p>Neondesk Africa is where <em>African entrepreneurs</em> come to grow and make money.</p>
+      <a href="#contact" class="btn-white">Work With Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHO WE SERVE ═════════════════════════════════ -->
+<section class="serve sec bdiv-b" id="serve">
+  <div class="wrap">
+    <div class="serve-hd">
       <div class="fu">
-        <div class="ey">Who We Serve</div>
-        <h2 class="disp" style="font-size:clamp(2rem,3.5vw,3.2rem)">Africa's vibrant,<br/><em>innovative youth.</em></h2>
+        <div class="lbl">Who We Work With</div>
+        <h2 class="big">Built for African entrepreneurs<br/>who are <em>serious about growth.</em></h2>
       </div>
-      <p class="fu d2">Our primary focus is on Africa's next generation of builders — those bold enough to create something from nothing and change their communities in the process.</p>
+      <p class="fu d1">Neondesk has two divisions for a reason — we serve early-stage entrepreneurs building from scratch and established businesses ready to scale. Here's how to know if you're a fit.</p>
     </div>
-    <div class="srow">
-      <div class="sc fu"><div class="sico">🎒</div><h4>Students</h4><p>Equipping the next generation with business skills before they leave campus.</p></div>
-      <div class="sc fu d1"><div class="sico">🏫</div><h4>Recent Graduates</h4><p>Helping fresh talent translate qualifications into real-world ventures.</p></div>
-      <div class="sc fu d2"><div class="sico">🇳🇬</div><h4>NYSC Members</h4><p>Supporting corp members to use their service year to build the future.</p></div>
-      <div class="sc fu d3"><div class="sico">🚀</div><h4>Early-Stage Founders</h4><p>Turning ideas into traction with structure, support, and strategic clarity.</p></div>
-      <div class="sc fu d4"><div class="sico">💼</div><h4>Young Professionals</h4><p>Helping career-driven individuals make the confident leap to entrepreneurship.</p></div>
+    <div class="fit-wrap">
+      <div class="fit-col fu">
+        <div class="fit-h yes-c"><span>You're a fit if:</span></div>
+        <ul class="fit-list">
+          <li><span class="ic yes-c-ic">✓</span>You're a student, graduate, NYSC member, or young professional with the ambition to build something real.</li>
+          <li><span class="ic yes-c-ic">✓</span>You're an early-stage founder who has started but needs structure, accountability, and a clear path forward.</li>
+          <li><span class="ic yes-c-ic">✓</span>You're an established business generating revenue and ready to grow it consistently and sustainably.</li>
+          <li><span class="ic yes-c-ic">✓</span>You want more than generic advice — you need a system that actually works in the African market.</li>
+          <li><span class="ic yes-c-ic">✓</span>You believe in community — in learning from and pushing others on the same journey as you.</li>
+          <li><span class="ic yes-c-ic">✓</span>You're ready to invest in your business — time, discipline, and the right resources to do things properly.</li>
+        </ul>
+      </div>
+      <div class="fit-col no-bg fu d1">
+        <div class="fit-h no-c"><span>You're NOT a fit if:</span></div>
+        <ul class="fit-list">
+          <li><span class="ic no-c-ic">✗</span>You're looking for a shortcut, a get-rich-quick scheme, or results without putting in real work.</li>
+          <li><span class="ic no-c-ic">✗</span>You're not open to honest feedback or willing to challenge how you currently run your business.</li>
+          <li><span class="ic no-c-ic">✗</span>You want to "just run some ads" without building systems that make those ads actually sustainable.</li>
+          <li><span class="ic no-c-ic">✗</span>You're not ready to commit — short-term thinking breaks long-term businesses.</li>
+          <li><span class="ic no-c-ic">✗</span>You want someone to take all the responsibility while you stay uninvolved in your own growth.</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════
-     BRANDS WE'VE WORKED WITH
-═══════════════════════════════════════════════════════ -->
-<section class="brands sec">
+<!-- ═══ BRANDS ════════════════════════════════════════ -->
+<section class="brands sec bdiv-b">
   <div class="wrap">
-    <div class="brands-head">
-      <div class="fu">
-        <div class="ey">Our Clients</div>
-        <h2>Brands we've<br/><em>worked with.</em></h2>
-      </div>
-      <p class="fu d1">From Nigeria's largest telecoms to innovative startups — we've had the privilege of working with remarkable brands across Africa.</p>
+    <div class="brands-hd fu">
+      <div class="lbl">Our Clients</div>
+      <h2 class="big">Brands we've <em>worked with.</em></h2>
+      <p style="margin-top:.5rem">From Nigeria's largest telecoms to ambitious startups — we've had the privilege of supporting remarkable brands across Africa.</p>
     </div>
-
     <div class="bgrid">
 
-      <!-- Airtel Nigeria -->
-      <div class="bcard fu">
-        <div class="bimg-wrap">
-          <img src="https://logo.clearbit.com/airtel.com.ng" alt="Airtel Nigeria" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-          <div class="bsvg">
-            <svg viewBox="0 0 110 40" height="34" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="18" cy="20" r="15" fill="#e40000"/>
-              <path d="M18 7 C18 7 28 14 28 20 C28 26 23 30 18 30 C13 30 8 26 8 20 C8 14 18 7 18 7Z" fill="#ff6600" opacity="0.6"/>
-              <text x="38" y="26" font-family="Arial Black" font-weight="900" font-size="16" fill="white">airtel</text>
-            </svg>
-          </div>
-        </div>
-        <div class="bname">Airtel Nigeria</div>
-        <div class="btag">Telecoms</div>
+      <div class="bc fu">
+        <div class="bi"><img src="https://logo.clearbit.com/airtel.com.ng" alt="Airtel Nigeria" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="bsvg"><svg viewBox="0 0 110 36" height="30" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="18" r="13" fill="#e40000"/><path d="M16 6C16 6 26 12 26 18C26 24 21 27 16 27C11 27 6 24 6 18C6 12 16 6 16 6Z" fill="#ff6600" opacity="0.5"/><text x="33" y="23" font-family="Arial Black" font-weight="900" font-size="14" fill="#111">airtel</text></svg></div></div>
+        <div class="bn">Airtel Nigeria</div><div class="btg">Telecoms</div>
       </div>
 
-      <!-- Bank of Industry -->
-      <div class="bcard fu d1">
-        <div class="bimg-wrap">
-          <img src="https://logo.clearbit.com/boi.ng" alt="Bank of Industry" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-          <div class="bsvg">
-            <svg viewBox="0 0 130 40" height="34" xmlns="http://www.w3.org/2000/svg">
-              <rect x="0" y="4" width="30" height="32" rx="4" fill="#006633"/>
-              <text x="5" y="26" font-family="Arial Black" font-weight="900" font-size="12" fill="white">BOI</text>
-              <text x="36" y="18" font-family="Arial" font-weight="700" font-size="10" fill="white">Bank of</text>
-              <text x="36" y="31" font-family="Arial" font-weight="700" font-size="10" fill="white">Industry</text>
-            </svg>
-          </div>
-        </div>
-        <div class="bname">Bank of Industry</div>
-        <div class="btag">Finance</div>
+      <div class="bc fu d1">
+        <div class="bi"><img src="https://logo.clearbit.com/boi.ng" alt="Bank of Industry" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="bsvg"><svg viewBox="0 0 130 36" height="30" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="2" width="27" height="29" rx="4" fill="#006633"/><text x="3" y="22" font-family="Arial Black" font-weight="900" font-size="11" fill="white">BOI</text><text x="33" y="15" font-family="Arial" font-weight="700" font-size="9" fill="#111">Bank of</text><text x="33" y="27" font-family="Arial" font-weight="700" font-size="9" fill="#111">Industry</text></svg></div></div>
+        <div class="bn">Bank of Industry</div><div class="btg">Finance</div>
       </div>
 
-      <!-- CAP PLC -->
-      <div class="bcard fu d2">
-        <div class="bimg-wrap">
-          <img src="https://logo.clearbit.com/capplc.com" alt="CAP PLC" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-          <div class="bsvg">
-            <svg viewBox="0 0 130 40" height="34" xmlns="http://www.w3.org/2000/svg">
-              <rect x="0" y="2" width="36" height="36" rx="4" fill="#cc0000"/>
-              <text x="4" y="26" font-family="Arial Black" font-weight="900" font-size="14" fill="white">CAP</text>
-              <text x="42" y="16" font-family="Arial" font-weight="700" font-size="9" fill="white">Chemical &amp;</text>
-              <text x="42" y="27" font-family="Arial" font-weight="700" font-size="9" fill="white">Allied Products</text>
-              <text x="42" y="36" font-family="Arial" font-size="8" fill="rgba(255,255,255,0.6)">PLC</text>
-            </svg>
-          </div>
-        </div>
-        <div class="bname">CAP PLC</div>
-        <div class="btag">Manufacturing</div>
+      <div class="bc fu d2">
+        <div class="bi"><img src="https://logo.clearbit.com/capplc.com" alt="CAP PLC" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="bsvg"><svg viewBox="0 0 120 36" height="30" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="2" width="32" height="32" rx="4" fill="#cc0000"/><text x="2" y="23" font-family="Arial Black" font-weight="900" font-size="13" fill="white">CAP</text><text x="38" y="14" font-family="Arial" font-weight="700" font-size="8" fill="#111">Chemical &amp;</text><text x="38" y="24" font-family="Arial" font-weight="700" font-size="8" fill="#111">Allied Products</text></svg></div></div>
+        <div class="bn">CAP PLC</div><div class="btg">Manufacturing</div>
       </div>
 
-      <!-- Chat Transact -->
-      <div class="bcard fu d3">
-        <div class="bimg-wrap">
-          <img src="https://logo.clearbit.com/chattransact.com" alt="Chat Transact" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-          <div class="bsvg">
-            <svg viewBox="0 0 140 40" height="34" xmlns="http://www.w3.org/2000/svg">
-              <rect x="0" y="4" width="34" height="30" rx="8" fill="#1D6BE6"/>
-              <path d="M7 12 Q17 8 27 12 L27 24 Q17 28 7 24 Z" fill="white" opacity="0.9"/>
-              <path d="M10 26 L6 34 L18 28 Z" fill="white" opacity="0.9"/>
-              <text x="40" y="20" font-family="Arial" font-weight="700" font-size="10" fill="white">Chat</text>
-              <text x="40" y="32" font-family="Arial" font-weight="700" font-size="10" fill="white">Transact</text>
-            </svg>
-          </div>
-        </div>
-        <div class="bname">Chat Transact</div>
-        <div class="btag">Fintech</div>
+      <div class="bc fu d3">
+        <div class="bi"><img src="https://logo.clearbit.com/chattransact.com" alt="Chat Transact" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="bsvg"><svg viewBox="0 0 130 36" height="30" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="3" width="30" height="26" rx="7" fill="#1D6BE6"/><path d="M6 10Q15 7 24 10L24 21Q15 24 6 21Z" fill="white" opacity=".9"/><text x="36" y="17" font-family="Arial" font-weight="700" font-size="9" fill="#111">Chat</text><text x="36" y="28" font-family="Arial" font-weight="700" font-size="9" fill="#111">Transact</text></svg></div></div>
+        <div class="bn">Chat Transact</div><div class="btg">Fintech</div>
       </div>
 
-      <!-- Brunch Avenue -->
-      <div class="bcard fu">
-        <div class="bimg-wrap">
-          <img src="https://logo.clearbit.com/brunchavenue.com" alt="Brunch Avenue" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-          <div class="bsvg">
-            <svg viewBox="0 0 140 40" height="34" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="18" cy="20" r="15" fill="#c8953a"/>
-              <text x="7" y="25" font-family="Georgia" font-weight="700" font-size="12" fill="white">BA</text>
-              <text x="38" y="17" font-family="Georgia" font-style="italic" font-size="11" fill="white">Brunch</text>
-              <text x="38" y="30" font-family="Georgia" font-style="italic" font-size="11" fill="white">Avenue</text>
-            </svg>
-          </div>
-        </div>
-        <div class="bname">Brunch Avenue</div>
-        <div class="btag">Hospitality</div>
+      <div class="bc fu">
+        <div class="bi"><img src="https://logo.clearbit.com/brunchavenue.com" alt="Brunch Avenue" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="bsvg"><svg viewBox="0 0 130 36" height="30" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="18" r="13" fill="#c8953a"/><text x="6" y="22" font-family="Georgia" font-weight="700" font-size="11" fill="white">BA</text><text x="34" y="15" font-family="Georgia" font-style="italic" font-size="10" fill="#111">Brunch</text><text x="34" y="27" font-family="Georgia" font-style="italic" font-size="10" fill="#111">Avenue</text></svg></div></div>
+        <div class="bn">Brunch Avenue</div><div class="btg">Hospitality</div>
       </div>
 
-      <!-- Mayana Africa -->
-      <div class="bcard fu d1">
-        <div class="bimg-wrap">
-          <img src="https://logo.clearbit.com/mayanaafrica.com" alt="Mayana Africa" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-          <div class="bsvg">
-            <svg viewBox="0 0 140 40" height="34" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 36 L12 8 L20 28 L28 8 L36 36" stroke="#d4902a" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-              <text x="44" y="18" font-family="Georgia" font-weight="700" font-size="12" fill="white">Mayana</text>
-              <text x="44" y="32" font-family="Georgia" font-size="10" fill="#d4902a">Africa</text>
-            </svg>
-          </div>
-        </div>
-        <div class="bname">Mayana Africa</div>
-        <div class="btag">Lifestyle</div>
+      <div class="bc fu d1">
+        <div class="bi"><img src="https://logo.clearbit.com/mayanaafrica.com" alt="Mayana Africa" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="bsvg"><svg viewBox="0 0 130 36" height="30" xmlns="http://www.w3.org/2000/svg"><path d="M4 32L10 7L17 24L24 7L30 32" stroke="#d4902a" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="38" y="16" font-family="Georgia" font-weight="700" font-size="11" fill="#111">Mayana</text><text x="38" y="29" font-family="Georgia" font-size="9" fill="#d4902a">Africa</text></svg></div></div>
+        <div class="bn">Mayana Africa</div><div class="btg">Lifestyle</div>
       </div>
 
-      <!-- Hybrid Tech -->
-      <div class="bcard fu d2">
-        <div class="bimg-wrap">
-          <img src="https://logo.clearbit.com/hybrid-tec.com" alt="Hybrid Tech" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-          <div class="bsvg">
-            <svg viewBox="0 0 140 40" height="34" xmlns="http://www.w3.org/2000/svg">
-              <polygon points="4,20 12,6 30,6 38,20 30,34 12,34" fill="none" stroke="#2B7FFF" stroke-width="2"/>
-              <text x="11" y="25" font-family="Arial Black" font-weight="900" font-size="10" fill="#2B7FFF">HT</text>
-              <text x="46" y="18" font-family="Arial" font-weight="700" font-size="11" fill="white">Hybrid</text>
-              <text x="46" y="31" font-family="Arial" font-weight="700" font-size="11" fill="white">Tech</text>
-            </svg>
-          </div>
-        </div>
-        <div class="bname">Hybrid Tech</div>
-        <div class="btag">Technology</div>
+      <div class="bc fu d2">
+        <div class="bi"><img src="https://logo.clearbit.com/hybrid-tec.com" alt="Hybrid Tech" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="bsvg"><svg viewBox="0 0 130 36" height="30" xmlns="http://www.w3.org/2000/svg"><polygon points="4,18 10,6 26,6 32,18 26,30 10,30" fill="none" stroke="#2B7FFF" stroke-width="2"/><text x="9" y="22" font-family="Arial Black" font-weight="900" font-size="9" fill="#2B7FFF">HT</text><text x="38" y="16" font-family="Arial" font-weight="700" font-size="10" fill="#111">Hybrid</text><text x="38" y="28" font-family="Arial" font-weight="700" font-size="10" fill="#111">Tech</text></svg></div></div>
+        <div class="bn">Hybrid Tech</div><div class="btg">Technology</div>
       </div>
 
-      <!-- Everything But Coffee -->
-      <div class="bcard fu d3">
-        <div class="bimg-wrap">
-          <img src="https://logo.clearbit.com/everythingbutcoffeebiz.com" alt="Everything But Coffee" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-          <div class="bsvg">
-            <svg viewBox="0 0 160 40" height="34" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="18" cy="20" r="14" fill="#6B3F1A"/>
-              <text x="9" y="25" font-family="Arial" font-size="14" fill="white">☕</text>
-              <line x1="28" y1="14" x2="28" y2="30" stroke="#ff4444" stroke-width="2"/>
-              <text x="34" y="17" font-family="Georgia" font-style="italic" font-size="9" fill="white">Everything</text>
-              <text x="34" y="27" font-family="Georgia" font-style="italic" font-size="9" fill="white">But Coffee</text>
-              <text x="34" y="36" font-family="Georgia" font-size="7" fill="rgba(255,255,255,0.5)">Biz</text>
-            </svg>
-          </div>
-        </div>
-        <div class="bname">Everything But Coffee</div>
-        <div class="btag">Business</div>
+      <div class="bc fu d3">
+        <div class="bi"><img src="https://logo.clearbit.com/everythingbutcoffeebiz.com" alt="Everything But Coffee" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="bsvg"><svg viewBox="0 0 148 36" height="30" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="18" r="13" fill="#6B3F1A"/><text x="8" y="23" font-family="Arial" font-size="13" fill="white">☕</text><line x1="25" y1="12" x2="25" y2="28" stroke="#d0324b" stroke-width="1.8"/><text x="30" y="15" font-family="Georgia" font-style="italic" font-size="8" fill="#111">Everything</text><text x="30" y="25" font-family="Georgia" font-style="italic" font-size="8" fill="#111">But Coffee</text></svg></div></div>
+        <div class="bn">Everything But Coffee</div><div class="btg">Business</div>
       </div>
 
-    </div><!-- /bgrid -->
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════════════════
-     TESTIMONIAL
-═══════════════════════════════════════════════════════ -->
-<section class="testi sec">
-  <div class="wrap" style="padding:0;max-width:100%">
-    <div class="testi-split">
-      <div class="testi-img">🌍</div>
-      <div class="testi-body">
-        <div class="ey fu">Founder Stories</div>
-        <p class="tq fu d1">Neondesk gave us the framework and the clarity to take our Lagos-based startup to three West African markets in under a year. They spoke the language of our ambition — and helped us build something real.</p>
-        <div class="fu d2">
-          <div class="tname">Adaeze Okonkwo</div>
-          <div class="trole">CEO, Agritech Ventures — Lagos, Nigeria</div>
-        </div>
-        <div class="tdots fu d3"><div class="tdot on"></div><div class="tdot"></div><div class="tdot"></div></div>
-      </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════
-     IDEOLOGY
-═══════════════════════════════════════════════════════ -->
-<section class="ideo sec">
-  <div class="ideo-in wrap">
-    <div class="fu">
-      <div class="ey">Our Ideology</div>
-      <h2 class="disp" style="font-size:clamp(2rem,3.5vw,3rem);margin-bottom:2.5rem">Together, we are building the future of Africa —<br/><em>one business at a time.</em></h2>
-      <div class="ideo-img">🏙️</div>
+<!-- ═══ FAQ ══════════════════════════════════════════ -->
+<section class="faq sec bdiv-b" id="faq">
+  <div class="wrap">
+    <div class="faq-hd fu">
+      <div class="lbl">Questions</div>
+      <h2 class="big">Questions</h2>
     </div>
-    <div class="fu d2">
-      <div class="ideo-hdg">Rooted in Africa.<br/><em>Built for Impact,<br/>Driven by Growth.</em></div>
-      <ul class="beliefs">
-        <li class="belief"><div class="bdot"></div><div><div class="btitle">Strategy is Power</div><div class="bbody">Every African entrepreneur deserves a clear, executable strategy. We don't do generic — everything we build is tailored to your context, your market, and your ambition.</div></div></li>
-        <li class="belief"><div class="bdot"></div><div><div class="btitle">Community is Currency</div><div class="bbody">The right network changes everything. We build intentional communities where entrepreneurs learn, hold each other accountable, and open doors for one another.</div></div></li>
-        <li class="belief"><div class="bdot"></div><div><div class="btitle">Impact is the Mission</div><div class="bbody">Every business we support creates jobs, builds wealth, and strengthens communities. Entrepreneurship is Africa's greatest tool for transformation.</div></div></li>
-      </ul>
+    <div class="faq-rows">
+
+      <div class="fq">
+        <button class="fq-q"><span>What exactly is the difference between Neondesk Studio and Neondesk Lab?</span><div class="fq-icon">+</div></button>
+        <div class="fq-a"><p>Neondesk Studio is our builder division — it creates the programs, courses, tools, and community that entrepreneurs need to start and grow a business. Think of it as the product we've built for the market. Neondesk Lab is our growth division — it works directly with established businesses to diagnose growth problems, build customer acquisition systems, and scale revenue. Studio is for entrepreneurs who are learning and building. Lab is for businesses that are already running and need to grow faster and more consistently.</p></div>
+      </div>
+
+      <div class="fq">
+        <button class="fq-q"><span>Are you a training school or a business support company?</span><div class="fq-icon">+</div></button>
+        <div class="fq-a"><p>Both — and that's intentional. Neondesk Studio handles the education and community side: programs, mentorship, and a structured framework for aspiring entrepreneurs. Neondesk Lab handles the hands-on business growth side: strategy, customer acquisition, and revenue systems for established businesses. Most companies do one or the other. We do both because African entrepreneurs need both — at different stages of their journey.</p></div>
+      </div>
+
+      <div class="fq">
+        <button class="fq-q"><span>What industries do you focus on?</span><div class="fq-icon">+</div></button>
+        <div class="fq-a"><p>We work across industries — food and hospitality, technology, fintech, retail, professional services, and more. The principles of building and growing a business are largely universal. What changes is how you apply them in specific African markets. We've worked with telecoms, financial institutions, lifestyle brands, and tech startups — and we bring direct experience from each of these sectors to every engagement.</p></div>
+      </div>
+
+      <div class="fq">
+        <button class="fq-q"><span>Are you an NGO or charity?</span><div class="fq-icon">+</div></button>
+        <div class="fq-a"><p>No. Neondesk Africa is a private business. We believe the best thing we can do for African entrepreneurship is build a sustainable company that shows up and delivers results — not one that depends on donor funding to survive. We charge for our services because that's what allows us to remain committed, accountable, and excellent in everything we do.</p></div>
+      </div>
+
+      <div class="fq">
+        <button class="fq-q"><span>How long before we see results?</span><div class="fq-icon">+</div></button>
+        <div class="fq-a"><p>For Studio members, the impact starts immediately — access to knowledge, community, and accountability from day one. For Lab clients, early signals typically appear within the first 60–90 days as systems are put in place, with significant and measurable results building over 6 months. We will always be honest about timelines and will never overpromise what's not possible in your specific context.</p></div>
+      </div>
+
+      <div class="fq">
+        <button class="fq-q"><span>What does working with Neondesk actually look like?</span><div class="fq-icon">+</div></button>
+        <div class="fq-a"><p>For Studio: you join a membership plan, get access to our resource library, live sessions, expert Q&amp;As, and a peer community. For Lab clients: we begin with a full growth diagnostic of your business — how you acquire customers, where revenue is leaking, why growth is inconsistent. We then build a custom roadmap and work alongside your team to execute it, with regular check-ins, reporting, and accountability throughout. We are in the business with you, not just advising from a distance.</p></div>
+      </div>
+
+    </div>
+    <div style="margin-top:3rem" class="fu">
+      <p style="font-size:.88rem;color:var(--muted);margin-bottom:1.2rem">Got more questions?</p>
+      <a href="mailto:neondeskafrica&#64;gmail.com" class="btn-dark">Get In Touch</a>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════
-     IMPACT BAR
-═══════════════════════════════════════════════════════ -->
-<div class="ibar">
-  <div class="ibar-in">
-    <h2 class="fu">Our Impact Goals for Africa</h2>
-    <div class="istat fu d1"><span class="inum">10,000</span><span class="ilbl">Entrepreneurs equipped by 2030</span></div>
-    <div class="istat fu d2"><span class="inum">5,000</span><span class="ilbl">Community members by 2027</span></div>
-    <div class="istat fu d3"><span class="inum">1,000</span><span class="ilbl">Ventures funded</span></div>
+<!-- ═══ NEWSLETTER + BIG CTA ══════════════════════════ -->
+<div class="nl-wrap" id="contact">
+  <div class="nl-inner">
+    <div class="nl-top">
+      <div class="nl-l fu">
+        <h2>Weekly Insights<br/>for <em>African Builders.</em></h2>
+        <p>Practical lessons on building, scaling, and growing businesses in Africa — every week, straight to your inbox.</p>
+      </div>
+      <div class="fu d1">
+        <p class="nl-sub-lbl">Sign up for weekly insights</p>
+        <div class="nl-form">
+          <input type="email" placeholder="Enter your email address"/>
+          <button type="button">Sign Up</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-block fu">
+      <h2>Ready to<br/><em>grow</em><br/>your business?</h2>
+      <p>Whether you're just starting out or ready to scale — Neondesk Africa has a division for you. Let's talk about what you're building and how we can help.</p>
+      <div class="cta-btns">
+        <a href="mailto:neondeskafrica&#64;gmail.com" class="btn-white">Get In Touch</a>
+        <a href="#divisions" class="btn-ghost">Our Divisions</a>
+      </div>
+    </div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════════════
-     MEMBERSHIP
-═══════════════════════════════════════════════════════ -->
-<section class="memb sec" id="membership">
-  <div class="wrap">
-    <div class="memb-head">
-      <div class="fu">
-        <div class="ey">Plans &amp; Pricing</div>
-        <h2 class="disp" style="font-size:clamp(2rem,3.5vw,3.2rem)">Join Our<br/><em>Entrepreneurial Community.</em></h2>
-      </div>
-      <p class="fu d1">Choose the plan that meets you where you are. Every tier includes access to our growing network and core entrepreneurial resources.</p>
-    </div>
-    <div class="plans">
-      <div class="plan fu">
-        <div class="ptier">Free Plan</div>
-        <div class="pprice"><sup>&#8358;</sup>0</div>
-        <div class="pper">Forever free</div>
-        <div class="pline"></div>
-        <ul class="pfeats">
-          <li>Access to basic community</li>
-          <li>Monthly newsletter</li>
-          <li>Free webinars</li>
-          <li>Limited resources</li>
-        </ul>
-        <a href="#contact" class="pbtn">Join Free</a>
-      </div>
-      <div class="plan fu d1">
-        <div class="ptier">Monthly Plan</div>
-        <div class="pprice"><sup>&#8358;</sup>2,000</div>
-        <div class="pper">Per month</div>
-        <div class="pline"></div>
-        <ul class="pfeats">
-          <li>All free features</li>
-          <li>Full resource library</li>
-          <li>Monthly expert Q&amp;A sessions</li>
-          <li>Member discounts</li>
-        </ul>
-        <a href="#contact" class="pbtn fill">Get Started</a>
-      </div>
-      <div class="plan best fu d2">
-        <div class="pbadge">Best Value</div>
-        <div class="ptier">Annual Plan</div>
-        <div class="pprice"><sup>&#8358;</sup>20,000</div>
-        <div class="pper">Per year</div>
-        <div class="psave">Save &#8358;4,000 — 17% off</div>
-        <div class="pline"></div>
-        <ul class="pfeats">
-          <li>All monthly features</li>
-          <li>Priority support</li>
-          <li>Exclusive masterclasses</li>
-          <li>Early access to all programs</li>
-        </ul>
-        <a href="#contact" class="pbtn fill">Get Started</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════════════════
-     CONTACT
-═══════════════════════════════════════════════════════ -->
-<section class="contact sec" id="contact">
-  <div class="contact-in wrap">
-    <div class="fu">
-      <div class="ey">Get In Touch</div>
-      <h2 class="disp" style="font-size:clamp(1.8rem,3vw,2.8rem);margin-bottom:1rem">Request a free<br/><em>consultation.</em></h2>
-      <p style="font-size:.93rem;color:var(--muted);margin-bottom:2rem;line-height:1.75">For project enquiries, membership questions, or partnership opportunities — we'd love to hear from you.</p>
-      <form onsubmit="return false">
-        <div class="frow">
-          <div class="ff"><label>Name (required)</label><input type="text" placeholder="Your name"/></div>
-          <div class="ff"><label>Company (optional)</label><input type="text" placeholder="Your company name"/></div>
-        </div>
-        <div class="frow">
-          <div class="ff"><label>Email (required)</label><input type="email" placeholder="Your email address"/></div>
-          <div class="ff"><label>Phone (optional)</label><input type="tel" placeholder="Your phone number"/></div>
-        </div>
-        <div class="ff"><label>Subject (optional)</label><input type="text" placeholder="How can we help?"/></div>
-        <div class="ff">
-          <label>Choose a Budget (USD)</label>
-          <select><option value="">Select a range</option><option>Under $500</option><option>$500 – $2,000</option><option>$2,000 – $5,000</option><option>$5,000+</option></select>
-        </div>
-        <button class="sbtn" type="submit">Get a Quote</button>
-      </form>
-    </div>
-
-    <div class="contact-r fu d2">
-      <div class="ey">Email Us</div>
-      <h3>Talk to our team directly.</h3>
-      <p style="font-size:.9rem;color:var(--muted);margin-bottom:2.5rem;line-height:1.75">For project enquiries — reach us at neondeskafrica&#64;gmail.com</p>
-      <div class="citem"><div class="cicon">&#9993;</div><div class="ctxt"><label>Email</label><span>neondeskafrica&#64;gmail.com</span></div></div>
-      <div class="citem"><div class="cicon">&#128222;</div><div class="ctxt"><label>Phone</label><span>+234 81 444 12 008</span></div></div>
-      <div class="citem"><div class="cicon">&#128205;</div><div class="ctxt"><label>Location</label><span>Lagos State, Nigeria</span></div></div>
-      <div class="citem"><div class="cicon">&#128279;</div><div class="ctxt"><label>Socials</label><span>&#64;neondeskafrica on X &amp; Instagram</span></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════════════════
-     FOOTER
-═══════════════════════════════════════════════════════ -->
+<!-- ═══ FOOTER ════════════════════════════════════════ -->
 <footer>
   <div class="ft">
     <div class="fb">
       <a href="#" class="logo">
         <div class="lmark">N</div>
-        <div class="lwords"><b>Neondesk</b><small>Africa</small></div>
+        <div class="lw"><b>Neondesk</b><small>Africa</small></div>
       </a>
-      <p>Empowering African entrepreneurs with the tools, resources, and frameworks they need to grow, scale, and lead.</p>
+      <p>Supporting and scaling African entrepreneurs through two divisions — Neondesk Studio and Neondesk Lab.</p>
       <div class="fsoc">
         <a href="#" aria-label="Twitter">&#120143;</a>
         <a href="#" aria-label="Instagram">&#9672;</a>
@@ -777,67 +664,83 @@ footer{background:var(--navy2);border-top:1px solid var(--line);padding:5rem 3.5
       </div>
     </div>
     <div class="fcol">
-      <h5>Quick Links</h5>
-      <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#services">What We Do</a></li>
-        <li><a href="#serve">Who We Serve</a></li>
-        <li><a href="#membership">Membership</a></li>
-      </ul>
-    </div>
-    <div class="fcol">
       <h5>Company</h5>
       <ul>
-        <li><a href="#">Our Team</a></li>
-        <li><a href="#">Blog</a></li>
-        <li><a href="#">Events</a></li>
-        <li><a href="#">Career</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#">Our Story</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Media</a></li>
       </ul>
     </div>
     <div class="fcol">
-      <h5>Contact Us</h5>
-      <div class="fci"><span class="fci-i">&#9993;</span> neondeskafrica&#64;gmail.com</div>
-      <div class="fci"><span class="fci-i">&#9742;</span> +234 81 444 12 008</div>
-      <div class="fci"><span class="fci-i">&#128205;</span> Lagos State, Nigeria</div>
+      <h5>Divisions</h5>
+      <ul>
+        <li><a href="#studio">Neondesk Studio</a></li>
+        <li><a href="#lab">Neondesk Lab</a></li>
+        <li><a href="#serve">Who We Serve</a></li>
+        <li><a href="#track">Track Record</a></li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h5>Community</h5>
+      <ul>
+        <li><a href="#">Membership Plans</a></li>
+        <li><a href="#">Events &amp; Masterclasses</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Partners</a></li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="mailto:neondeskafrica&#64;gmail.com">neondeskafrica&#64;gmail.com</a></li>
+        <li><a href="tel:+2348144412008">+234 81 444 12 008</a></li>
+        <li><a href="#">Lagos State, Nigeria</a></li>
+      </ul>
     </div>
   </div>
   <div class="fbot">
-    <p>&#169; 2025 Neondesk Africa. All rights reserved.</p>
+    <p>&#169; 2025 Neondesk Africa. All Rights Reserved.</p>
     <div class="flinks">
-      <a href="#">Security</a>
-      <a href="#">Privacy &amp; Cookie Policy</a>
+      <a href="#">Privacy Policy</a>
       <a href="#">Terms of Service</a>
+      <a href="#">Legal Overview</a>
     </div>
   </div>
 </footer>
 
 <script>
 (function(){
-  /* NAV scroll */
-  var nav = document.getElementById('mainNav');
-  window.addEventListener('scroll', function(){ nav.classList.toggle('scrolled', window.scrollY > 60); });
+  /* Nav */
+  var nav=document.getElementById('mainNav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>60);});
 
-  /* Mobile menu */
-  document.getElementById('ham').addEventListener('click', function(){ document.getElementById('mobMenu').classList.add('open'); });
-  document.getElementById('mobClose').addEventListener('click', function(){ document.getElementById('mobMenu').classList.remove('open'); });
-  document.querySelectorAll('.ml').forEach(function(l){ l.addEventListener('click', function(){ document.getElementById('mobMenu').classList.remove('open'); }); });
+  /* Mobile */
+  document.getElementById('ham').addEventListener('click',function(){document.getElementById('mob').classList.add('open');});
+  document.getElementById('mobX').addEventListener('click',function(){document.getElementById('mob').classList.remove('open');});
+  document.querySelectorAll('.ml').forEach(function(l){l.addEventListener('click',function(){document.getElementById('mob').classList.remove('open');});});
 
-  /* Scroll fade-in — hero items show immediately */
-  setTimeout(function(){
-    document.querySelectorAll('.hero .fu').forEach(function(el){ el.classList.add('in'); });
-  }, 150);
+  /* Scroll animations */
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in');});
+  },{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.fu').forEach(function(el){obs.observe(el);});
 
-  /* IntersectionObserver for all other .fu elements */
-  var obs = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('in'); });
-  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-  document.querySelectorAll('.fu').forEach(function(el){ obs.observe(el); });
+  /* FAQ */
+  document.querySelectorAll('.fq-q').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var item=this.closest('.fq');
+      var isOpen=item.classList.contains('open');
+      document.querySelectorAll('.fq').forEach(function(i){i.classList.remove('open');});
+      if(!isOpen)item.classList.add('open');
+    });
+  });
 
-  /* Brand logo fallback — show SVG if Clearbit image fails */
-  document.querySelectorAll('.bimg-wrap img').forEach(function(img){
-    function showSvg(){ img.style.display='none'; var s=img.nextElementSibling; if(s) s.style.display='flex'; }
-    img.addEventListener('error', showSvg);
-    img.addEventListener('load', function(){ if(!img.naturalWidth){ showSvg(); } });
+  /* Brand logo fallback */
+  document.querySelectorAll('.bi img').forEach(function(img){
+    function show(){img.style.display='none';var s=img.nextElementSibling;if(s)s.style.display='flex';}
+    img.addEventListener('error',show);
+    img.addEventListener('load',function(){if(!img.naturalWidth)show();});
   });
 })();
 </script>
